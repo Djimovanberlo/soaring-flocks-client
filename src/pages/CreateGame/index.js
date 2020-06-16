@@ -34,13 +34,13 @@ export default function CreateGame() {
   }
   return (
     <>
-      <Container>
-        <h3>Create Game</h3>
+      <Container as={Col} md={{ span: 6, offset: 5 }} className="mt-5">
+        <h2>Create Game</h2>
       </Container>
       <Container>
         <Form as={Col} md={{ span: 6, offset: 3 }} className="mt-5">
           <Form.Group controlId="formGameTitle">
-            <Form.Label>Email address</Form.Label>
+            <Form.Label>Game title</Form.Label>
             <Form.Control
               value={gameTitle}
               onChange={(event) => set_gameTitle(event.target.value)}
@@ -56,7 +56,6 @@ export default function CreateGame() {
               value={gameTime}
               onChange={(event) => set_gameTime(event.target.value)}
               as="select"
-              defaultValue={gameTime}
               required
             >
               <option>10 days</option>
@@ -64,7 +63,7 @@ export default function CreateGame() {
               <option>30 days</option>
             </Form.Control>
           </Form.Group>
-          <Form.Group controlId="exampleForm.ControlSelect2">
+          <Form.Group controlId="playersInGame">
             <Form.Label>Example multiple select</Form.Label>
             <Form.Control as="select" multiple>
               <option>Player 1</option>
@@ -72,7 +71,7 @@ export default function CreateGame() {
               <option>Player 3</option>
             </Form.Control>
           </Form.Group>
-          <Form.Group controlId="exampleForm.ControlSelect2">
+          <Form.Group controlId="playersOutsideGame">
             <Form.Label>Example multiple select</Form.Label>
             <Form.Control as="select" multiple>
               <option>Player 4</option>
@@ -86,14 +85,6 @@ export default function CreateGame() {
             </Button>
           </Form.Group>
         </Form>
-      </Container>{" "}
-      <Container>
-        {" "}
-        <div class="overflow-auto">
-          This is an example of using .overflow-auto on an element with set
-          width and height dimensions. By design, this content will vertically
-          scroll.
-        </div>
       </Container>
     </>
   );

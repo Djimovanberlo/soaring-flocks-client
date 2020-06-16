@@ -10,8 +10,8 @@ import { Col } from "react-bootstrap";
 
 export default function Rules() {
   return (
-    <Container>
-      <h3>Game Rules</h3>
+    <Container as={Col} md={{ span: 6, offset: 5 }} className="mt-5">
+      <h2>Rules</h2>
     </Container>
   );
 }
