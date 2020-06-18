@@ -20,7 +20,7 @@ const httpLink = new HttpLink({
   uri: `https://${apiUrl}`,
 });
 
-// // Create a WebSocket link:
+// Create a WebSocket link:
 const wsLink = new WebSocketLink({
   uri: `ws://${apiUrl}`,
   options: {
