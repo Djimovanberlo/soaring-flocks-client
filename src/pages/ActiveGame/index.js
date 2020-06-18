@@ -54,7 +54,9 @@ export default function ActiveGame() {
             })}
           </Col>
           <Col>Player card</Col>
-          <Col>Chatbox</Col>
+          <Col>
+            Chatbox (char limit in backend 255: type=string, not type=text
+          </Col>
         </Row>
       </Container>
       {/* <Row>
