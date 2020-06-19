@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import "./App.css";
 
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import Navigation from "./components/Navigation";
 import Loading from "./components/Loading";
 import MessageBox from "./components/MessageBox";
@@ -30,7 +30,10 @@ function App() {
       <MessageBox />
       {isLoading ? <Loading /> : null}
       <Switch>
-        <Route exact path="/" component={Rules} />
+        <Route exact path="/">
+          <Redirect to="/rules" />
+        </Route>
+        <Route path="/rules" component={Rules} />
         <Route path="/createGame" component={CreateGame} />
         <Route path="/activeGame" component={ActiveGame} />
         <Route path="/signup" component={SignUp} />
