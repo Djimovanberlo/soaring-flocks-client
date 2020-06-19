@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
 import { Col, Row } from "react-bootstrap";
 import Player from "./Player";
+import { GET_ALL_PLAYERS_INGAME_SCORE } from "../../graphql/queries";
 
 export default function ActiveGame() {
   const players = [
