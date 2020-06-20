@@ -8,20 +8,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, NavLink } from "react-router-dom";
 import { Col, Row, Image } from "react-bootstrap";
 
-import bug from "../../images/icons/bug.png";
-import egg from "../../images/icons/egg.png";
-import feather from "../../images/icons/feather.png";
-import market from "../../images/icons/market.png";
-import moneyCash from "../../images/icons/moneyCash.png";
-import rare from "../../images/icons/rare.png";
-import vPoint from "../../images/icons/vPoint.png";
+import bugIcon from "../../images/icons/bugIcon.png";
+import eggIcon from "../../images/icons/eggIcon.png";
+import featherIcon from "../../images/icons/featherIcon.png";
+import marketIcon from "../../images/icons/marketIcon.png";
+import moneyCashIcon from "../../images/icons/moneyCashIcon.png";
+import rareIcon from "../../images/icons/rareIcon.png";
+import vPointIcon from "../../images/icons/vPointIcon.png";
+import { inlineIconStyle, iconStyle } from "../../styles/imgStyles";
 
 export default function gameInfo() {
-  const iconStyle = {
-    width: 25,
-    height: 25,
-  };
-
   return (
     <>
       <Container as={Col} md={{ span: 6, offset: 5 }} className="mt-5">
@@ -54,10 +50,10 @@ export default function gameInfo() {
             <p>
               Soaring flocks is a multiplayer game where up to 12 players take
               on the role of capitalist birds to collect, spend and trade
-              resources in orde to earn victory points. Soaring flocks is played
-              in 10, 20 or 30 turns, each turn lasts a day. Whichever player has
-              the most victory points by the end of the game wins Soaring
-              Flocks.
+              resources in order to earn victory points. Soaring flocks is
+              played in 10, 20 or 30 turns. Each turn lasts a day. Whichever
+              player has the most victory points by the end of the game wins
+              Soaring Flocks.
             </p>
             <p>
               Each turn players build up to one market and one ability. Every
@@ -66,8 +62,8 @@ export default function gameInfo() {
             </p>
             <p>
               Players own a number of markets. At the end of each turn, these
-              markets create a resource for the player. Players are free to
-              trade their resources with eachother at any time and by any amount
+              markets create resources for the player. Players are free to trade
+              their resources with each other at any time and by any amount
             </p>
           </Col>
           <Col>
@@ -75,24 +71,22 @@ export default function gameInfo() {
               Resources, Markets, Abilities
             </h5>
 
-            <p>
-              Resources are used to build markets, except for Victory Points
-            </p>
+            <p>Resources are used to build markets.</p>
             <ul>
               <li>
-                <Image src={moneyCash} style={iconStyle} />
+                <Image src={moneyCashIcon} style={inlineIconStyle} />
                 MoneyCash is used to build markets. The more markets you have,
                 the more MoneyCash is required to build your next market.
               </li>
               <li>
-                <Image src={egg} style={iconStyle} />
-                egg, <Image src={feather} style={iconStyle} /> feather,{" "}
-                <Image src={bug} style={iconStyle} />
+                <Image src={eggIcon} style={inlineIconStyle} />
+                egg, <Image src={featherIcon} style={inlineIconStyle} />{" "}
+                feather, <Image src={bugIcon} style={inlineIconStyle} />
                 bug: rare resources. You need to spend one of each of these to
                 build a market.
               </li>
               <li>
-                <Image src={vPoint} style={iconStyle} />
+                <Image src={vPointIcon} style={inlineIconStyle} />
                 Victory Points are not for anything, except for winning!
               </li>
             </ul>
@@ -103,18 +97,18 @@ export default function gameInfo() {
             </p>
             <ul>
               <li>
-                <Image src={moneyCash} style={iconStyle} />
-                <Image src={market} style={iconStyle} />
+                <Image src={moneyCashIcon} style={inlineIconStyle} />
+                <Image src={marketIcon} style={inlineIconStyle} />
                 Money Market generates 2 MoneyCash each turn
               </li>
               <li>
-                <Image src={rare} style={iconStyle} />
-                <Image src={market} style={iconStyle} />
+                <Image src={rareIcon} style={inlineIconStyle} />
+                <Image src={marketIcon} style={inlineIconStyle} />
                 Rare Market generates 1 random Rare Resource each turn
               </li>
               <li>
-                <Image src={vPoint} style={iconStyle} />
-                <Image src={market} style={iconStyle} />
+                <Image src={vPointIcon} style={inlineIconStyle} />
+                <Image src={marketIcon} style={inlineIconStyle} />
                 Victory Market generates 1 victory point each turn
               </li>
             </ul>
