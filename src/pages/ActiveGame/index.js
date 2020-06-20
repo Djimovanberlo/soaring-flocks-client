@@ -26,7 +26,7 @@ export default function ActiveGame() {
 
   return (
     <>
-      <Container style={{ textAlign: "center" }}>
+      <Container as={Col} md={{ span: 6, offset: 5 }} className="mt-5">
         <Row>
           <Col>
             <h2>Game Title</h2>
