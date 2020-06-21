@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Jumbotron from "react-bootstrap/Jumbotron";
 import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import Trade from "./Trade";
+import Trade from "./TradePanel";
 import Container from "react-bootstrap/Container";
 import { Col, Row, Image, Dropdown, DropdownButton } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
@@ -35,10 +35,10 @@ export default function Player(props) {
   const [abilityParam, set_abilityParam] = useState("");
   const [abilityParamForm, set_abilityParamForm] = useState(null);
   const [abilityDescription, set_abilityDescription] = useState(
-    <div>
+    <>
       Choose an ability and its parameter<br></br>
       <br></br>
-    </div>
+    </>
   );
 
   const abilityHandler = (event) => {
@@ -69,7 +69,7 @@ export default function Player(props) {
     } else if (event.target.value === "Buy") {
       set_abilityParamForm(
         <Form>
-          <Form.Group controlId="attackTargetSelect">
+          <Form.Group controlId="buyResourceSelect">
             <Form.Label>Select a resource</Form.Label>
             <Form.Control
               as="select"
@@ -175,14 +175,12 @@ export default function Player(props) {
         <Col>
           <p>Build</p>
           <p>
-            Cost of building a market:{" "}
-            <p>
-              {(mMarket + rMarket + vMarket) * 2}
-              <Image src={moneyCashIcon} style={inlineIconStyle} /> 1
-              <Image src={eggIcon} style={inlineIconStyle} /> 1
-              <Image src={featherIcon} style={inlineIconStyle} /> 1
-              <Image src={bugIcon} style={inlineIconStyle} />
-            </p>
+            Cost of building a market: <br></br>
+            {(mMarket + rMarket + vMarket) * 2 - 4}
+            <Image src={moneyCashIcon} style={inlineIconStyle} /> 1
+            <Image src={eggIcon} style={inlineIconStyle} /> 1
+            <Image src={featherIcon} style={inlineIconStyle} /> 1
+            <Image src={bugIcon} style={inlineIconStyle} />
           </p>
           <Form>
             <Form.Group controlId="marketselect">
