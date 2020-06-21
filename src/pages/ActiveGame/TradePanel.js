@@ -55,171 +55,170 @@ export default function TradePanel(props) {
   ];
 
   return (
-    <>
-      <Container>
-        {tradeList.map((trade) => {
-          return (
-            <Trade
-              key={trade.tradeId}
-              senderId={trade.senderId}
-              receiverId={trade.receiverId}
-              senderName={trade.senderName}
-              receiverName={trade.receiverName}
-              moneyCashSender={trade.moneyCashSender}
-              moneyCashReceiver={trade.moneyCashReceiver}
-              eggSender={trade.eggSender}
-              eggReceiver={trade.eggReceiver}
-              featherSender={trade.featherSender}
-              featherReceiver={trade.featherReceiver}
-              bugSender={trade.bugSender}
-              bugReceiver={trade.bugReceiver}
-              vPointsSender={trade.vPointsSender}
-              vPointsReceiver={trade.vPointsReceiver}
-            />
-          );
-        })}
-        <Card>
-          <Card.Body>
-            <Row>
-              <Form>
-                <Row>
-                  <Col>You offer:</Col>
-                  <Col>Jan offers:</Col>
-                </Row>
-                <Row>
-                  <Col>
-                    <Image src={moneyCashIcon} style={iconStyle} />
-                  </Col>
-                  <Col md={{ span: 2, align: "center" }}>
-                    <Form.Control
-                      width={1}
-                      type="number"
-                      min="0"
-                      id="inputSenderMoneyCash"
-                    />
-                  </Col>
-                  <Col>
-                    <Image src={moneyCashIcon} style={iconStyle} />
-                  </Col>
-                  <Col md={{ span: 2 }}>
-                    <Form.Control
-                      width={1}
-                      type="number"
-                      min="0"
-                      id="inputSenderMoneyCash"
-                    />
-                  </Col>
-                </Row>
-                <Row>
-                  <Col>
-                    <Image src={eggIcon} style={iconStyle} />
-                  </Col>
-                  <Col md={{ span: 2, align: "center" }}>
-                    <Form.Control
-                      width={1}
-                      type="number"
-                      min="0"
-                      id="inputSenderMoneyCash"
-                    />
-                  </Col>
-                  <Col>
-                    <Image src={eggIcon} style={iconStyle} />
-                  </Col>
-                  <Col md={{ span: 2 }}>
-                    <Form.Control
-                      width={1}
-                      type="number"
-                      min="0"
-                      id="inputSenderMoneyCash"
-                    />
-                  </Col>
-                </Row>
-                <Row>
-                  <Col>
-                    <Image src={featherIcon} style={iconStyle} />
-                  </Col>
-                  <Col md={{ span: 2, align: "center" }}>
-                    <Form.Control
-                      width={1}
-                      type="number"
-                      min="0"
-                      id="inputSenderMoneyCash"
-                    />
-                  </Col>
-                  <Col>
-                    <Image src={featherIcon} style={iconStyle} />
-                  </Col>
-                  <Col md={{ span: 2 }}>
-                    <Form.Control
-                      width={1}
-                      type="number"
-                      min="0"
-                      id="inputSenderMoneyCash"
-                    />
-                  </Col>
-                </Row>
-                <Row>
-                  <Col>
-                    <Image src={bugIcon} style={iconStyle} />
-                  </Col>
-                  <Col md={{ span: 2, align: "center" }}>
-                    <Form.Control
-                      width={1}
-                      type="number"
-                      min="0"
-                      id="inputSenderMoneyCash"
-                    />
-                  </Col>
-                  <Col>
-                    <Image src={bugIcon} style={iconStyle} />
-                  </Col>
-                  <Col md={{ span: 2 }}>
-                    <Form.Control
-                      width={1}
-                      type="number"
-                      min="0"
-                      id="inputSenderMoneyCash"
-                    />
-                  </Col>
-                </Row>
-                <Row>
-                  <Col>
-                    <Image src={vPointIcon} style={iconStyle} />
-                  </Col>
-                  <Col md={{ span: 2, align: "center" }}>
-                    <Form.Control
-                      width={1}
-                      type="number"
-                      min="0"
-                      id="inputSenderMoneyCash"
-                    />
-                  </Col>
-                  <Col>
-                    <Image src={vPointIcon} style={iconStyle} />
-                  </Col>
-                  <Col md={{ span: 2 }}>
-                    <Form.Control
-                      width={1}
-                      type="number"
-                      min="0"
-                      id="inputSenderMoneyCash"
-                    />
-                  </Col>
-                </Row>
-              </Form>
-            </Row>
-            <Button
-              variant="primary"
-              onClick={(event) => {
-                console.log("Create trade");
-              }}
-            >
-              Suggest trade
-            </Button>
-          </Card.Body>
-        </Card>
-      </Container>
-    </>
+    <Container>
+      {tradeList.map((trade) => {
+        return (
+          <Trade
+            key={trade.tradeId}
+            senderId={trade.senderId}
+            receiverId={trade.receiverId}
+            senderName={trade.senderName}
+            receiverName={trade.receiverName}
+            moneyCashSender={trade.moneyCashSender}
+            moneyCashReceiver={trade.moneyCashReceiver}
+            eggSender={trade.eggSender}
+            eggReceiver={trade.eggReceiver}
+            featherSender={trade.featherSender}
+            featherReceiver={trade.featherReceiver}
+            bugSender={trade.bugSender}
+            bugReceiver={trade.bugReceiver}
+            vPointsSender={trade.vPointsSender}
+            vPointsReceiver={trade.vPointsReceiver}
+          />
+        );
+      })}
+
+      <Card>
+        <Card.Body>
+          <Row>
+            <Form>
+              <Row>
+                <Col>You offer:</Col>
+                <Col>Jan offers:</Col>
+              </Row>
+              <Row>
+                <Col>
+                  <Image src={moneyCashIcon} style={iconStyle} />
+                </Col>
+                <Col md={{ span: 2, align: "center" }}>
+                  <Form.Control
+                    width={1}
+                    type="number"
+                    min="0"
+                    id="inputSenderMoneyCash"
+                  />
+                </Col>
+                <Col>
+                  <Image src={moneyCashIcon} style={iconStyle} />
+                </Col>
+                <Col md={{ span: 2 }}>
+                  <Form.Control
+                    width={1}
+                    type="number"
+                    min="0"
+                    id="inputSenderMoneyCash"
+                  />
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <Image src={eggIcon} style={iconStyle} />
+                </Col>
+                <Col md={{ span: 2, align: "center" }}>
+                  <Form.Control
+                    width={1}
+                    type="number"
+                    min="0"
+                    id="inputSenderMoneyCash"
+                  />
+                </Col>
+                <Col>
+                  <Image src={eggIcon} style={iconStyle} />
+                </Col>
+                <Col md={{ span: 2 }}>
+                  <Form.Control
+                    width={1}
+                    type="number"
+                    min="0"
+                    id="inputSenderMoneyCash"
+                  />
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <Image src={featherIcon} style={iconStyle} />
+                </Col>
+                <Col md={{ span: 2, align: "center" }}>
+                  <Form.Control
+                    width={1}
+                    type="number"
+                    min="0"
+                    id="inputSenderMoneyCash"
+                  />
+                </Col>
+                <Col>
+                  <Image src={featherIcon} style={iconStyle} />
+                </Col>
+                <Col md={{ span: 2 }}>
+                  <Form.Control
+                    width={1}
+                    type="number"
+                    min="0"
+                    id="inputSenderMoneyCash"
+                  />
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <Image src={bugIcon} style={iconStyle} />
+                </Col>
+                <Col md={{ span: 2, align: "center" }}>
+                  <Form.Control
+                    width={1}
+                    type="number"
+                    min="0"
+                    id="inputSenderMoneyCash"
+                  />
+                </Col>
+                <Col>
+                  <Image src={bugIcon} style={iconStyle} />
+                </Col>
+                <Col md={{ span: 2 }}>
+                  <Form.Control
+                    width={1}
+                    type="number"
+                    min="0"
+                    id="inputSenderMoneyCash"
+                  />
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <Image src={vPointIcon} style={iconStyle} />
+                </Col>
+                <Col md={{ span: 2, align: "center" }}>
+                  <Form.Control
+                    width={1}
+                    type="number"
+                    min="0"
+                    id="inputSenderMoneyCash"
+                  />
+                </Col>
+                <Col>
+                  <Image src={vPointIcon} style={iconStyle} />
+                </Col>
+                <Col md={{ span: 2 }}>
+                  <Form.Control
+                    width={1}
+                    type="number"
+                    min="0"
+                    id="inputSenderMoneyCash"
+                  />
+                </Col>
+              </Row>
+            </Form>
+          </Row>
+          <Button
+            variant="primary"
+            onClick={(event) => {
+              console.log("Create trade");
+            }}
+          >
+            Suggest trade
+          </Button>
+        </Card.Body>
+      </Card>
+    </Container>
     // YOU CAN ONLY OFFER 1 TRADE PER PLAYER AT A TIME (to limit spam options)
     // this means a-b AND b-a can be active at the same time, but no more than that
   );
