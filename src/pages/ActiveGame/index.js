@@ -9,6 +9,17 @@ import { useHistory, Link } from "react-router-dom";
 import { Col, Row } from "react-bootstrap";
 import PlayerCard from "./PlayerCard";
 import Player from "./Player";
+import TradePanel from "./TradePanel";
+
+import bugIcon from "../../images/icons/bugIcon.png";
+import eggIcon from "../../images/icons/eggIcon.png";
+import featherIcon from "../../images/icons/featherIcon.png";
+import marketIcon from "../../images/icons/marketIcon.png";
+import moneyCashIcon from "../../images/icons/moneyCashIcon.png";
+import rareIcon from "../../images/icons/rareIcon.png";
+import vPointIcon from "../../images/icons/vPointIcon.png";
+import { inlineIconStyle, iconStyle } from "../../styles/imgStyles";
+
 import { GET_ALL_PLAYERS_INGAME_SCORE } from "../../graphql/queries";
 
 export default function ActiveGame() {
@@ -31,6 +42,7 @@ export default function ActiveGame() {
   ];
 
   const player = {
+    id: 1,
     name: "Djimo",
     resources: {
       moneyCash: 9,
@@ -42,6 +54,21 @@ export default function ActiveGame() {
       rMarket: 1,
       vMarket: 1,
     },
+  };
+  const [tradePanelState, set_tradePanelState] = useState(true);
+  const tradeControls = tradePanelState ? (
+    <TradePanel playerList={playerList} />
+  ) : (
+    <Player
+      name={player.name}
+      resources={player.resources}
+      playerList={playerList}
+    />
+  );
+
+  const handleClick = (event) => {
+    event.preventDefault();
+    set_tradePanelState(!tradePanelState);
   };
 
   return (
@@ -57,6 +84,9 @@ export default function ActiveGame() {
         <Row>
           <Col>
             <h6>Turn X. Game ends in Y turns</h6>
+            <Button variant="primary" onClick={handleClick}>
+              Open trade
+            </Button>
           </Col>
         </Row>
       </Container>
@@ -76,11 +106,7 @@ export default function ActiveGame() {
           </Col>
           <Col sm={7}>
             <p>{player.name}</p>
-            <Player
-              name={player.name}
-              resources={player.resources}
-              playerList={playerList}
-            />
+            {tradeControls}
           </Col>
           <Col>
             <p style={{ textAlign: "center" }}>Chatbox</p>

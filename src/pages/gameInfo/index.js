@@ -87,13 +87,13 @@ export default function gameInfo() {
               </li>
               <li>
                 <Image src={vPointIcon} style={inlineIconStyle} />
-                Victory Points are not for anything, except for winning!
+                Victory Points are not used for anything, except winning!
               </li>
             </ul>
             <p>
               Markets generate resources. Markets cost one of each rare
-              resource, in addition to 2 MoneyCash for each market that you
-              already have.
+              resource, in addition to 2 MoneyCash for each market that you have
+              built.
             </p>
             <ul>
               <li>
@@ -112,6 +112,14 @@ export default function gameInfo() {
                 Victory Market generates 1 victory point each turn
               </li>
             </ul>
+            <p>
+              {" "}
+              Players start with 1{" "}
+              <Image src={moneyCashIcon} style={inlineIconStyle} />
+              <Image src={marketIcon} style={inlineIconStyle} /> and 1
+              <Image src={rareIcon} style={inlineIconStyle} />
+              <Image src={marketIcon} style={inlineIconStyle} />.
+            </p>
             <p>Abilities are executed at midnight each day</p>
             <ul>
               <li>Attack to destroy another player's random resource</li>

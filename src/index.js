@@ -21,36 +21,36 @@ const httpLink = new HttpLink({
 });
 
 // Create a WebSocket link:
-const wsLink = new WebSocketLink({
-  uri: `ws://${apiUrl}`,
-  options: {
-    reconnect: true,
-  },
-});
+// const wsLink = new WebSocketLink({
+//   uri: `ws://${apiUrl}`,
+//   options: {
+//     reconnect: true,
+//   },
+// });
 
-const link = split(
-  ({ query }) => {
-    const { kind, operation } = getMainDefinition(query);
-    console.log(kind, operation);
-    return kind === "OperationDefinition" && operation === "subscription";
-  },
-  wsLink,
-  httpLink
-);
+// const link = split(
+//   ({ query }) => {
+//     const { kind, operation } = getMainDefinition(query);
+//     console.log(kind, operation);
+//     return kind === "OperationDefinition" && operation === "subscription";
+//   },
+//   wsLink,
+//   httpLink
+// );
 
-// Instantiate client
-const client = new ApolloClient({
-  link,
-  cache: new InMemoryCache(),
-});
+// // Instantiate client
+// const client = new ApolloClient({
+//   link,
+//   cache: new InMemoryCache(),
+// });
 
 ReactDOM.render(
   <Router>
-    <ApolloProvider client={client}>
-      <Provider store={store}>
-        <App />
-      </Provider>
-    </ApolloProvider>
+    {/* <ApolloProvider client={client}> */}
+    <Provider store={store}>
+      <App />
+    </Provider>
+    {/* </ApolloProvider> */}
   </Router>,
   document.getElementById("root")
 );
