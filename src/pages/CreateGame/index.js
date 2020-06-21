@@ -11,6 +11,16 @@ import { Col, Row } from "react-bootstrap";
 export default function CreateGame() {
   const [gameTitle, set_gameTitle] = useState("");
   const [gameTime, set_gameTime] = useState("10 days");
+  const [playersInGame, set_playersInGame] = useState([
+    "Djimo",
+    "Jan",
+    "Jochem",
+  ]);
+  const [playersOutGame, set_playersOutGame] = useState([
+    "Joep",
+    "Joepie",
+    "Jaap",
+  ]);
   const dispatch = useDispatch();
   const token = useSelector(selectToken);
   const history = useHistory();
@@ -21,7 +31,23 @@ export default function CreateGame() {
     }
   }, [token, history]);
 
-  function submitForm(event) {
+  const addToGameListener = (event) => {
+    set_playersInGame([...playersInGame, event.target.value].sort());
+    set_playersOutGame(
+      [
+        ...playersOutGame.filter((player) => player != event.target.value),
+      ].sort()
+    );
+  };
+
+  const removeFromGameListener = (event) => {
+    set_playersOutGame([...playersOutGame, event.target.value].sort());
+    set_playersInGame(
+      [...playersInGame.filter((player) => player != event.target.value)].sort()
+    );
+  };
+
+  const submitForm = (event) => {
     console.log(gameTitle, parseInt(gameTime));
     console.log(typeof parseInt(gameTime));
     event.preventDefault();
@@ -31,7 +57,7 @@ export default function CreateGame() {
     // setEmail("");
     // setPassword("");
     // send user to Active Game page
-  }
+  };
   return (
     <>
       <Container as={Col} md={{ span: 6, offset: 5 }} className="mt-5">
@@ -73,21 +99,25 @@ export default function CreateGame() {
           <Row>
             <Col md={{ span: 3 }}>
               <Form.Group controlId="playersInGame">
-                <Form.Label>Example multiple select</Form.Label>
-                <Form.Control as="select" multiple>
-                  <option>Player 1</option>
-                  <option>Player 2</option>
-                  <option>Player 3</option>
+                <Form.Label>Remove players from game</Form.Label>
+                <Form.Control
+                  as="select"
+                  multiple
+                  onClick={removeFromGameListener}
+                >
+                  {playersInGame.map((player, index) => {
+                    return <option key={index}>{player}</option>;
+                  })}
                 </Form.Control>
               </Form.Group>
             </Col>
             <Col md={{ span: 3 }}>
-              <Form.Group controlId="playersOutsideGame">
-                <Form.Label>Example multiple select</Form.Label>
-                <Form.Control as="select" multiple>
-                  <option>Player 4</option>
-                  <option>Player 5</option>
-                  <option>Player 6</option>
+              <Form.Group controlId="playersOutGame">
+                <Form.Label>Add up to 12 players to game</Form.Label>
+                <Form.Control as="select" multiple onClick={addToGameListener}>
+                  {playersOutGame.map((player) => {
+                    return <option>{player}</option>;
+                  })}
                 </Form.Control>
               </Form.Group>
             </Col>
