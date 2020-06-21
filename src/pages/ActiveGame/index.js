@@ -10,6 +10,7 @@ import { Col, Row } from "react-bootstrap";
 import PlayerCard from "./PlayerCard";
 import Player from "./Player";
 import TradePanel from "./TradePanel";
+import PublicChat from "./PublicChat";
 
 import bugIcon from "../../images/icons/bugIcon.png";
 import eggIcon from "../../images/icons/eggIcon.png";
@@ -110,7 +111,7 @@ export default function ActiveGame() {
           </Col>
           <Col>
             <p style={{ textAlign: "center" }}>Chatbox</p>
-            <p>(char limit in backend 255: type=string, not type=text</p>
+            <PublicChat />
           </Col>
         </Row>
       </Container>

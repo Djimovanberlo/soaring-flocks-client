@@ -112,89 +112,93 @@ export default function Player(props) {
 
   return (
     <Container>
-      <Row>
-        <Col>
-          <p>Resources</p>
-          <ul>
-            <li>
-              <Image src={moneyCashIcon} style={iconStyle} /> {moneyCash}
-            </li>
-            <li>
-              <Image src={eggIcon} style={iconStyle} /> {egg}
-            </li>
-            <li>
-              <Image src={featherIcon} style={iconStyle} /> {feather}
-            </li>
-            <li>
-              <Image src={bugIcon} style={iconStyle} /> {bug}
-            </li>
-            <li>
-              <Image src={vPointIcon} style={iconStyle} /> {vPoints}
-            </li>
-          </ul>
-        </Col>
-        <Col>
-          <p>Markets</p>
-          <ul>
-            <li>
-              <Image src={moneyCashIcon} style={iconStyle} />
-              <Image src={marketIcon} style={iconStyle} /> {mMarket}
-            </li>
-            <li>
-              <Image src={rareIcon} style={iconStyle} />
-              <Image src={marketIcon} style={iconStyle} /> {rMarket}
-            </li>
-            <li>
-              <Image src={vPointIcon} style={iconStyle} />
-              <Image src={marketIcon} style={iconStyle} /> {vMarket}
-            </li>
-          </ul>
-        </Col>
-      </Row>
-      <Row>
-        <Col>
-          <p>Ability</p>
-          <p>{abilityDescription}</p>
+      <Card>
+        <Card.Body>
           <Row>
             <Col>
+              <p>Resources</p>
+              <ul>
+                <li>
+                  <Image src={moneyCashIcon} style={iconStyle} /> {moneyCash}
+                </li>
+                <li>
+                  <Image src={eggIcon} style={iconStyle} /> {egg}
+                </li>
+                <li>
+                  <Image src={featherIcon} style={iconStyle} /> {feather}
+                </li>
+                <li>
+                  <Image src={bugIcon} style={iconStyle} /> {bug}
+                </li>
+                <li>
+                  <Image src={vPointIcon} style={iconStyle} /> {vPoints}
+                </li>
+              </ul>
+            </Col>
+            <Col>
+              <p>Markets</p>
+              <ul>
+                <li>
+                  <Image src={moneyCashIcon} style={iconStyle} />
+                  <Image src={marketIcon} style={iconStyle} /> {mMarket}
+                </li>
+                <li>
+                  <Image src={rareIcon} style={iconStyle} />
+                  <Image src={marketIcon} style={iconStyle} /> {rMarket}
+                </li>
+                <li>
+                  <Image src={vPointIcon} style={iconStyle} />
+                  <Image src={marketIcon} style={iconStyle} /> {vMarket}
+                </li>
+              </ul>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <p>Ability</p>
+              <p>{abilityDescription}</p>
+              <Row>
+                <Col>
+                  <Form>
+                    <Form.Group controlId="abilitySelect">
+                      <Form.Label>Select an ability</Form.Label>
+                      <Form.Control as="select" onChange={abilityHandler}>
+                        <option>No ability</option>
+                        <option>Attack</option>
+                        <option>Buy</option>
+                        <option>Invest</option>
+                      </Form.Control>
+                    </Form.Group>
+                  </Form>
+                </Col>
+                <Col>{abilityParamForm}</Col>
+              </Row>
+            </Col>
+            <Col>
+              <p>Build</p>
+              <p>
+                Cost of building a market: <br></br>
+                {(mMarket + rMarket + vMarket) * 2 - 4}
+                <Image src={moneyCashIcon} style={inlineIconStyle} /> 1
+                <Image src={eggIcon} style={inlineIconStyle} /> 1
+                <Image src={featherIcon} style={inlineIconStyle} /> 1
+                <Image src={bugIcon} style={inlineIconStyle} />
+              </p>
               <Form>
-                <Form.Group controlId="abilitySelect">
-                  <Form.Label>Select an ability</Form.Label>
-                  <Form.Control as="select" onChange={abilityHandler}>
-                    <option>No ability</option>
-                    <option>Attack</option>
-                    <option>Buy</option>
-                    <option>Invest</option>
+                <Form.Group controlId="marketselect">
+                  <Form.Label>Select a market</Form.Label>
+                  <Form.Control as="select">
+                    <option>Don't build anything</option>
+                    <option>Money Market</option>
+                    <option>Rare Market</option>
+                    <option>Victory Market</option>
                   </Form.Control>
                 </Form.Group>
               </Form>
             </Col>
-            <Col>{abilityParamForm}</Col>
           </Row>
-        </Col>
-        <Col>
-          <p>Build</p>
-          <p>
-            Cost of building a market: <br></br>
-            {(mMarket + rMarket + vMarket) * 2 - 4}
-            <Image src={moneyCashIcon} style={inlineIconStyle} /> 1
-            <Image src={eggIcon} style={inlineIconStyle} /> 1
-            <Image src={featherIcon} style={inlineIconStyle} /> 1
-            <Image src={bugIcon} style={inlineIconStyle} />
-          </p>
-          <Form>
-            <Form.Group controlId="marketselect">
-              <Form.Label>Select a market</Form.Label>
-              <Form.Control as="select">
-                <option>Don't build anything</option>
-                <option>Money Market</option>
-                <option>Rare Market</option>
-                <option>Victory Market</option>
-              </Form.Control>
-            </Form.Group>
-          </Form>
-        </Col>
-      </Row>
+        </Card.Body>
+      </Card>
     </Container>
   );
 }

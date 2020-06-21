@@ -31,6 +31,7 @@ export default function CreateGame() {
     }
   }, [token, history]);
 
+  // TO DO: max 12 players
   const addToGameListener = (event) => {
     set_playersInGame([...playersInGame, event.target.value].sort());
     set_playersOutGame(
@@ -115,8 +116,8 @@ export default function CreateGame() {
               <Form.Group controlId="playersOutGame">
                 <Form.Label>Add up to 12 players to game</Form.Label>
                 <Form.Control as="select" multiple onClick={addToGameListener}>
-                  {playersOutGame.map((player) => {
-                    return <option>{player}</option>;
+                  {playersOutGame.map((player, index) => {
+                    return <option key={index}>{player}</option>;
                   })}
                 </Form.Control>
               </Form.Group>
