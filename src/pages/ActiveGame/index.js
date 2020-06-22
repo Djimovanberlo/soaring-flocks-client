@@ -11,6 +11,7 @@ import PlayerCard from "./PlayerCard";
 import Player from "./Player";
 import TradePanel from "./TradePanel";
 import PublicChat from "./PublicChat";
+import { useQuery, useSubscription } from "@apollo/react-hooks";
 
 import bugIcon from "../../images/icons/bugIcon.png";
 import eggIcon from "../../images/icons/eggIcon.png";
@@ -21,9 +22,16 @@ import rareIcon from "../../images/icons/rareIcon.png";
 import vPointIcon from "../../images/icons/vPointIcon.png";
 import { inlineIconStyle, iconStyle } from "../../styles/imgStyles";
 
-import { GET_ALL_PLAYERS_INGAME_SCORE } from "../../graphql/queries";
+import {
+  GET_PLAYERS_WITH_RESOURCES,
+  GET_PLAYER_BY_ID,
+} from "../../graphql/queries";
 
 export default function ActiveGame() {
+  // const { data, error, loading } = useSubscription(GET_PLAYERS_WITH_RESOURCES);
+  const { data, error, loading } = useQuery(GET_PLAYERS_WITH_RESOURCES);
+  console.log(data, error, loading);
+
   const playerList = [
     {
       id: 1,
