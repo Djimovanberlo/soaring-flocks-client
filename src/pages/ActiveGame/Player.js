@@ -137,7 +137,8 @@ export default function Player(props) {
               </p>
             </Col>
             <Col>
-              <p>Markets</p>
+              <div>Markets</div>
+              <br></br>
 
               <ListGroup variant="flush">
                 <ListGroup.Item>
@@ -172,8 +173,10 @@ export default function Player(props) {
               <hr></hr>
               <Row>
                 <Col>
-                  <p>Ability</p>
-                  <p>{abilityDescription}</p>
+                  <div>Ability</div>
+                  <br></br>
+                  <div>{abilityDescription}</div>
+                  <br></br>
                   <Row>
                     <Col>
                       <Form>
@@ -192,15 +195,17 @@ export default function Player(props) {
                   </Row>
                 </Col>
                 <Col>
-                  <p>Build</p>
-                  <p>
+                  <div>Build</div>
+                  <br></br>
+                  <div>
                     Cost of building a market: <br></br>
                     <Image src={moneyCashIcon} style={inlineIconStyle} />
                     {(mMarket + rMarket + vMarket) * 2 - 6}
                     <Image src={eggIcon} style={inlineIconStyle} />1
                     <Image src={featherIcon} style={inlineIconStyle} />1
                     <Image src={bugIcon} style={inlineIconStyle} />1
-                  </p>
+                  </div>
+                  <br></br>
                   <Form>
                     <Form.Group controlId="marketselect">
                       <Form.Label>Select a market</Form.Label>

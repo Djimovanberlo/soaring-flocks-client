@@ -82,7 +82,7 @@ export default function Trade(props) {
         {props.senderId === 1 ? <>Suggested Trade</> : <>Incoming Trade </>}
       </Card.Header>
       <Card.Body>
-        <Card.Text>
+        <Card.Text as="div">
           <Row>
             <Col>
               {props.senderName} offers: <br></br>

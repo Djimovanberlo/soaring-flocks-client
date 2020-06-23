@@ -121,6 +121,7 @@ export default function gameInfo() {
               <Image src={rareIcon} style={inlineIconStyle} />.
             </p>
             <p>Abilities are executed at midnight each day</p>
+
             <ul>
               <li>Attack to destroy another player's random resource</li>
               <li>Buy a resource for 3 MoneyCash</li>

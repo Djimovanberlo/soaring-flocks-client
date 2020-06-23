@@ -54,9 +54,9 @@ export default function PublicChat(props) {
           .reverse()
           .map((message, index) => {
             return (
-              <p key={index}>
+              <div key={index}>
                 {message.player}: {message.content}
-              </p>
+              </div>
             );
           })}
       </Card.Body>
