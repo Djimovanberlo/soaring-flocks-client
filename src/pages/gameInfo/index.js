@@ -116,7 +116,7 @@ export default function gameInfo() {
               {" "}
               Players start with 1{" "}
               <Image src={moneyCashIcon} style={inlineIconStyle} />
-              <Image src={marketIcon} style={inlineIconStyle} /> and 1
+              <Image src={marketIcon} style={inlineIconStyle} /> and 2
               <Image src={rareIcon} style={inlineIconStyle} />
               <Image src={marketIcon} style={inlineIconStyle} />.
             </p>

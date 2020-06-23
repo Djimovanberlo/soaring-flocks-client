@@ -18,9 +18,11 @@ export default function Trade(props) {
   const noValueChecker = (resource, resourceIcon) => {
     if (resource != 0) {
       return (
-        <Row>
-          {resource} <Image src={resourceIcon} style={inlineIconStyle} />
-        </Row>
+        <>
+          <Image src={resourceIcon} style={inlineIconStyle} />
+          {resource}
+          <br></br>
+        </>
       );
     } else {
       return <Row></Row>;
@@ -31,10 +33,10 @@ export default function Trade(props) {
     if (senderId === 1) {
       return (
         <Row>
-          <Col>{null}</Col>
           <Col>
             <Button
-              variant="primary"
+              variant="outline-danger"
+              size="sm"
               onClick={(event) => {
                 console.log("Cancel trade");
               }}
@@ -49,7 +51,8 @@ export default function Trade(props) {
         <Row>
           <Col>
             <Button
-              variant="primary"
+              variant="outline-success"
+              size="sm"
               onClick={(event) => {
                 console.log("Accept trade");
               }}
@@ -59,7 +62,8 @@ export default function Trade(props) {
           </Col>
           <Col>
             <Button
-              variant="primary"
+              variant="outline-danger"
+              size="sm"
               onClick={(event) => {
                 console.log("Decline trade");
               }}
@@ -74,26 +78,31 @@ export default function Trade(props) {
 
   return (
     <Card>
+      <Card.Header>
+        {props.senderId === 1 ? <>Suggested Trade</> : <>Incoming Trade </>}
+      </Card.Header>
       <Card.Body>
-        <Row>
-          <Col>
-            <Row>{props.senderName} offers:</Row>
-            {noValueChecker(props.moneyCashSender, moneyCashIcon)}
-            {noValueChecker(props.eggSender, eggIcon)}
-            {noValueChecker(props.featherSender, featherIcon)}
-            {noValueChecker(props.bugSender, bugIcon)}
-            {noValueChecker(props.vPointsSender, vPointIcon)}
-          </Col>
-          <Col>
-            <Row>{props.receiverName} offers:</Row>
-            {noValueChecker(props.moneyCashReceiver, moneyCashIcon)}
-            {noValueChecker(props.eggReceiver, eggIcon)}
-            {noValueChecker(props.featherReceiver, featherIcon)}
-            {noValueChecker(props.bugReceiver, bugIcon)}
-            {noValueChecker(props.vPointsReceiver, vPointIcon)}
-          </Col>
-        </Row>
-        <Row>{buttonChecker(props.senderId)}</Row>
+        <Card.Text>
+          <Row>
+            <Col>
+              {props.senderName} offers: <br></br>
+              {noValueChecker(props.moneyCashSender, moneyCashIcon)}
+              {noValueChecker(props.eggSender, eggIcon)}
+              {noValueChecker(props.featherSender, featherIcon)}
+              {noValueChecker(props.bugSender, bugIcon)}
+              {noValueChecker(props.vPointsSender, vPointIcon)}
+            </Col>
+            <Col>
+              <Row>{props.receiverName} offers:</Row>
+              {noValueChecker(props.moneyCashReceiver, moneyCashIcon)}
+              {noValueChecker(props.eggReceiver, eggIcon)}
+              {noValueChecker(props.featherReceiver, featherIcon)}
+              {noValueChecker(props.bugReceiver, bugIcon)}
+              {noValueChecker(props.vPointsReceiver, vPointIcon)}
+            </Col>
+          </Row>
+        </Card.Text>
+        {buttonChecker(props.senderId)}
       </Card.Body>
     </Card>
   );

@@ -102,12 +102,12 @@ export default function ActiveGame() {
         </Row>
       </Container>
       <br></br>
-      <Container as={Col} fluid>
+      <Container fluid>
         <Row>
           <Col md={2}>
             <ScoreBoard playerList={playerList} />
           </Col>
-          <Col fluid>{tradeControls}</Col>
+          <Col>{tradeControls}</Col>
         </Row>
       </Container>
     </>

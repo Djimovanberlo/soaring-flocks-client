@@ -16,145 +16,145 @@ export default function TradeSuggest(props) {
   return (
     <Container>
       <Card>
+        <Card.Header>Suggest new trade</Card.Header>
         <Card.Body>
-          <Row>
-            <Form>
-              <Row>
-                <Col>You offer:</Col>
-                <Col>Jan offers:</Col>
-              </Row>
-              <Row>
-                <Col>
-                  <Image src={moneyCashIcon} style={iconStyle} />
-                </Col>
-                <Col md={{ span: 2, align: "center" }}>
-                  <Form.Control
-                    width={1}
-                    type="number"
-                    min="0"
-                    id="inputSenderMoneyCash"
-                  />
-                </Col>
-                <Col>
-                  <Image src={moneyCashIcon} style={iconStyle} />
-                </Col>
-                <Col md={{ span: 2 }}>
-                  <Form.Control
-                    width={1}
-                    type="number"
-                    min="0"
-                    id="inputSenderMoneyCash"
-                  />
-                </Col>
-              </Row>
-              <Row>
-                <Col>
-                  <Image src={eggIcon} style={iconStyle} />
-                </Col>
-                <Col md={{ span: 2, align: "center" }}>
-                  <Form.Control
-                    width={1}
-                    type="number"
-                    min="0"
-                    id="inputSenderMoneyCash"
-                  />
-                </Col>
-                <Col>
-                  <Image src={eggIcon} style={iconStyle} />
-                </Col>
-                <Col md={{ span: 2 }}>
-                  <Form.Control
-                    width={1}
-                    type="number"
-                    min="0"
-                    id="inputSenderMoneyCash"
-                  />
-                </Col>
-              </Row>
-              <Row>
-                <Col>
-                  <Image src={featherIcon} style={iconStyle} />
-                </Col>
-                <Col md={{ span: 2, align: "center" }}>
-                  <Form.Control
-                    width={1}
-                    type="number"
-                    min="0"
-                    id="inputSenderMoneyCash"
-                  />
-                </Col>
-                <Col>
-                  <Image src={featherIcon} style={iconStyle} />
-                </Col>
-                <Col md={{ span: 2 }}>
-                  <Form.Control
-                    width={1}
-                    type="number"
-                    min="0"
-                    id="inputSenderMoneyCash"
-                  />
-                </Col>
-              </Row>
-              <Row>
-                <Col>
-                  <Image src={bugIcon} style={iconStyle} />
-                </Col>
-                <Col md={{ span: 2, align: "center" }}>
-                  <Form.Control
-                    width={1}
-                    type="number"
-                    min="0"
-                    id="inputSenderMoneyCash"
-                  />
-                </Col>
-                <Col>
-                  <Image src={bugIcon} style={iconStyle} />
-                </Col>
-                <Col md={{ span: 2 }}>
-                  <Form.Control
-                    width={1}
-                    type="number"
-                    min="0"
-                    id="inputSenderMoneyCash"
-                  />
-                </Col>
-              </Row>
-              <Row>
-                <Col>
-                  <Image src={vPointIcon} style={iconStyle} />
-                </Col>
-                <Col md={{ span: 2, align: "center" }}>
-                  <Form.Control
-                    width={1}
-                    type="number"
-                    min="0"
-                    id="inputSenderMoneyCash"
-                  />
-                </Col>
-                <Col>
-                  <Image src={vPointIcon} style={iconStyle} />
-                </Col>
-                <Col md={{ span: 2 }}>
-                  <Form.Control
-                    width={1}
-                    type="number"
-                    min="0"
-                    id="inputSenderMoneyCash"
-                  />
-                </Col>
-              </Row>
-            </Form>
-          </Row>
-          <Row>
-            <Button
-              variant="primary"
-              onClick={(event) => {
-                console.log("Create trade");
-              }}
-            >
-              Suggest trade
-            </Button>
-          </Row>
+          <Form>
+            <Row>
+              <Col>You offer:</Col>
+              <Col>Jan offers:</Col>
+            </Row>
+            <Row>
+              <Col>
+                <Image src={moneyCashIcon} style={iconStyle} />
+              </Col>
+              <Col md={{ span: 2, align: "center" }}>
+                <Form.Control
+                  width={1}
+                  type="number"
+                  min="0"
+                  id="inputSenderMoneyCash"
+                />
+              </Col>
+              <Col>
+                <Image src={moneyCashIcon} style={iconStyle} />
+              </Col>
+              <Col md={{ span: 2 }}>
+                <Form.Control
+                  width={1}
+                  type="number"
+                  min="0"
+                  id="inputSenderMoneyCash"
+                />
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <Image src={eggIcon} style={iconStyle} />
+              </Col>
+              <Col md={{ span: 2, align: "center" }}>
+                <Form.Control
+                  width={1}
+                  type="number"
+                  min="0"
+                  id="inputSenderMoneyCash"
+                />
+              </Col>
+              <Col>
+                <Image src={eggIcon} style={iconStyle} />
+              </Col>
+              <Col md={{ span: 2 }}>
+                <Form.Control
+                  width={1}
+                  type="number"
+                  min="0"
+                  id="inputSenderMoneyCash"
+                />
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <Image src={featherIcon} style={iconStyle} />
+              </Col>
+              <Col md={{ span: 2, align: "center" }}>
+                <Form.Control
+                  width={1}
+                  type="number"
+                  min="0"
+                  id="inputSenderMoneyCash"
+                />
+              </Col>
+              <Col>
+                <Image src={featherIcon} style={iconStyle} />
+              </Col>
+              <Col md={{ span: 2 }}>
+                <Form.Control
+                  width={1}
+                  type="number"
+                  min="0"
+                  id="inputSenderMoneyCash"
+                />
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <Image src={bugIcon} style={iconStyle} />
+              </Col>
+              <Col md={{ span: 2, align: "center" }}>
+                <Form.Control
+                  width={1}
+                  type="number"
+                  min="0"
+                  id="inputSenderMoneyCash"
+                />
+              </Col>
+              <Col>
+                <Image src={bugIcon} style={iconStyle} />
+              </Col>
+              <Col md={{ span: 2 }}>
+                <Form.Control
+                  width={1}
+                  type="number"
+                  min="0"
+                  id="inputSenderMoneyCash"
+                />
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <Image src={vPointIcon} style={iconStyle} />
+              </Col>
+              <Col md={{ span: 2, align: "center" }}>
+                <Form.Control
+                  width={1}
+                  type="number"
+                  min="0"
+                  id="inputSenderMoneyCash"
+                />
+              </Col>
+              <Col>
+                <Image src={vPointIcon} style={iconStyle} />
+              </Col>
+              <Col md={{ span: 2 }}>
+                <Form.Control
+                  width={1}
+                  type="number"
+                  min="0"
+                  id="inputSenderMoneyCash"
+                />
+              </Col>
+            </Row>
+            <br></br>
+          </Form>
+          <Button
+            Button
+            variant="outline-info"
+            size="sm"
+            onClick={(event) => {
+              console.log("Create trade");
+            }}
+          >
+            Suggest trade
+          </Button>
         </Card.Body>
       </Card>
     </Container>

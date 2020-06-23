@@ -113,6 +113,7 @@ export default function Player(props) {
   return (
     <Container>
       <Card>
+        <Card.Header>{props.name}</Card.Header>
         <Card.Body>
           <Row>
             <Col>
@@ -139,16 +140,19 @@ export default function Player(props) {
               <p>Markets</p>
               <ul>
                 <li>
+                  <Image src={marketIcon} style={iconStyle} />
                   <Image src={moneyCashIcon} style={iconStyle} />
-                  <Image src={marketIcon} style={iconStyle} /> {mMarket}
+                  {mMarket}
                 </li>
                 <li>
+                  <Image src={marketIcon} style={iconStyle} />
                   <Image src={rareIcon} style={iconStyle} />
-                  <Image src={marketIcon} style={iconStyle} /> {rMarket}
+                  {rMarket}
                 </li>
                 <li>
+                  <Image src={marketIcon} style={iconStyle} />
                   <Image src={vPointIcon} style={iconStyle} />
-                  <Image src={marketIcon} style={iconStyle} /> {vMarket}
+                  {vMarket}
                 </li>
               </ul>
             </Col>
@@ -178,11 +182,11 @@ export default function Player(props) {
               <p>Build</p>
               <p>
                 Cost of building a market: <br></br>
-                {(mMarket + rMarket + vMarket) * 2 - 4}
-                <Image src={moneyCashIcon} style={inlineIconStyle} /> 1
-                <Image src={eggIcon} style={inlineIconStyle} /> 1
-                <Image src={featherIcon} style={inlineIconStyle} /> 1
-                <Image src={bugIcon} style={inlineIconStyle} />
+                <Image src={moneyCashIcon} style={inlineIconStyle} />
+                {(mMarket + rMarket + vMarket) * 2 - 6}
+                <Image src={eggIcon} style={inlineIconStyle} />1
+                <Image src={featherIcon} style={inlineIconStyle} />1
+                <Image src={bugIcon} style={inlineIconStyle} />1
               </p>
               <Form>
                 <Form.Group controlId="marketselect">
