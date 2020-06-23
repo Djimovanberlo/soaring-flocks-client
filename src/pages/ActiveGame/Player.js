@@ -97,6 +97,8 @@ export default function Player(props) {
           Pay 10
           <Image src={moneyCashIcon} style={inlineIconStyle} /> to gain 4 random
           Rare Resources
+          <br></br>
+          <br></br>
         </>
       );
     } else if (event.target.value === "No ability") {
