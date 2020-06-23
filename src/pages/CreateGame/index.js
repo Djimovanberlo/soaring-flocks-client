@@ -124,7 +124,7 @@ export default function CreateGame() {
             </Col>
           </Row>
           <Form.Group className="mt-5">
-            <Button variant="primary" type="submit" onClick={submitForm}>
+            <Button variant="outline-info" type="submit" onClick={submitForm}>
               Start Game
             </Button>
           </Form.Group>

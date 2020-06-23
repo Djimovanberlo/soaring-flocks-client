@@ -7,7 +7,7 @@ import { selectToken } from "../../store/user/selectors";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
 import { Col, Row } from "react-bootstrap";
-import PlayerCard from "./PlayerCard";
+import PlayerScore from "./PlayerScore";
 import Player from "./Player";
 import TradePanel from "./TradePanel";
 import PublicChat from "./PublicChat";
@@ -22,6 +22,8 @@ import moneyCashIcon from "../../images/icons/moneyCashIcon.png";
 import rareIcon from "../../images/icons/rareIcon.png";
 import vPointIcon from "../../images/icons/vPointIcon.png";
 import { inlineIconStyle, iconStyle } from "../../styles/imgStyles";
+import PlayerPanel from "./PlayerPanel";
+import ScoreBoard from "./ScoreBoard";
 
 import {
   GET_PLAYERS_WITH_RESOURCES,
@@ -67,31 +69,9 @@ export default function ActiveGame() {
   };
   const [tradePanelState, set_tradePanelState] = useState(true);
   const tradeControls = tradePanelState ? (
-    <Container>
-      <Row>
-        <Col md={{ span: 8 }}>
-          <TradePanel playerList={playerList} />
-        </Col>
-        <Col Col md={{ span: 3 }}>
-          <PrivateChat />
-        </Col>
-      </Row>
-    </Container>
+    <TradePanel playerList={playerList} />
   ) : (
-    <Container>
-      <Row>
-        <Col md={{ span: 8 }}>
-          <Player
-            name={player.name}
-            resources={player.resources}
-            playerList={playerList}
-          />
-        </Col>
-        <Col Col md={{ span: 3 }}>
-          <PublicChat />
-        </Col>
-      </Row>
-    </Container>
+    <PlayerPanel />
   );
 
   const handleClick = (event) => {
@@ -101,14 +81,17 @@ export default function ActiveGame() {
 
   return (
     <>
-      <Container as={Col} md={{ span: 6, offset: 5 }} className="mt-5">
+      <Container
+        style={{ textAlign: "center" }}
+        as={Col}
+        md={{ span: 2, offset: 5 }}
+        className="mt-5"
+      >
         <Row>
           <Col>
             <h2>Game Title</h2>
           </Col>
         </Row>
-      </Container>
-      <Container style={{ textAlign: "center" }}>
         <Row>
           <Col>
             <h6>Turn X. Game ends in Y turns</h6>
@@ -118,24 +101,13 @@ export default function ActiveGame() {
           </Col>
         </Row>
       </Container>
-      <Container>
+      <br></br>
+      <Container fluid>
         <Row>
-          <Col md={{ span: 2 }}>
-            <p style={{ textAlign: "center" }}>Scoreboard</p>
-            {playerList.map((listPlayer) => {
-              return (
-                <PlayerCard
-                  key={listPlayer.id}
-                  name={listPlayer.name}
-                  vPoints={listPlayer.vPoints}
-                />
-              );
-            })}
+          <Col md={2}>
+            <ScoreBoard playerList={playerList} />
           </Col>
-          <Col md={10}>
-            <p>{player.name}</p>
-            {tradeControls}
-          </Col>
+          <Col>{tradeControls}</Col>
         </Row>
       </Container>
     </>
