@@ -23,7 +23,7 @@ export default function Trade(props) {
         </Row>
       );
     } else {
-      return null;
+      return <Row></Row>;
     }
   };
 
@@ -73,30 +73,28 @@ export default function Trade(props) {
   };
 
   return (
-    <>
-      <Card>
-        <Card.Body>
-          <Row>
-            <Col>
-              <Row>{props.senderName} offers:</Row>
-              {noValueChecker(props.moneyCashSender, moneyCashIcon)}
-              {noValueChecker(props.eggSender, eggIcon)}
-              {noValueChecker(props.featherSender, featherIcon)}
-              {noValueChecker(props.bugSender, bugIcon)}
-              {noValueChecker(props.vPointsSender, vPointIcon)}
-            </Col>
-            <Col>
-              <Row>{props.receiverName} offers:</Row>
-              {noValueChecker(props.moneyCashReceiver, moneyCashIcon)}
-              {noValueChecker(props.eggReceiver, eggIcon)}
-              {noValueChecker(props.featherReceiver, featherIcon)}
-              {noValueChecker(props.bugReceiver, bugIcon)}
-              {noValueChecker(props.vPointsReceiver, vPointIcon)}
-            </Col>
-          </Row>
-          {buttonChecker(props.senderId)}
-        </Card.Body>
-      </Card>
-    </>
+    <Card>
+      <Card.Body>
+        <Row>
+          <Col>
+            <Row>{props.senderName} offers:</Row>
+            {noValueChecker(props.moneyCashSender, moneyCashIcon)}
+            {noValueChecker(props.eggSender, eggIcon)}
+            {noValueChecker(props.featherSender, featherIcon)}
+            {noValueChecker(props.bugSender, bugIcon)}
+            {noValueChecker(props.vPointsSender, vPointIcon)}
+          </Col>
+          <Col>
+            <Row>{props.receiverName} offers:</Row>
+            {noValueChecker(props.moneyCashReceiver, moneyCashIcon)}
+            {noValueChecker(props.eggReceiver, eggIcon)}
+            {noValueChecker(props.featherReceiver, featherIcon)}
+            {noValueChecker(props.bugReceiver, bugIcon)}
+            {noValueChecker(props.vPointsReceiver, vPointIcon)}
+          </Col>
+        </Row>
+        <Row>{buttonChecker(props.senderId)}</Row>
+      </Card.Body>
+    </Card>
   );
 }

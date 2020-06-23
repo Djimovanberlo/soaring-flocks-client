@@ -47,7 +47,7 @@ export default function PublicChat(props) {
 
   return (
     <>
-      <Container>
+      <Col>
         {messages
           .slice(0)
           .reverse()
@@ -68,7 +68,7 @@ export default function PublicChat(props) {
             onKeyPress={handleOnKeyPress}
           />
         </Form>
-      </Container>
+      </Col>
     </>
   );
 }

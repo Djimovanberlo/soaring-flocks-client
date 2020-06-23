@@ -4,7 +4,7 @@ import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Trade from "./TradePanel";
 
-export default function PlayerCard(props) {
+export default function PlayerScore(props) {
   const [trade, set_trade] = useState(false);
   // select userID (sender trade) and playerID (receiver trade)
   //   const loginLogoutControls = token ? <LoggedIn /> : <LoggedOut />;
@@ -20,7 +20,7 @@ export default function PlayerCard(props) {
         <Card.Body>
           <Card.Title>{props.name}</Card.Title>
           <Card.Text>Victory points: {props.vPoints}</Card.Text>
-          <Button variant="primary" onClick={handleClick}>
+          <Button variant="outline-info" size="sm" onClick={handleClick}>
             Open trade
           </Button>
         </Card.Body>
