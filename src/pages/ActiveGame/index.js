@@ -11,6 +11,7 @@ import PlayerCard from "./PlayerCard";
 import Player from "./Player";
 import TradePanel from "./TradePanel";
 import PublicChat from "./PublicChat";
+import PrivateChat from "./PrivateChat";
 import { useQuery, useSubscription } from "@apollo/react-hooks";
 
 import bugIcon from "../../images/icons/bugIcon.png";
@@ -66,13 +67,31 @@ export default function ActiveGame() {
   };
   const [tradePanelState, set_tradePanelState] = useState(true);
   const tradeControls = tradePanelState ? (
-    <TradePanel playerList={playerList} />
+    <Container>
+      <Row>
+        <Col md={{ span: 8 }}>
+          <TradePanel playerList={playerList} />
+        </Col>
+        <Col Col md={{ span: 3 }}>
+          <PrivateChat />
+        </Col>
+      </Row>
+    </Container>
   ) : (
-    <Player
-      name={player.name}
-      resources={player.resources}
-      playerList={playerList}
-    />
+    <Container>
+      <Row>
+        <Col md={{ span: 8 }}>
+          <Player
+            name={player.name}
+            resources={player.resources}
+            playerList={playerList}
+          />
+        </Col>
+        <Col Col md={{ span: 3 }}>
+          <PublicChat />
+        </Col>
+      </Row>
+    </Container>
   );
 
   const handleClick = (event) => {
@@ -101,7 +120,7 @@ export default function ActiveGame() {
       </Container>
       <Container>
         <Row>
-          <Col>
+          <Col md={{ span: 2 }}>
             <p style={{ textAlign: "center" }}>Scoreboard</p>
             {playerList.map((listPlayer) => {
               return (
@@ -113,13 +132,9 @@ export default function ActiveGame() {
               );
             })}
           </Col>
-          <Col sm={7}>
+          <Col md={10}>
             <p>{player.name}</p>
             {tradeControls}
-          </Col>
-          <Col>
-            <p style={{ textAlign: "center" }}>Chatbox</p>
-            <PublicChat />
           </Col>
         </Row>
       </Container>
