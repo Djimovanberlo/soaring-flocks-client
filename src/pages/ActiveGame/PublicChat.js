@@ -46,29 +46,30 @@ export default function PublicChat(props) {
   };
 
   return (
-    <>
-      <Col>
+    <Card>
+      <Card.Header>Game Title Chat</Card.Header>
+      <Card.Body>
         {messages
           .slice(0)
           .reverse()
           .map((message, index) => {
             return (
-              <Card key={index}>
+              <p key={index}>
                 {message.player}: {message.content}
-              </Card>
+              </p>
             );
           })}
-        <Form>
-          <Form.Control
-            type="text"
-            as="textarea"
-            rows="2"
-            value={newMessage.content}
-            onChange={handleChange}
-            onKeyPress={handleOnKeyPress}
-          />
-        </Form>
-      </Col>
-    </>
+      </Card.Body>
+      <Form>
+        <Form.Control
+          type="text"
+          as="textarea"
+          rows="2"
+          value={newMessage.content}
+          onChange={handleChange}
+          onKeyPress={handleOnKeyPress}
+        />
+      </Form>
+    </Card>
   );
 }

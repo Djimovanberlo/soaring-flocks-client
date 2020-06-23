@@ -80,7 +80,7 @@ export default function gameInfo() {
               </li>
               <li>
                 <Image src={eggIcon} style={inlineIconStyle} />
-                egg, <Image src={featherIcon} style={inlineIconStyle} />{" "}
+                egg, <Image src={featherIcon} style={inlineIconStyle} />
                 feather, <Image src={bugIcon} style={inlineIconStyle} />
                 bug: rare resources. You need to spend one of each of these to
                 build a market.
@@ -97,28 +97,28 @@ export default function gameInfo() {
             </p>
             <ul>
               <li>
-                <Image src={moneyCashIcon} style={inlineIconStyle} />
                 <Image src={marketIcon} style={inlineIconStyle} />
+                <Image src={moneyCashIcon} style={inlineIconStyle} />
                 Money Market generates 2 MoneyCash each turn
               </li>
               <li>
-                <Image src={rareIcon} style={inlineIconStyle} />
                 <Image src={marketIcon} style={inlineIconStyle} />
+                <Image src={rareIcon} style={inlineIconStyle} />
                 Rare Market generates 1 random Rare Resource each turn
               </li>
               <li>
-                <Image src={vPointIcon} style={inlineIconStyle} />
                 <Image src={marketIcon} style={inlineIconStyle} />
+                <Image src={vPointIcon} style={inlineIconStyle} />
                 Victory Market generates 1 victory point each turn
               </li>
             </ul>
             <p>
               {" "}
               Players start with 1{" "}
-              <Image src={moneyCashIcon} style={inlineIconStyle} />
-              <Image src={marketIcon} style={inlineIconStyle} /> and 2
-              <Image src={rareIcon} style={inlineIconStyle} />
-              <Image src={marketIcon} style={inlineIconStyle} />.
+              <Image src={marketIcon} style={inlineIconStyle} />
+              <Image src={moneyCashIcon} style={inlineIconStyle} /> and 2
+              <Image src={marketIcon} style={inlineIconStyle} />
+              <Image src={rareIcon} style={inlineIconStyle} />.
             </p>
             <p>Abilities are executed at midnight each day</p>
             <ul>

@@ -61,6 +61,7 @@ export default function TradePanel(props) {
       <Col>
         <Container>
           <Card>
+            <Card.Header>Djimo's trades with Jan</Card.Header>
             <Card.Body>
               <Row>
                 <Col>

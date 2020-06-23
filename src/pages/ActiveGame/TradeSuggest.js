@@ -20,133 +20,125 @@ export default function TradeSuggest(props) {
         <Card.Body>
           <Form>
             <Row>
-              <Col>You offer:</Col>
-              <Col>Jan offers:</Col>
-            </Row>
-            <Row>
               <Col>
-                <Image src={moneyCashIcon} style={iconStyle} />
-              </Col>
-              <Col md={{ span: 2, align: "center" }}>
-                <Form.Control
-                  width={1}
-                  type="number"
-                  min="0"
-                  id="inputSenderMoneyCash"
-                />
-              </Col>
-              <Col>
-                <Image src={moneyCashIcon} style={iconStyle} />
-              </Col>
-              <Col md={{ span: 2 }}>
-                <Form.Control
-                  width={1}
-                  type="number"
-                  min="0"
-                  id="inputSenderMoneyCash"
-                />
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <Image src={eggIcon} style={iconStyle} />
-              </Col>
-              <Col md={{ span: 2, align: "center" }}>
-                <Form.Control
-                  width={1}
-                  type="number"
-                  min="0"
-                  id="inputSenderMoneyCash"
-                />
-              </Col>
-              <Col>
-                <Image src={eggIcon} style={iconStyle} />
-              </Col>
-              <Col md={{ span: 2 }}>
-                <Form.Control
-                  width={1}
-                  type="number"
-                  min="0"
-                  id="inputSenderMoneyCash"
-                />
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <Image src={featherIcon} style={iconStyle} />
-              </Col>
-              <Col md={{ span: 2, align: "center" }}>
-                <Form.Control
-                  width={1}
-                  type="number"
-                  min="0"
-                  id="inputSenderMoneyCash"
-                />
+                Your offer:
+                <Row>
+                  <Image src={moneyCashIcon} style={iconStyle} />
+                  <Form.Group>
+                    <Form.Control
+                      style={{ width: 60 }}
+                      type="number"
+                      min="0"
+                      id="inputSenderMoneyCash"
+                    />
+                  </Form.Group>
+                </Row>
+                <Row>
+                  <Image src={eggIcon} style={iconStyle} />
+                  <Form.Group>
+                    <Form.Control
+                      style={{ width: 60 }}
+                      type="number"
+                      min="0"
+                      id="inputSenderEgg"
+                    />
+                  </Form.Group>
+                </Row>
+                <Row>
+                  <Image src={featherIcon} style={iconStyle} />
+                  <Form.Group>
+                    <Form.Control
+                      style={{ width: 60 }}
+                      type="number"
+                      min="0"
+                      id="inputSenderFeather"
+                    />
+                  </Form.Group>
+                </Row>
+                <Row>
+                  <Image src={bugIcon} style={iconStyle} />
+                  <Form.Group>
+                    <Form.Control
+                      style={{ width: 60 }}
+                      type="number"
+                      min="0"
+                      id="inputSenderEgg"
+                    />
+                  </Form.Group>
+                </Row>
+                <Row>
+                  <Image src={vPointIcon} style={iconStyle} />
+                  <Form.Group>
+                    <Form.Control
+                      style={{ width: 60 }}
+                      type="number"
+                      min="0"
+                      id="inputSenderVPoint"
+                    />
+                  </Form.Group>
+                </Row>
               </Col>
               <Col>
-                <Image src={featherIcon} style={iconStyle} />
-              </Col>
-              <Col md={{ span: 2 }}>
-                <Form.Control
-                  width={1}
-                  type="number"
-                  min="0"
-                  id="inputSenderMoneyCash"
-                />
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <Image src={bugIcon} style={iconStyle} />
-              </Col>
-              <Col md={{ span: 2, align: "center" }}>
-                <Form.Control
-                  width={1}
-                  type="number"
-                  min="0"
-                  id="inputSenderMoneyCash"
-                />
-              </Col>
-              <Col>
-                <Image src={bugIcon} style={iconStyle} />
-              </Col>
-              <Col md={{ span: 2 }}>
-                <Form.Control
-                  width={1}
-                  type="number"
-                  min="0"
-                  id="inputSenderMoneyCash"
-                />
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <Image src={vPointIcon} style={iconStyle} />
-              </Col>
-              <Col md={{ span: 2, align: "center" }}>
-                <Form.Control
-                  width={1}
-                  type="number"
-                  min="0"
-                  id="inputSenderMoneyCash"
-                />
-              </Col>
-              <Col>
-                <Image src={vPointIcon} style={iconStyle} />
-              </Col>
-              <Col md={{ span: 2 }}>
-                <Form.Control
-                  width={1}
-                  type="number"
-                  min="0"
-                  id="inputSenderMoneyCash"
-                />
+                Their offer:
+                <Row>
+                  <Image src={moneyCashIcon} style={iconStyle} />
+                  <Form.Group>
+                    <Form.Control
+                      style={{ width: 60 }}
+                      type="number"
+                      min="0"
+                      id="inputReceiverMoneyCash"
+                    />
+                  </Form.Group>
+                </Row>
+                <Row>
+                  <Image src={eggIcon} style={iconStyle} />
+                  <Form.Group>
+                    <Form.Control
+                      style={{ width: 60 }}
+                      type="number"
+                      min="0"
+                      id="inputReceiverEgg"
+                    />
+                  </Form.Group>
+                </Row>
+                <Row>
+                  <Image src={featherIcon} style={iconStyle} />
+                  <Form.Group>
+                    <Form.Control
+                      style={{ width: 60 }}
+                      type="number"
+                      min="0"
+                      id="inputReceiverFeather"
+                    />
+                  </Form.Group>
+                </Row>
+                <Row>
+                  <Image src={bugIcon} style={iconStyle} />
+                  <Form.Group>
+                    <Form.Control
+                      style={{ width: 60 }}
+                      type="number"
+                      min="0"
+                      id="inputReceiverEgg"
+                    />
+                  </Form.Group>
+                </Row>
+                <Row>
+                  <Image src={vPointIcon} style={iconStyle} />
+                  <Form.Group>
+                    <Form.Control
+                      style={{ width: 60 }}
+                      type="number"
+                      min="0"
+                      id="inputReceiverVPoint"
+                    />
+                  </Form.Group>
+                </Row>
               </Col>
             </Row>
-            <br></br>
           </Form>
           <Button
-            Button
             variant="outline-info"
             size="sm"
             onClick={(event) => {

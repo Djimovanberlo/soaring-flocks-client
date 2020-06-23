@@ -31,7 +31,7 @@ export default function PlayerScore(props) {
           </Button>
         </Card.Body>
       </Card>
-      <div>{trade ? <Trade /> : null}</div>
+      <>{trade ? <Trade /> : null}</>
     </>
   );
 }
