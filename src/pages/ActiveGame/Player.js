@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Jumbotron from "react-bootstrap/Jumbotron";
-import { Button, Card, ListGroup } from "react-bootstrap";
+import { Button, Card, ListGroup, Alert } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Trade from "./TradePanel";
 import Container from "react-bootstrap/Container";
 import { Col, Row, Image, Dropdown, DropdownButton } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
+import { GET_PLAYER_BY_ID } from "../../graphql/queries";
+import { useQuery, useSubscription } from "@apollo/react-hooks";
 
 import bugIcon from "../../images/icons/bugIcon.png";
 import eggIcon from "../../images/icons/eggIcon.png";
@@ -17,20 +19,6 @@ import vPointIcon from "../../images/icons/vPointIcon.png";
 import { inlineIconStyle, iconStyle } from "../../styles/imgStyles";
 
 export default function Player(props) {
-  const {
-    name,
-    resources: {
-      moneyCash,
-      egg,
-      feather,
-      bug,
-      vPoints,
-      mMarket,
-      rMarket,
-      vMarket,
-    },
-  } = props;
-
   const [ability, set_ability] = useState("");
   const [abilityParam, set_abilityParam] = useState("");
   const [abilityParamForm, set_abilityParamForm] = useState(null);
@@ -40,6 +28,22 @@ export default function Player(props) {
       <br></br>
     </>
   );
+  const { data, error, loading } = useQuery(GET_PLAYER_BY_ID);
+  if (loading) return "Loading...";
+  if (error) return <Alert variant="danger">Error! {error.message}</Alert>;
+  // console.log("data:", data, "error:", error, "loading:", loading);
+  const {
+    id,
+    name,
+    moneyCash,
+    egg,
+    feather,
+    bug,
+    vPoint,
+    mMarket,
+    rMarket,
+    vMarket,
+  } = data.getPlayerById;
 
   const abilityHandler = (event) => {
     console.log(event.target.value);
@@ -54,7 +58,7 @@ export default function Player(props) {
               onChange={set_abilityParam(event.target.value)}
             >
               {props.playerList.map((player) => {
-                return <option>{player.name}</option>;
+                return <option key={player.id}>{player.name}</option>;
               })}
             </Form.Control>
           </Form.Group>
@@ -115,7 +119,7 @@ export default function Player(props) {
   return (
     <Container>
       <Card>
-        <Card.Header>{props.name}</Card.Header>
+        <Card.Header>{name}</Card.Header>
         <Card.Body>
           <Row>
             <Col>
@@ -133,11 +137,12 @@ export default function Player(props) {
                 <Image src={bugIcon} style={iconStyle} /> {bug}
               </p>
               <p>
-                <Image src={vPointIcon} style={iconStyle} /> {vPoints}
+                <Image src={vPointIcon} style={iconStyle} /> {vPoint}
               </p>
             </Col>
             <Col>
-              <p>Markets</p>
+              <div>Markets</div>
+              <br></br>
 
               <ListGroup variant="flush">
                 <ListGroup.Item>
@@ -172,8 +177,10 @@ export default function Player(props) {
               <hr></hr>
               <Row>
                 <Col>
-                  <p>Ability</p>
-                  <p>{abilityDescription}</p>
+                  <div>Ability</div>
+                  <br></br>
+                  <div>{abilityDescription}</div>
+                  <br></br>
                   <Row>
                     <Col>
                       <Form>
@@ -192,15 +199,17 @@ export default function Player(props) {
                   </Row>
                 </Col>
                 <Col>
-                  <p>Build</p>
-                  <p>
+                  <div>Build</div>
+                  <br></br>
+                  <div>
                     Cost of building a market: <br></br>
                     <Image src={moneyCashIcon} style={inlineIconStyle} />
                     {(mMarket + rMarket + vMarket) * 2 - 6}
                     <Image src={eggIcon} style={inlineIconStyle} />1
                     <Image src={featherIcon} style={inlineIconStyle} />1
                     <Image src={bugIcon} style={inlineIconStyle} />1
-                  </p>
+                  </div>
+                  <br></br>
                   <Form>
                     <Form.Group controlId="marketselect">
                       <Form.Label>Select a market</Form.Label>

@@ -82,7 +82,7 @@ export default function Trade(props) {
         {props.senderId === 1 ? <>Suggested Trade</> : <>Incoming Trade </>}
       </Card.Header>
       <Card.Body>
-        <Card.Text>
+        <Card.Text as="div">
           <Row>
             <Col>
               {props.senderName} offers: <br></br>
@@ -90,7 +90,6 @@ export default function Trade(props) {
               {noValueChecker(props.eggSender, eggIcon)}
               {noValueChecker(props.featherSender, featherIcon)}
               {noValueChecker(props.bugSender, bugIcon)}
-              {noValueChecker(props.vPointsSender, vPointIcon)}
             </Col>
             <Col>
               <Row>{props.receiverName} offers:</Row>
@@ -98,10 +97,10 @@ export default function Trade(props) {
               {noValueChecker(props.eggReceiver, eggIcon)}
               {noValueChecker(props.featherReceiver, featherIcon)}
               {noValueChecker(props.bugReceiver, bugIcon)}
-              {noValueChecker(props.vPointsReceiver, vPointIcon)}
             </Col>
           </Row>
         </Card.Text>
+        <br></br>
         {buttonChecker(props.senderId)}
       </Card.Body>
     </Card>

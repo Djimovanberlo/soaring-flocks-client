@@ -22,10 +22,11 @@ export default function PlayerScore(props) {
         <Card.Header>{props.name}</Card.Header>
         {/* <Card.Img /> */}
         <Card.Body>
-          <Card.Text>
+          <Card.Text as="div">
             <Image src={vPointIcon} style={iconStyle} />
-            {props.vPoints}
+            {props.vPoint}
           </Card.Text>
+          <br></br>
           <Button variant="outline-info" size="sm" onClick={handleClick}>
             Open trade
           </Button>

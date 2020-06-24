@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Jumbotron from "react-bootstrap/Jumbotron";
 import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { Col, Row, Form, Image } from "react-bootstrap";
+import { Col, Row, Form, Image, Alert } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 
 import bugIcon from "../../images/icons/bugIcon.png";
@@ -13,6 +13,8 @@ import moneyCashIcon from "../../images/icons/moneyCashIcon.png";
 import rareIcon from "../../images/icons/rareIcon.png";
 import vPointIcon from "../../images/icons/vPointIcon.png";
 import { inlineIconStyle, iconStyle } from "../../styles/imgStyles";
+import { GET_PRIVATE_MESSAGES_BY_ID } from "../../graphql/queries";
+import { useQuery, useSubscription } from "@apollo/react-hooks";
 
 import Trade from "./Trade";
 
@@ -30,6 +32,11 @@ export default function PrivateChat(props) {
     { player: "Jan", content: "aaaa" },
     { player: "Jochem", content: "eeeee" },
   ]);
+
+  const { data, error, loading } = useQuery(GET_PRIVATE_MESSAGES_BY_ID);
+  if (loading) return "Loading...";
+  if (error) return <Alert variant="danger">Error! {error.message}</Alert>;
+  console.log("QDATA", data);
 
   const handleChange = (event) => {
     console.log(event.target.value);
@@ -54,9 +61,9 @@ export default function PrivateChat(props) {
           .reverse()
           .map((message, index) => {
             return (
-              <p key={index}>
+              <div key={index}>
                 {message.player}: {message.content}
-              </p>
+              </div>
             );
           })}
       </Card.Body>

@@ -6,13 +6,14 @@ import { login } from "../../store/user/actions";
 import { selectToken } from "../../store/user/selectors";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
-import { Col, Row } from "react-bootstrap";
+import { Col, Row, Alert } from "react-bootstrap";
 import PlayerScore from "./PlayerScore";
 import Player from "./Player";
 import TradePanel from "./TradePanel";
 import PublicChat from "./PublicChat";
 import PrivateChat from "./PrivateChat";
 import { useQuery, useSubscription } from "@apollo/react-hooks";
+import { GET_GAME_BY_ID } from "../../graphql/queries";
 
 import bugIcon from "../../images/icons/bugIcon.png";
 import eggIcon from "../../images/icons/eggIcon.png";
@@ -25,53 +26,19 @@ import { inlineIconStyle, iconStyle } from "../../styles/imgStyles";
 import PlayerPanel from "./PlayerPanel";
 import ScoreBoard from "./ScoreBoard";
 
-import {
-  GET_PLAYERS_WITH_RESOURCES,
-  GET_PLAYER_BY_ID,
-} from "../../graphql/queries";
-
 export default function ActiveGame() {
-  // const { data, error, loading } = useSubscription(GET_PLAYERS_WITH_RESOURCES);
-  const { data, error, loading } = useQuery(GET_PLAYERS_WITH_RESOURCES);
-  console.log(data, error, loading);
-
-  const playerList = [
-    {
-      id: 1,
-      name: "Pietje",
-      vPoints: 2,
-    },
-    {
-      id: 2,
-      name: "Wolla",
-      vPoints: 3,
-    },
-    {
-      id: 3,
-      name: "Djimo",
-      vPoints: 5,
-    },
-  ];
-
-  const player = {
-    id: 1,
-    name: "Djimo",
-    resources: {
-      moneyCash: 9,
-      egg: 0,
-      feather: 2,
-      bug: 1,
-      vPoints: 5,
-      mMarket: 2,
-      rMarket: 1,
-      vMarket: 1,
-    },
-  };
   const [tradePanelState, set_tradePanelState] = useState(true);
+
+  const { data, error, loading } = useQuery(GET_GAME_BY_ID);
+  if (loading) return "Loading...";
+  if (error) return <Alert variant="danger">Error! {error.message}</Alert>;
+  // console.log("data:", data, "error:", error, "loading:", loading);
+  // console.log("PLAYERDATA", data.getGameById.players);
+
   const tradeControls = tradePanelState ? (
-    <TradePanel playerList={playerList} />
+    <TradePanel playerList={data.getGameById.players} />
   ) : (
-    <PlayerPanel />
+    <PlayerPanel playerList={data.getGameById.players} />
   );
 
   const handleClick = (event) => {
@@ -88,24 +55,20 @@ export default function ActiveGame() {
         className="mt-5"
       >
         <Row>
-          <Col>
-            <h2>Game Title</h2>
-          </Col>
+          <h2>{data.getGameById.gameTitle}</h2>
         </Row>
         <Row>
-          <Col>
-            <h6>Turn X. Game ends in Y turns</h6>
-            <Button variant="primary" onClick={handleClick}>
-              Open trade
-            </Button>
-          </Col>
+          <h6>Turn X. Game ends in Y turns</h6>
+          <Button variant="primary" onClick={handleClick}>
+            Open trade
+          </Button>
         </Row>
       </Container>
       <br></br>
       <Container fluid>
         <Row>
           <Col md={2}>
-            <ScoreBoard playerList={playerList} />
+            <ScoreBoard playerList={data.getGameById.players} />
           </Col>
           <Col>{tradeControls}</Col>
         </Row>

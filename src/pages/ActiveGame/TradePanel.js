@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Jumbotron from "react-bootstrap/Jumbotron";
 import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { Col, Row, Form, Image } from "react-bootstrap";
+import { Col, Row, Form, Image, Alert } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 
 import bugIcon from "../../images/icons/bugIcon.png";
@@ -13,48 +13,18 @@ import moneyCashIcon from "../../images/icons/moneyCashIcon.png";
 import rareIcon from "../../images/icons/rareIcon.png";
 import vPointIcon from "../../images/icons/vPointIcon.png";
 import { inlineIconStyle, iconStyle } from "../../styles/imgStyles";
-import PrivateChat from "./PrivateChat";
+import { useQuery, useSubscription } from "@apollo/react-hooks";
+import { GET_TRADES_BY_ID } from "../../graphql/queries";
 
+import PrivateChat from "./PrivateChat";
 import Trade from "./Trade";
 import TradeSuggest from "./TradeSuggest";
 
 export default function TradePanel(props) {
-  const tradeList = [
-    {
-      tradeId: 1,
-      senderId: 1,
-      receiverId: 2,
-      senderName: "Djimo",
-      receiverName: "Jan",
-      moneyCashSender: 3,
-      moneyCashReceiver: 0,
-      eggSender: 1,
-      eggReceiver: 0,
-      featherSender: 0,
-      featherReceiver: 1,
-      bugSender: 0,
-      bugReceiver: 1,
-      vPointsSender: 0,
-      vPointsReceiver: 0,
-    },
-    {
-      tradeId: 2,
-      senderId: 2,
-      receiverId: 1,
-      senderName: "Jan",
-      receiverName: "Djimo",
-      moneyCashSender: 0,
-      moneyCashReceiver: 5,
-      eggSender: 0,
-      eggReceiver: 0,
-      featherSender: 1,
-      featherReceiver: 0,
-      bugSender: 0,
-      bugReceiver: 1,
-      vPointsSender: 1,
-      vPointsReceiver: 0,
-    },
-  ];
+  const { data, error, loading } = useQuery(GET_TRADES_BY_ID);
+  if (loading) return "Loading...";
+  if (error) return <Alert variant="danger">Error! {error.message}</Alert>;
+  // console.log(data);
 
   return (
     <Row>
@@ -66,40 +36,30 @@ export default function TradePanel(props) {
               <Row>
                 <Col>
                   <Trade
-                    key={tradeList[0].tradeId}
-                    senderId={tradeList[0].senderId}
-                    receiverId={tradeList[0].receiverId}
-                    senderName={tradeList[0].senderName}
-                    receiverName={tradeList[0].receiverName}
-                    moneyCashSender={tradeList[0].moneyCashSender}
-                    moneyCashReceiver={tradeList[0].moneyCashReceiver}
-                    eggSender={tradeList[0].eggSender}
-                    eggReceiver={tradeList[0].eggReceiver}
-                    featherSender={tradeList[0].featherSender}
-                    featherReceiver={tradeList[0].featherReceiver}
-                    bugSender={tradeList[0].bugSender}
-                    bugReceiver={tradeList[0].bugReceiver}
-                    vPointsSender={tradeList[0].vPointsSender}
-                    vPointsReceiver={tradeList[0].vPointsReceiver}
+                    senderName={data.suggested[0].playerSenderId.name}
+                    receiverName={data.suggested[0].playerReceiverId.name}
+                    moneyCashSender={data.suggested[0].moneyCashSender}
+                    moneyCashReceiver={data.suggested[0].moneyCashReceiver}
+                    eggSender={data.suggested[0].eggSender}
+                    eggReceiver={data.suggested[0].eggReceiver}
+                    featherSender={data.suggested[0].featherSender}
+                    featherReceiver={data.suggested[0].featherReceiver}
+                    bugSender={data.suggested[0].bugSender}
+                    bugReceiver={data.suggested[0].bugReceiver}
                   />
                 </Col>
                 <Col>
                   <Trade
-                    key={tradeList[1].tradeId}
-                    senderId={tradeList[1].senderId}
-                    receiverId={tradeList[1].receiverId}
-                    senderName={tradeList[1].senderName}
-                    receiverName={tradeList[1].receiverName}
-                    moneyCashSender={tradeList[1].moneyCashSender}
-                    moneyCashReceiver={tradeList[1].moneyCashReceiver}
-                    eggSender={tradeList[1].eggSender}
-                    eggReceiver={tradeList[1].eggReceiver}
-                    featherSender={tradeList[1].featherSender}
-                    featherReceiver={tradeList[1].featherReceiver}
-                    bugSender={tradeList[1].bugSender}
-                    bugReceiver={tradeList[1].bugReceiver}
-                    vPointsSender={tradeList[1].vPointsSender}
-                    vPointsReceiver={tradeList[1].vPointsReceiver}
+                    senderName={data.incoming[0].playerSenderId.name}
+                    receiverName={data.incoming[0].playerReceiverId.name}
+                    moneyCashSender={data.incoming[0].moneyCashSender}
+                    moneyCashReceiver={data.incoming[0].moneyCashReceiver}
+                    eggSender={data.incoming[0].eggSender}
+                    eggReceiver={data.incoming[0].eggReceiver}
+                    featherSender={data.incoming[0].featherSender}
+                    featherReceiver={data.incoming[0].featherReceiver}
+                    bugSender={data.incoming[0].bugSender}
+                    bugReceiver={data.incoming[0].bugReceiver}
                   />
                 </Col>
               </Row>

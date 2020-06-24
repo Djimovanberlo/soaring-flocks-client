@@ -1,36 +1,142 @@
 import gql from "graphql-tag";
 
 export const GET_PLAYER_BY_ID = gql`
-  query playerById {
-    playerById(id: 3) {
+  query getPlayerById {
+    getPlayerById(id: 1) {
       id
       name
+      moneyCash
+      egg
+      feather
+      bug
+      vPoint
+      mMarket
+      rMarket
+      vMarket
     }
   }
 `;
 
-export const GET_PLAYERS_WITH_RESOURCES = gql`
-  query getPlayersWithResources {
-    getPlayersWithResources {
+export const GET_ALL_PUBLIC_MESSAGES = gql`
+  query getAllPublicMessages {
+    getAllPublicMessages {
       id
-      name
-      resources {
+      content
+      playerId {
         id
-      }
-      playerResources {
-        id
+        name
       }
     }
   }
 `;
 
-// export const GET_PLAYERS_WITH_RESOURCES = gql`
-//   subscription getPlayersWithResources {
-//     getPlayersWithResources {
-//       name
-//       playerResources {
-//         id
-//       }
-//     }
-//   }
-// `;
+export const GET_GAME_BY_ID = gql`
+  query getGameById {
+    getGameById(id: 1) {
+      gameTitle
+      players {
+        id
+        name
+        vPoint
+      }
+    }
+  }
+`;
+
+export const GET_ALL_PLAYERS_GAME_STATE = gql`
+  query getAllPlayersGameState {
+    inGame: getAllPlayersGameState(inGame: true) {
+      id
+      name
+      inGame
+    }
+    outGame: getAllPlayersGameState(inGame: false) {
+      id
+      name
+      inGame
+    }
+  }
+`;
+
+export const GET_TRADES_BY_ID = gql`
+  query getTradesById {
+    suggested: getTradesById(playerSenderId: 1, playerReceiverId: 2) {
+      id
+      moneyCashSender
+      moneyCashReceiver
+      eggSender
+      eggReceiver
+      featherSender
+      featherReceiver
+      bugSender
+      bugReceiver
+      playerSenderId {
+        id
+        name
+      }
+      playerReceiverId {
+        id
+        name
+      }
+    }
+    incoming: getTradesById(playerSenderId: 2, playerReceiverId: 1) {
+      id
+      moneyCashSender
+      moneyCashReceiver
+      eggSender
+      eggReceiver
+      featherSender
+      featherReceiver
+      bugSender
+      bugReceiver
+      playerSenderId {
+        id
+        name
+      }
+      playerReceiverId {
+        id
+        name
+      }
+    }
+  }
+`;
+
+export const GET_PRIVATE_MESSAGES_BY_ID = gql`
+  query getPrivateMessagesById {
+    outgoing: getPrivateMessagesById(playerSenderId: 1, playerReceiverId: 2) {
+      id
+      content
+      createdAt
+      updatedAt
+      playerSenderId {
+        name
+      }
+    }
+    incoming: getPrivateMessagesById(playerSenderId: 2, playerReceiverId: 1) {
+      id
+      content
+      createdAt
+      updatedAt
+      playerSenderId {
+        name
+      }
+    }
+  }
+`;
+
+// ----------- MUTATIONS ----------------
+
+// ----------- SUBSCRIPTIONS ------------
+
+export const SUB_ALL_PUBLIC_MESSAGES = gql`
+  subscription getAllPublicMessages {
+    getAllPublicMessages {
+      id
+      content
+      playerId {
+        id
+        name
+      }
+    }
+  }
+`;
