@@ -18,6 +18,7 @@ import { apiUrl } from "./config/constants";
 
 const httpLink = new HttpLink({
   uri: `http://${apiUrl}`,
+  // credentials: "include",
 });
 
 // Create a WebSocket link:

@@ -24,7 +24,7 @@ export default function TradePanel(props) {
   const { data, error, loading } = useQuery(GET_TRADES_BY_ID);
   if (loading) return "Loading...";
   if (error) return <Alert variant="danger">Error! {error.message}</Alert>;
-  // console.log(data);
+  console.log(data);
 
   return (
     <Row>
@@ -36,6 +36,7 @@ export default function TradePanel(props) {
               <Row>
                 <Col>
                   <Trade
+                    tradeId={data.suggested[0].id}
                     senderName={data.suggested[0].playerSenderId.name}
                     receiverName={data.suggested[0].playerReceiverId.name}
                     moneyCashSender={data.suggested[0].moneyCashSender}
@@ -46,10 +47,15 @@ export default function TradePanel(props) {
                     featherReceiver={data.suggested[0].featherReceiver}
                     bugSender={data.suggested[0].bugSender}
                     bugReceiver={data.suggested[0].bugReceiver}
+                    playerSender={data.suggested[0].playerSenderId}
+                    closed={data.suggested[0].closed}
+                    playerSenderId={data.suggested[0].playerSenderId.id}
+                    playerReceiverId={data.suggested[0].playerReceiverId.id}
                   />
                 </Col>
                 <Col>
                   <Trade
+                    tradeId={data.incoming[0].id}
                     senderName={data.incoming[0].playerSenderId.name}
                     receiverName={data.incoming[0].playerReceiverId.name}
                     moneyCashSender={data.incoming[0].moneyCashSender}
@@ -60,6 +66,9 @@ export default function TradePanel(props) {
                     featherReceiver={data.incoming[0].featherReceiver}
                     bugSender={data.incoming[0].bugSender}
                     bugReceiver={data.incoming[0].bugReceiver}
+                    closed={data.incoming[0].closed}
+                    playerSenderId={data.incoming[0].playerSenderId.id}
+                    playerReceiverId={data.incoming[0].playerReceiverId.id}
                   />
                 </Col>
               </Row>

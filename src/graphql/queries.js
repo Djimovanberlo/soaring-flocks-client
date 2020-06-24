@@ -60,7 +60,11 @@ export const GET_ALL_PLAYERS_GAME_STATE = gql`
 
 export const GET_TRADES_BY_ID = gql`
   query getTradesById {
-    suggested: getTradesById(playerSenderId: 1, playerReceiverId: 2) {
+    suggested: getTradesById(
+      playerSenderId: 1
+      playerReceiverId: 2
+      closed: false
+    ) {
       id
       moneyCashSender
       moneyCashReceiver
@@ -70,6 +74,7 @@ export const GET_TRADES_BY_ID = gql`
       featherReceiver
       bugSender
       bugReceiver
+      closed
       playerSenderId {
         id
         name
@@ -79,7 +84,11 @@ export const GET_TRADES_BY_ID = gql`
         name
       }
     }
-    incoming: getTradesById(playerSenderId: 2, playerReceiverId: 1) {
+    incoming: getTradesById(
+      playerSenderId: 2
+      playerReceiverId: 1
+      closed: false
+    ) {
       id
       moneyCashSender
       moneyCashReceiver
@@ -89,6 +98,7 @@ export const GET_TRADES_BY_ID = gql`
       featherReceiver
       bugSender
       bugReceiver
+      closed
       playerSenderId {
         id
         name
@@ -125,6 +135,64 @@ export const GET_PRIVATE_MESSAGES_BY_ID = gql`
 `;
 
 // ----------- MUTATIONS ----------------
+
+export const ADD_PUBLIC_MESSAGE = gql`
+  mutation addPublicMessage($content: String) {
+    addPublicMessage(content: $content) {
+      id
+      content
+    }
+  }
+`;
+
+export const CLOSE_TRADE = gql`
+  mutation closeTrade($id: Int, $closed: Boolean) {
+    closeTrade(id: $id, closed: $closed) {
+      closed
+    }
+  }
+`;
+
+export const SUGGEST_TRADE = gql`
+  mutation suggestTrade(
+    $id: Int
+    $playerSenderId: Int
+    $playerSenderReceiverId: Int
+    $moneyCashSender: Int
+    $moneyCashReceiver: Int
+    $eggSender: Int
+    $eggReceiver: Int
+    $featherSender: Int
+    $featherReceiver: Int
+    $bugSender: Int
+    $bugReceiver: Id
+    $closed: Boolean
+  ) {
+    suggestTrade(
+      id: $id
+      playerSenderId: $playerSenderId
+      playerReceiverId: $playerReceiverId
+      moneyCashSender: $moneyCashReceiver
+      eggSender: $eggSender
+      eggReceiver: $eggReceiver
+      featherSender: $featherSender
+      featherReceiver: $featherReceiver
+      bugSender: $bugSender
+      bugReceiver: $bugSender
+      closed: $closed
+    ) {
+      moneyCashSender
+      moneyCashReceiver
+      eggSender
+      eggReceiver
+      featherSender
+      featherReceiver
+      bugSender
+      bugReceiver
+      closed
+    }
+  }
+`;
 
 // ----------- SUBSCRIPTIONS ------------
 

@@ -65,14 +65,12 @@ export default function ActiveGame() {
         </Row>
       </Container>
       <br></br>
-      <Container fluid>
-        <Row>
-          <Col md={2}>
-            <ScoreBoard playerList={data.getGameById.players} />
-          </Col>
-          <Col>{tradeControls}</Col>
-        </Row>
-      </Container>
+      <Row>
+        <Col md={2}>
+          <ScoreBoard playerList={data.getGameById.players} />
+        </Col>
+        <Col>{tradeControls}</Col>
+      </Row>
     </>
   );
 }

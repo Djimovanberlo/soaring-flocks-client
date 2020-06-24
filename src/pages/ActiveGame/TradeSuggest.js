@@ -66,17 +66,6 @@ export default function TradeSuggest(props) {
                     />
                   </Form.Group>
                 </Row>
-                <Row>
-                  <Image src={vPointIcon} style={iconStyle} />
-                  <Form.Group>
-                    <Form.Control
-                      style={{ width: 60 }}
-                      type="number"
-                      min="0"
-                      id="inputSenderVPoint"
-                    />
-                  </Form.Group>
-                </Row>
               </Col>
               <Col>
                 Their offer:
@@ -121,17 +110,6 @@ export default function TradeSuggest(props) {
                       type="number"
                       min="0"
                       id="inputReceiverEgg"
-                    />
-                  </Form.Group>
-                </Row>
-                <Row>
-                  <Image src={vPointIcon} style={iconStyle} />
-                  <Form.Group>
-                    <Form.Control
-                      style={{ width: 60 }}
-                      type="number"
-                      min="0"
-                      id="inputReceiverVPoint"
                     />
                   </Form.Group>
                 </Row>

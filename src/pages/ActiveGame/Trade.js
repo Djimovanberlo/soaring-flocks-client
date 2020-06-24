@@ -4,6 +4,8 @@ import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { Col, Row, Image } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
+import { useQuery, useSubscription, useMutation } from "@apollo/react-hooks";
+import { CLOSE_TRADE } from "../../graphql/queries";
 
 import bugIcon from "../../images/icons/bugIcon.png";
 import eggIcon from "../../images/icons/eggIcon.png";
@@ -15,6 +17,8 @@ import vPointIcon from "../../images/icons/vPointIcon.png";
 import { inlineIconStyle, iconStyle } from "../../styles/imgStyles";
 
 export default function Trade(props) {
+  const [closeTrade, { data }] = useMutation(CLOSE_TRADE);
+
   const noValueChecker = (resource, resourceIcon) => {
     if (resource != 0) {
       return (
@@ -29,8 +33,8 @@ export default function Trade(props) {
     }
   };
 
-  const buttonChecker = (senderId) => {
-    if (senderId === 1) {
+  const buttonChecker = (playerSenderId) => {
+    if (playerSenderId === 1) {
       return (
         <Row>
           <Col>
@@ -39,6 +43,8 @@ export default function Trade(props) {
               size="sm"
               onClick={(event) => {
                 console.log("Cancel trade");
+                event.preventDefault();
+                closeTrade({ variables: { id: props.tradeId, closed: false } });
               }}
             >
               Cancel
@@ -65,7 +71,9 @@ export default function Trade(props) {
               variant="outline-danger"
               size="sm"
               onClick={(event) => {
-                console.log("Decline trade");
+                console.log("Cancel trade");
+                event.preventDefault();
+                closeTrade({ variables: { id: props.tradeId, closed: false } });
               }}
             >
               Decline
@@ -76,33 +84,43 @@ export default function Trade(props) {
     }
   };
 
+  console.log("HWALLOOO", props.playerSenderId);
+
   return (
     <Card>
-      <Card.Header>
-        {props.senderId === 1 ? <>Suggested Trade</> : <>Incoming Trade </>}
-      </Card.Header>
-      <Card.Body>
-        <Card.Text as="div">
-          <Row>
-            <Col>
-              {props.senderName} offers: <br></br>
-              {noValueChecker(props.moneyCashSender, moneyCashIcon)}
-              {noValueChecker(props.eggSender, eggIcon)}
-              {noValueChecker(props.featherSender, featherIcon)}
-              {noValueChecker(props.bugSender, bugIcon)}
-            </Col>
-            <Col>
-              <Row>{props.receiverName} offers:</Row>
-              {noValueChecker(props.moneyCashReceiver, moneyCashIcon)}
-              {noValueChecker(props.eggReceiver, eggIcon)}
-              {noValueChecker(props.featherReceiver, featherIcon)}
-              {noValueChecker(props.bugReceiver, bugIcon)}
-            </Col>
-          </Row>
-        </Card.Text>
-        <br></br>
-        {buttonChecker(props.senderId)}
-      </Card.Body>
+      {props.closed ? (
+        <>
+          <Card.Header>
+            {props.playerSenderId === 1 ? (
+              <>Suggested Trade</>
+            ) : (
+              <>Incoming Trade </>
+            )}
+          </Card.Header>
+          <Card.Body>
+            <Card.Text as="div">
+              <Row>
+                <Col>
+                  {props.senderName} offers: <br></br>
+                  {noValueChecker(props.moneyCashSender, moneyCashIcon)}
+                  {noValueChecker(props.eggSender, eggIcon)}
+                  {noValueChecker(props.featherSender, featherIcon)}
+                  {noValueChecker(props.bugSender, bugIcon)}
+                </Col>
+                <Col>
+                  <Row>{props.receiverName} offers:</Row>
+                  {noValueChecker(props.moneyCashReceiver, moneyCashIcon)}
+                  {noValueChecker(props.eggReceiver, eggIcon)}
+                  {noValueChecker(props.featherReceiver, featherIcon)}
+                  {noValueChecker(props.bugReceiver, bugIcon)}
+                </Col>
+              </Row>
+            </Card.Text>
+            <br></br>
+            {buttonChecker(props.playerSenderId)}
+          </Card.Body>{" "}
+        </>
+      ) : null}
     </Card>
   );
 }
