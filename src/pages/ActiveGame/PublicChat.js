@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Jumbotron from "react-bootstrap/Jumbotron";
 import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { Col, Row, Form, Image } from "react-bootstrap";
+import { Col, Row, Form, Image, Alert } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import { GET_ALL_PUBLIC_MESSAGES } from "../../graphql/queries";
 import { useQuery, useSubscription } from "@apollo/react-hooks";
@@ -24,13 +24,12 @@ export default function PublicChat(props) {
     player: "Djimo",
     content: "",
   });
-  const [messages, set_messages] = useState([]);
 
   const { data, error, loading } = useQuery(GET_ALL_PUBLIC_MESSAGES);
   if (loading) return "Loading...";
-  if (error) return <p>Error! ${error.message}</p>;
-  console.log("data:", data, "error:", error, "loading:", loading);
-  console.log("DATAMSG", data.getAllPublicMessages);
+  if (error) return <Alert variant="danger">Error! {error.message}</Alert>;
+  // console.log("data:", data, "error:", error, "loading:", loading);
+  // console.log("DATAMSG", data.getAllPublicMessages);
 
   const handleChange = (event) => {
     console.log(event.target.value);
@@ -40,7 +39,7 @@ export default function PublicChat(props) {
   const handleOnKeyPress = (target, event) => {
     if (target.charCode === 13) {
       console.log("ENTER CLICKED", newMessage);
-      set_messages([...messages, newMessage]);
+      // set_messages([...messages, newMessage]);
       set_newMessage({ player: "Djimo", content: "" });
       set_inputField("");
     }
@@ -57,12 +56,6 @@ export default function PublicChat(props) {
             </div>
           );
         })}
-        {/* {messages
-          .slice(0)
-          .reverse()
-          .map((data, index) => {
-            return <div key={index}>: {data.content}</div>; */}
-        {/* })} */}
       </Card.Body>
       <Form>
         <Form.Control

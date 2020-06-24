@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Jumbotron from "react-bootstrap/Jumbotron";
-import { Button, Card, ListGroup } from "react-bootstrap";
+import { Button, Card, ListGroup, Alert } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Trade from "./TradePanel";
 import Container from "react-bootstrap/Container";
 import { Col, Row, Image, Dropdown, DropdownButton } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
+import { GET_PLAYER_BY_ID } from "../../graphql/queries";
+import { useQuery, useSubscription } from "@apollo/react-hooks";
 
 import bugIcon from "../../images/icons/bugIcon.png";
 import eggIcon from "../../images/icons/eggIcon.png";
@@ -17,19 +19,19 @@ import vPointIcon from "../../images/icons/vPointIcon.png";
 import { inlineIconStyle, iconStyle } from "../../styles/imgStyles";
 
 export default function Player(props) {
-  const {
-    name,
-    resources: {
-      moneyCash,
-      egg,
-      feather,
-      bug,
-      vPoints,
-      mMarket,
-      rMarket,
-      vMarket,
-    },
-  } = props;
+  // const {
+  //   name,
+  //   resources: {
+  //     moneyCash,
+  //     egg,
+  //     feather,
+  //     bug,
+  //     vPoints,
+  //     mMarket,
+  //     rMarket,
+  //     vMarket,
+  //   },
+  // } = props;
 
   const [ability, set_ability] = useState("");
   const [abilityParam, set_abilityParam] = useState("");
@@ -40,6 +42,21 @@ export default function Player(props) {
       <br></br>
     </>
   );
+  const { data, error, loading } = useQuery(GET_PLAYER_BY_ID);
+  if (loading) return "Loading...";
+  if (error) return <Alert variant="danger">Error! {error.message}</Alert>;
+  console.log("data:", data, "error:", error, "loading:", loading);
+  const {
+    name,
+    moneyCash,
+    egg,
+    feather,
+    bug,
+    vPoint,
+    mMarket,
+    rMarket,
+    vMarket,
+  } = data.playerById;
 
   const abilityHandler = (event) => {
     console.log(event.target.value);
@@ -115,7 +132,7 @@ export default function Player(props) {
   return (
     <Container>
       <Card>
-        <Card.Header>{props.name}</Card.Header>
+        <Card.Header>{name}</Card.Header>
         <Card.Body>
           <Row>
             <Col>
@@ -133,7 +150,7 @@ export default function Player(props) {
                 <Image src={bugIcon} style={iconStyle} /> {bug}
               </p>
               <p>
-                <Image src={vPointIcon} style={iconStyle} /> {vPoints}
+                <Image src={vPointIcon} style={iconStyle} /> {vPoint}
               </p>
             </Col>
             <Col>

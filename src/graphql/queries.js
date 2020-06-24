@@ -2,9 +2,17 @@ import gql from "graphql-tag";
 
 export const GET_PLAYER_BY_ID = gql`
   query playerById {
-    playerById(id: 3) {
+    playerById(id: 1) {
       id
       name
+      moneyCash
+      egg
+      feather
+      bug
+      vPoint
+      mMarket
+      rMarket
+      vMarket
     }
   }
 `;
