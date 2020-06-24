@@ -101,6 +101,29 @@ export const GET_TRADES_BY_ID = gql`
   }
 `;
 
+export const GET_PRIVATE_MESSAGES_BY_ID = gql`
+  query getPrivateMessagesById {
+    outgoing: getPrivateMessagesById(playerSenderId: 1, playerReceiverId: 2) {
+      id
+      content
+      createdAt
+      updatedAt
+      playerSenderId {
+        name
+      }
+    }
+    incoming: getPrivateMessagesById(playerSenderId: 2, playerReceiverId: 1) {
+      id
+      content
+      createdAt
+      updatedAt
+      playerSenderId {
+        name
+      }
+    }
+  }
+`;
+
 // ----------- MUTATIONS ----------------
 
 // ----------- SUBSCRIPTIONS ------------

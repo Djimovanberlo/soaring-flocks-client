@@ -21,47 +21,10 @@ import Trade from "./Trade";
 import TradeSuggest from "./TradeSuggest";
 
 export default function TradePanel(props) {
-  const tradeList = [
-    {
-      tradeId: 1,
-      senderId: 1,
-      receiverId: 2,
-      senderName: "Djimo",
-      receiverName: "Jan",
-      moneyCashSender: 3,
-      moneyCashReceiver: 0,
-      eggSender: 1,
-      eggReceiver: 0,
-      featherSender: 0,
-      featherReceiver: 1,
-      bugSender: 0,
-      bugReceiver: 1,
-      vPointsSender: 0,
-      vPointsReceiver: 0,
-    },
-    {
-      tradeId: 2,
-      senderId: 2,
-      receiverId: 1,
-      senderName: "Jan",
-      receiverName: "Djimo",
-      moneyCashSender: 0,
-      moneyCashReceiver: 5,
-      eggSender: 0,
-      eggReceiver: 0,
-      featherSender: 1,
-      featherReceiver: 0,
-      bugSender: 0,
-      bugReceiver: 1,
-      vPointsSender: 1,
-      vPointsReceiver: 0,
-    },
-  ];
-
   const { data, error, loading } = useQuery(GET_TRADES_BY_ID);
   if (loading) return "Loading...";
   if (error) return <Alert variant="danger">Error! {error.message}</Alert>;
-  console.log(data);
+  // console.log(data);
 
   return (
     <Row>
@@ -73,7 +36,6 @@ export default function TradePanel(props) {
               <Row>
                 <Col>
                   <Trade
-                    key={tradeList[0].tradeId}
                     senderName={data.suggested[0].playerSenderId.name}
                     receiverName={data.suggested[0].playerReceiverId.name}
                     moneyCashSender={data.suggested[0].moneyCashSender}
@@ -88,7 +50,6 @@ export default function TradePanel(props) {
                 </Col>
                 <Col>
                   <Trade
-                    key={tradeList[1].tradeId}
                     senderName={data.incoming[0].playerSenderId.name}
                     receiverName={data.incoming[0].playerReceiverId.name}
                     moneyCashSender={data.incoming[0].moneyCashSender}
