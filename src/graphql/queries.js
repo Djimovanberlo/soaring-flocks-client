@@ -43,6 +43,21 @@ export const GET_GAME_BY_ID = gql`
   }
 `;
 
+export const GET_ALL_PLAYERS_GAME_STATE = gql`
+  query getAllPlayersGameState {
+    inGame: getAllPlayersGameState(inGame: true) {
+      id
+      name
+      inGame
+    }
+    outGame: getAllPlayersGameState(inGame: false) {
+      id
+      name
+      inGame
+    }
+  }
+`;
+
 // -----------
 
 export const SUB_ALL_PUBLIC_MESSAGES = gql`

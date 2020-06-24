@@ -27,31 +27,13 @@ import PlayerPanel from "./PlayerPanel";
 import ScoreBoard from "./ScoreBoard";
 
 export default function ActiveGame() {
-  const playerList = [
-    {
-      id: 1,
-      name: "Pietje",
-      vPoints: 2,
-    },
-    {
-      id: 2,
-      name: "Wolla",
-      vPoints: 3,
-    },
-    {
-      id: 3,
-      name: "Djimo",
-      vPoints: 5,
-    },
-  ];
-
   const [tradePanelState, set_tradePanelState] = useState(true);
 
   const { data, error, loading } = useQuery(GET_GAME_BY_ID);
   if (loading) return "Loading...";
   if (error) return <Alert variant="danger">Error! {error.message}</Alert>;
-  console.log("data:", data, "error:", error, "loading:", loading);
-  console.log("PLAYERDATA", data.getGameById.players);
+  // console.log("data:", data, "error:", error, "loading:", loading);
+  // console.log("PLAYERDATA", data.getGameById.players);
 
   const tradeControls = tradePanelState ? (
     <TradePanel playerList={data.getGameById.players} />

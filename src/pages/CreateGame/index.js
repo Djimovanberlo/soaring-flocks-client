@@ -1,26 +1,21 @@
 import React, { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
-import Button from "react-bootstrap/Button";
+import { Button, Alert } from "react-bootstrap";
 import { login } from "../../store/user/actions";
 import { selectToken } from "../../store/user/selectors";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
 import { Col, Row } from "react-bootstrap";
 
+import { GET_ALL_PLAYERS_GAME_STATE } from "../../graphql/queries";
+import { useQuery, useSubscription } from "@apollo/react-hooks";
+
 export default function CreateGame() {
   const [gameTitle, set_gameTitle] = useState("");
   const [gameTime, set_gameTime] = useState("10 days");
-  const [playersInGame, set_playersInGame] = useState([
-    "Djimo",
-    "Jan",
-    "Jochem",
-  ]);
-  const [playersOutGame, set_playersOutGame] = useState([
-    "Joep",
-    "Joepie",
-    "Jaap",
-  ]);
+  const [playersInGame, set_playersInGame] = useState([]);
+  const [playersOutGame, set_playersOutGame] = useState([]);
   const dispatch = useDispatch();
   const token = useSelector(selectToken);
   const history = useHistory();
@@ -30,6 +25,14 @@ export default function CreateGame() {
       history.push("/");
     }
   }, [token, history]);
+
+  const { data, error, loading } = useQuery(GET_ALL_PLAYERS_GAME_STATE);
+  // set_playersInGame(data.inGame);
+  // set_playersOutGame(data.outGame);
+  if (loading) return "Loading...";
+  if (error) return <Alert variant="danger">Error! {error.message}</Alert>;
+  console.log("data:", data, "error:", error, "loading:", loading);
+  console.log("GAMEDATA", data.inGame);
 
   // TO DO: max 12 players
   const addToGameListener = (event) => {
@@ -100,30 +103,32 @@ export default function CreateGame() {
           <Row>
             <Col md={{ span: 3 }}>
               <Form.Group controlId="playersInGame">
-                <Form.Label>Remove players from game</Form.Label>
-                <Form.Control
-                  as="select"
-                  multiple
-                  onClick={removeFromGameListener}
-                >
-                  {playersInGame.map((player, index) => {
-                    return <option key={index}>{player}</option>;
+                <Form.Label>Click on a name to remove from game</Form.Label>
+                <Form.Control as="select" onChange={removeFromGameListener}>
+                  {data.inGame.map((player) => {
+                    return <option key={player.id}>{player.name}</option>;
                   })}
                 </Form.Control>
               </Form.Group>
             </Col>
             <Col md={{ span: 3 }}>
               <Form.Group controlId="playersOutGame">
-                <Form.Label>Add up to 12 players to game</Form.Label>
-                <Form.Control as="select" multiple onClick={addToGameListener}>
-                  {playersOutGame.map((player, index) => {
-                    return <option key={index}>{player}</option>;
+                <Form.Label>Click on a name to add to game</Form.Label>
+                <Form.Control as="select" onChange={addToGameListener}>
+                  {data.outGame.map((player, index) => {
+                    return <option key={player.id}>{player.name}</option>;
                   })}
                 </Form.Control>
               </Form.Group>
             </Col>
           </Row>
-          <Form.Group className="mt-5">
+          {playersInGame.length} Player(s) in game:{" "}
+          {data.inGame.map((player) => {
+            return `${player.name} `;
+          })}
+          <br></br>
+          <br></br>
+          <Form.Group controlId="submitForm">
             <Button variant="outline-info" type="submit" onClick={submitForm}>
               Start Game
             </Button>

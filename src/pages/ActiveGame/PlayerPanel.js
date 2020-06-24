@@ -19,29 +19,11 @@ import Player from "./Player";
 import Trade from "./Trade";
 
 export default function PlayerPanel(props) {
-  const player = {
-    id: 1,
-    name: "Djimo",
-    resources: {
-      moneyCash: 9,
-      egg: 0,
-      feather: 2,
-      bug: 1,
-      vPoints: 5,
-      mMarket: 2,
-      rMarket: 1,
-      vMarket: 1,
-    },
-  };
   return (
     <Row>
       <Col>
         {" "}
-        <Player
-          name={player.name}
-          resources={player.resources}
-          playerList={props.playerList}
-        />
+        <Player playerList={props.playerList} />
       </Col>
       <Col md={4}>
         <PublicChat />
