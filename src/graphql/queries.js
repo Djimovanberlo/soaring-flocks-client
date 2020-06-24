@@ -58,7 +58,52 @@ export const GET_ALL_PLAYERS_GAME_STATE = gql`
   }
 `;
 
-// -----------
+export const GET_TRADES_BY_ID = gql`
+  query getTradesById {
+    suggested: getTradesById(playerSenderId: 1, playerReceiverId: 2) {
+      id
+      moneyCashSender
+      moneyCashReceiver
+      eggSender
+      eggReceiver
+      featherSender
+      featherReceiver
+      bugSender
+      bugReceiver
+      playerSenderId {
+        id
+        name
+      }
+      playerReceiverId {
+        id
+        name
+      }
+    }
+    incoming: getTradesById(playerSenderId: 2, playerReceiverId: 1) {
+      id
+      moneyCashSender
+      moneyCashReceiver
+      eggSender
+      eggReceiver
+      featherSender
+      featherReceiver
+      bugSender
+      bugReceiver
+      playerSenderId {
+        id
+        name
+      }
+      playerReceiverId {
+        id
+        name
+      }
+    }
+  }
+`;
+
+// ----------- MUTATIONS ----------------
+
+// ----------- SUBSCRIPTIONS ------------
 
 export const SUB_ALL_PUBLIC_MESSAGES = gql`
   subscription getAllPublicMessages {

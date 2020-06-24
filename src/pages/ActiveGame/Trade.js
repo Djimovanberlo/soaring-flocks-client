@@ -90,7 +90,6 @@ export default function Trade(props) {
               {noValueChecker(props.eggSender, eggIcon)}
               {noValueChecker(props.featherSender, featherIcon)}
               {noValueChecker(props.bugSender, bugIcon)}
-              {noValueChecker(props.vPointsSender, vPointIcon)}
             </Col>
             <Col>
               <Row>{props.receiverName} offers:</Row>
@@ -98,7 +97,6 @@ export default function Trade(props) {
               {noValueChecker(props.eggReceiver, eggIcon)}
               {noValueChecker(props.featherReceiver, featherIcon)}
               {noValueChecker(props.bugReceiver, bugIcon)}
-              {noValueChecker(props.vPointsReceiver, vPointIcon)}
             </Col>
           </Row>
         </Card.Text>

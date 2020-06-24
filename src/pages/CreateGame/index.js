@@ -31,8 +31,8 @@ export default function CreateGame() {
   // set_playersOutGame(data.outGame);
   if (loading) return "Loading...";
   if (error) return <Alert variant="danger">Error! {error.message}</Alert>;
-  console.log("data:", data, "error:", error, "loading:", loading);
-  console.log("GAMEDATA", data.inGame);
+  // console.log("data:", data, "error:", error, "loading:", loading);
+  // console.log("GAMEDATA", data.inGame);
 
   // TO DO: max 12 players
   const addToGameListener = (event) => {

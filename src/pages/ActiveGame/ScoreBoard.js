@@ -13,6 +13,7 @@ import TradePanel from "./TradePanel";
 import PublicChat from "./PublicChat";
 import PrivateChat from "./PrivateChat";
 import { useQuery, useSubscription } from "@apollo/react-hooks";
+import { GET_TRADES_BY_ID } from "../../graphql/queries";
 
 export default function Trade(props) {
   // const sortedListing = newList.sort((a, b) => {
