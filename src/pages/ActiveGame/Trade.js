@@ -102,6 +102,7 @@ export default function Trade(props) {
             </Col>
           </Row>
         </Card.Text>
+        <br></br>
         {buttonChecker(props.senderId)}
       </Card.Body>
     </Card>

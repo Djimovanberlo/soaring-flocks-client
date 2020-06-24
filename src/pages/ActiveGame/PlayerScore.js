@@ -26,6 +26,7 @@ export default function PlayerScore(props) {
             <Image src={vPointIcon} style={iconStyle} />
             {props.vPoints}
           </Card.Text>
+          <br></br>
           <Button variant="outline-info" size="sm" onClick={handleClick}>
             Open trade
           </Button>

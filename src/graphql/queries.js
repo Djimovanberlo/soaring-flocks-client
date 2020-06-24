@@ -9,28 +9,28 @@ export const GET_PLAYER_BY_ID = gql`
   }
 `;
 
-export const GET_PLAYERS_WITH_RESOURCES = gql`
-  query getPlayersWithResources {
-    getPlayersWithResources {
+export const GET_ALL_PUBLIC_MESSAGES = gql`
+  query getAllPublicMessages {
+    getAllPublicMessages {
       id
-      name
-      resources {
+      content
+      playerId {
         id
-      }
-      playerResources {
-        id
+        name
       }
     }
   }
 `;
 
-// export const GET_PLAYERS_WITH_RESOURCES = gql`
-//   subscription getPlayersWithResources {
-//     getPlayersWithResources {
-//       name
-//       playerResources {
-//         id
-//       }
-//     }
-//   }
-// `;
+export const SUB_ALL_PUBLIC_MESSAGES = gql`
+  subscription getAllPublicMessages {
+    getAllPublicMessages {
+      id
+      content
+      playerId {
+        id
+        name
+      }
+    }
+  }
+`;

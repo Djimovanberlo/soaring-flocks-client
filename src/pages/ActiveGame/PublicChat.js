@@ -4,6 +4,8 @@ import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { Col, Row, Form, Image } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
+import { GET_ALL_PUBLIC_MESSAGES } from "../../graphql/queries";
+import { useQuery, useSubscription } from "@apollo/react-hooks";
 
 import bugIcon from "../../images/icons/bugIcon.png";
 import eggIcon from "../../images/icons/eggIcon.png";
@@ -22,14 +24,13 @@ export default function PublicChat(props) {
     player: "Djimo",
     content: "",
   });
-  const [messages, set_messages] = useState([
-    {
-      player: "Djimo",
-      content: "Hi anyone wanna trade?",
-    },
-    { player: "Jan", content: "Nah I'm good son" },
-    { player: "Jochem", content: "Ye sure m9" },
-  ]);
+  const [messages, set_messages] = useState([]);
+
+  const { data, error, loading } = useQuery(GET_ALL_PUBLIC_MESSAGES);
+  if (loading) return "Loading...";
+  if (error) return <p>Error! ${error.message}</p>;
+  console.log("data:", data, "error:", error, "loading:", loading);
+  console.log("DATAMSG", data.getAllPublicMessages);
 
   const handleChange = (event) => {
     console.log(event.target.value);
@@ -49,16 +50,19 @@ export default function PublicChat(props) {
     <Card>
       <Card.Header>Game Title Chat</Card.Header>
       <Card.Body>
-        {messages
+        {data.getAllPublicMessages.map((msg, index) => {
+          return (
+            <div key={index}>
+              {msg.playerId.name}: {msg.content}
+            </div>
+          );
+        })}
+        {/* {messages
           .slice(0)
           .reverse()
-          .map((message, index) => {
-            return (
-              <div key={index}>
-                {message.player}: {message.content}
-              </div>
-            );
-          })}
+          .map((data, index) => {
+            return <div key={index}>: {data.content}</div>; */}
+        {/* })} */}
       </Card.Body>
       <Form>
         <Form.Control

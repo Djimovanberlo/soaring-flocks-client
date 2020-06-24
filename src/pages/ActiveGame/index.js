@@ -25,16 +25,7 @@ import { inlineIconStyle, iconStyle } from "../../styles/imgStyles";
 import PlayerPanel from "./PlayerPanel";
 import ScoreBoard from "./ScoreBoard";
 
-import {
-  GET_PLAYERS_WITH_RESOURCES,
-  GET_PLAYER_BY_ID,
-} from "../../graphql/queries";
-
 export default function ActiveGame() {
-  // const { data, error, loading } = useSubscription(GET_PLAYERS_WITH_RESOURCES);
-  const { data, error, loading } = useQuery(GET_PLAYERS_WITH_RESOURCES);
-  console.log(data, error, loading);
-
   const playerList = [
     {
       id: 1,
