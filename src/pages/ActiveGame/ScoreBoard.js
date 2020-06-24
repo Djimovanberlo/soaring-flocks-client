@@ -15,6 +15,10 @@ import PrivateChat from "./PrivateChat";
 import { useQuery, useSubscription } from "@apollo/react-hooks";
 
 export default function Trade(props) {
+  // const sortedListing = newList.sort((a, b) => {
+  //   return a.priceEuro - b.priceEuro;
+  // });
+
   return (
     <Col>
       {props.playerList.map((listPlayer) => {
@@ -22,7 +26,7 @@ export default function Trade(props) {
           <PlayerScore
             key={listPlayer.id}
             name={listPlayer.name}
-            vPoints={listPlayer.vPoints}
+            vPoint={listPlayer.vPoint}
           />
         );
       })}

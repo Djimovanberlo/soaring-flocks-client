@@ -19,20 +19,6 @@ import vPointIcon from "../../images/icons/vPointIcon.png";
 import { inlineIconStyle, iconStyle } from "../../styles/imgStyles";
 
 export default function Player(props) {
-  // const {
-  //   name,
-  //   resources: {
-  //     moneyCash,
-  //     egg,
-  //     feather,
-  //     bug,
-  //     vPoints,
-  //     mMarket,
-  //     rMarket,
-  //     vMarket,
-  //   },
-  // } = props;
-
   const [ability, set_ability] = useState("");
   const [abilityParam, set_abilityParam] = useState("");
   const [abilityParamForm, set_abilityParamForm] = useState(null);
@@ -45,8 +31,9 @@ export default function Player(props) {
   const { data, error, loading } = useQuery(GET_PLAYER_BY_ID);
   if (loading) return "Loading...";
   if (error) return <Alert variant="danger">Error! {error.message}</Alert>;
-  console.log("data:", data, "error:", error, "loading:", loading);
+  // console.log("data:", data, "error:", error, "loading:", loading);
   const {
+    id,
     name,
     moneyCash,
     egg,
@@ -56,7 +43,7 @@ export default function Player(props) {
     mMarket,
     rMarket,
     vMarket,
-  } = data.playerById;
+  } = data.getPlayerById;
 
   const abilityHandler = (event) => {
     console.log(event.target.value);
@@ -71,7 +58,7 @@ export default function Player(props) {
               onChange={set_abilityParam(event.target.value)}
             >
               {props.playerList.map((player) => {
-                return <option>{player.name}</option>;
+                return <option key={player.id}>{player.name}</option>;
               })}
             </Form.Control>
           </Form.Group>

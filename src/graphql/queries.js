@@ -1,8 +1,8 @@
 import gql from "graphql-tag";
 
 export const GET_PLAYER_BY_ID = gql`
-  query playerById {
-    playerById(id: 1) {
+  query getPlayerById {
+    getPlayerById(id: 1) {
       id
       name
       moneyCash
@@ -29,6 +29,21 @@ export const GET_ALL_PUBLIC_MESSAGES = gql`
     }
   }
 `;
+
+export const GET_GAME_BY_ID = gql`
+  query getGameById {
+    getGameById(id: 1) {
+      gameTitle
+      players {
+        id
+        name
+        vPoint
+      }
+    }
+  }
+`;
+
+// -----------
 
 export const SUB_ALL_PUBLIC_MESSAGES = gql`
   subscription getAllPublicMessages {

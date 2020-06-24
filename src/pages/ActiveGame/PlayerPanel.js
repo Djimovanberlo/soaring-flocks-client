@@ -19,24 +19,6 @@ import Player from "./Player";
 import Trade from "./Trade";
 
 export default function PlayerPanel(props) {
-  const playerList = [
-    {
-      id: 1,
-      name: "Pietje",
-      vPoints: 2,
-    },
-    {
-      id: 2,
-      name: "Wolla",
-      vPoints: 3,
-    },
-    {
-      id: 3,
-      name: "Djimo",
-      vPoints: 5,
-    },
-  ];
-
   const player = {
     id: 1,
     name: "Djimo",
@@ -58,7 +40,7 @@ export default function PlayerPanel(props) {
         <Player
           name={player.name}
           resources={player.resources}
-          playerList={playerList}
+          playerList={props.playerList}
         />
       </Col>
       <Col md={4}>
