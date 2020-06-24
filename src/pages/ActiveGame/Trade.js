@@ -120,7 +120,12 @@ export default function Trade(props) {
             {buttonChecker(props.playerSenderId)}
           </Card.Body>{" "}
         </>
-      ) : null}
+      ) : (
+        <>
+          <Card.Header>No open trade</Card.Header>
+          <Card.Body>{""}</Card.Body>
+        </>
+      )}
     </Card>
   );
 }

@@ -155,9 +155,8 @@ export const CLOSE_TRADE = gql`
 
 export const SUGGEST_TRADE = gql`
   mutation suggestTrade(
-    $id: Int
     $playerSenderId: Int
-    $playerSenderReceiverId: Int
+    $playerReceiverId: Int
     $moneyCashSender: Int
     $moneyCashReceiver: Int
     $eggSender: Int
@@ -165,22 +164,24 @@ export const SUGGEST_TRADE = gql`
     $featherSender: Int
     $featherReceiver: Int
     $bugSender: Int
-    $bugReceiver: Id
+    $bugReceiver: Int
     $closed: Boolean
   ) {
     suggestTrade(
-      id: $id
       playerSenderId: $playerSenderId
       playerReceiverId: $playerReceiverId
-      moneyCashSender: $moneyCashReceiver
+      moneyCashSender: $moneyCashSender
+      moneyCashReceiver: $moneyCashReceiver
       eggSender: $eggSender
       eggReceiver: $eggReceiver
       featherSender: $featherSender
       featherReceiver: $featherReceiver
       bugSender: $bugSender
-      bugReceiver: $bugSender
+      bugReceiver: $bugReceiver
       closed: $closed
     ) {
+      playerSenderId
+      playerReceiverId
       moneyCashSender
       moneyCashReceiver
       eggSender
