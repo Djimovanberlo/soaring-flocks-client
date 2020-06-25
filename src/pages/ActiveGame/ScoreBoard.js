@@ -14,7 +14,7 @@ import PublicChat from "./PublicChat";
 import PrivateChat from "./PrivateChat";
 import { useQuery, useSubscription } from "@apollo/react-hooks";
 
-export default function Trade(props) {
+export default function ScoreBoard(props) {
   // const sortedListing = newList.sort((a, b) => {
   //   return a.priceEuro - b.priceEuro;
   // });
