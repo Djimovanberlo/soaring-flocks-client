@@ -11,8 +11,80 @@ import moneyCashIcon from "../../images/icons/moneyCashIcon.png";
 import rareIcon from "../../images/icons/rareIcon.png";
 import vPointIcon from "../../images/icons/vPointIcon.png";
 import { inlineIconStyle, iconStyle } from "../../styles/imgStyles";
+import { SUGGEST_TRADE } from "../../graphql/queries";
+import { useQuery, useSubscription, useMutation } from "@apollo/react-hooks";
 
 export default function TradeSuggest(props) {
+  const [suggestedTrade, set_suggestedTrade] = useState({
+    playerSenderId: 3,
+    playerReceiverId: 1,
+    moneyCashSender: null,
+    moneyCashReceiver: null,
+    eggSender: null,
+    eggReceiver: null,
+    featherSender: null,
+    featherReceiver: null,
+    bugSender: null,
+    bugReceiver: null,
+  });
+
+  // -- copied from server schema
+  // playerSenderId: Int
+  // playerReceiverId: Int
+  // moneyCashSender: Int
+  // moneyCashReceiver: Int
+  // eggSender: Int
+  // eggReceiver: Int
+  // featherSender: Int
+  // featherReceiver: Int
+  // bugSender: Int
+  // bugReceiver: Int
+  // closed: Boolean
+  // -- copied from server resolver
+  // playerSenderId,
+  // playerReceiverId,
+  // moneyCashSender,
+  // moneyCashReceiver,
+  // eggSender,
+  // eggReceiver,
+  // featherSender,
+  // featherReceiver,
+  // bugSender,
+  // bugReceiver,
+  // closed: false,
+  // -- copied from client mutation
+  // playerSenderId
+  // playerReceiverId
+  // moneyCashSender
+  // moneyCashReceiver
+  // eggSender
+  // eggReceiver
+  // featherSender
+  // featherReceiver
+  // bugSender
+  // bugReceiver
+
+  const [suggestTrade, { data }] = useMutation(SUGGEST_TRADE);
+
+  const submitTrade = (event) => {
+    event.preventDefault();
+    console.log("Create trade", suggestedTrade, suggestedTrade.playerSenderId);
+    suggestTrade({
+      variables: {
+        playerSenderId: suggestedTrade.playerSenderId,
+        playerReceiverId: suggestedTrade.playerReceiverId,
+        moneyCashSender: suggestedTrade.moneyCashSender,
+        moneyCashReceiver: suggestedTrade.moneyCashReceiver,
+        eggSender: suggestedTrade.eggSender,
+        eggReceiver: suggestedTrade.eggReceiver,
+        featherSender: suggestedTrade.featherSender,
+        featherReceiver: suggestedTrade.featherReceiver,
+        bugSender: suggestedTrade.bugSender,
+        bugReceiver: suggestedTrade.bugReceiver,
+      },
+    });
+  };
+
   return (
     <Container>
       <Card>
@@ -30,6 +102,12 @@ export default function TradeSuggest(props) {
                       type="number"
                       min="0"
                       id="inputSenderMoneyCash"
+                      onChange={(event) => {
+                        set_suggestedTrade({
+                          ...suggestedTrade,
+                          moneyCashSender: parseInt(event.target.value),
+                        });
+                      }}
                     />
                   </Form.Group>
                 </Row>
@@ -41,6 +119,12 @@ export default function TradeSuggest(props) {
                       type="number"
                       min="0"
                       id="inputSenderEgg"
+                      onChange={(event) => {
+                        set_suggestedTrade({
+                          ...suggestedTrade,
+                          eggSender: parseInt(event.target.value),
+                        });
+                      }}
                     />
                   </Form.Group>
                 </Row>
@@ -52,6 +136,12 @@ export default function TradeSuggest(props) {
                       type="number"
                       min="0"
                       id="inputSenderFeather"
+                      onChange={(event) => {
+                        set_suggestedTrade({
+                          ...suggestedTrade,
+                          featherSender: parseInt(event.target.value),
+                        });
+                      }}
                     />
                   </Form.Group>
                 </Row>
@@ -62,18 +152,13 @@ export default function TradeSuggest(props) {
                       style={{ width: 60 }}
                       type="number"
                       min="0"
-                      id="inputSenderEgg"
-                    />
-                  </Form.Group>
-                </Row>
-                <Row>
-                  <Image src={vPointIcon} style={iconStyle} />
-                  <Form.Group>
-                    <Form.Control
-                      style={{ width: 60 }}
-                      type="number"
-                      min="0"
-                      id="inputSenderVPoint"
+                      id="inputSenderBug"
+                      onChange={(event) => {
+                        set_suggestedTrade({
+                          ...suggestedTrade,
+                          bugSender: parseInt(event.target.value),
+                        });
+                      }}
                     />
                   </Form.Group>
                 </Row>
@@ -88,6 +173,12 @@ export default function TradeSuggest(props) {
                       type="number"
                       min="0"
                       id="inputReceiverMoneyCash"
+                      onChange={(event) => {
+                        set_suggestedTrade({
+                          ...suggestedTrade,
+                          moneyCashReceiver: parseInt(event.target.value),
+                        });
+                      }}
                     />
                   </Form.Group>
                 </Row>
@@ -99,6 +190,12 @@ export default function TradeSuggest(props) {
                       type="number"
                       min="0"
                       id="inputReceiverEgg"
+                      onChange={(event) => {
+                        set_suggestedTrade({
+                          ...suggestedTrade,
+                          eggReceiver: parseInt(event.target.value),
+                        });
+                      }}
                     />
                   </Form.Group>
                 </Row>
@@ -110,6 +207,12 @@ export default function TradeSuggest(props) {
                       type="number"
                       min="0"
                       id="inputReceiverFeather"
+                      onChange={(event) => {
+                        set_suggestedTrade({
+                          ...suggestedTrade,
+                          featherReceiver: parseInt(event.target.value),
+                        });
+                      }}
                     />
                   </Form.Group>
                 </Row>
@@ -120,31 +223,20 @@ export default function TradeSuggest(props) {
                       style={{ width: 60 }}
                       type="number"
                       min="0"
-                      id="inputReceiverEgg"
-                    />
-                  </Form.Group>
-                </Row>
-                <Row>
-                  <Image src={vPointIcon} style={iconStyle} />
-                  <Form.Group>
-                    <Form.Control
-                      style={{ width: 60 }}
-                      type="number"
-                      min="0"
-                      id="inputReceiverVPoint"
+                      id="inputReceiverBug"
+                      onChange={(event) => {
+                        set_suggestedTrade({
+                          ...suggestedTrade,
+                          bugReceiver: parseInt(event.target.value),
+                        });
+                      }}
                     />
                   </Form.Group>
                 </Row>
               </Col>
             </Row>
           </Form>
-          <Button
-            variant="outline-info"
-            size="sm"
-            onClick={(event) => {
-              console.log("Create trade");
-            }}
-          >
+          <Button variant="outline-info" size="sm" onClick={submitTrade}>
             Suggest trade
           </Button>
         </Card.Body>

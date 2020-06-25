@@ -66,8 +66,9 @@ export default function Player(props) {
       );
       set_abilityDescription(
         <>
-          Destroy another player's random resource. Cannot destroy{" "}
-          <Image src={vPointIcon} style={inlineIconStyle} />.
+          Destroy another player's random resource.
+          <br></br>
+          <br></br>
         </>
       );
     } else if (event.target.value === "Buy") {

@@ -17,14 +17,15 @@ import { useQuery, useSubscription } from "@apollo/react-hooks";
 import { GET_TRADES_BY_ID } from "../../graphql/queries";
 
 import PrivateChat from "./PrivateChat";
-import Trade from "./Trade";
+import SentTrade from "./SentTrade";
+import IncomingTrade from "./IncomingTrade";
 import TradeSuggest from "./TradeSuggest";
 
 export default function TradePanel(props) {
-  const { data, error, loading } = useQuery(GET_TRADES_BY_ID);
-  if (loading) return "Loading...";
-  if (error) return <Alert variant="danger">Error! {error.message}</Alert>;
-  // console.log(data);
+  // const { data, error, loading } = useQuery(GET_TRADES_BY_ID);
+  // if (loading) return "Loading...";
+  // if (error) return <Alert variant="danger">Error! {error.message}</Alert>;
+  // console.log("GOEIEDAG", data);
 
   return (
     <Row>
@@ -35,32 +36,10 @@ export default function TradePanel(props) {
             <Card.Body>
               <Row>
                 <Col>
-                  <Trade
-                    senderName={data.suggested[0].playerSenderId.name}
-                    receiverName={data.suggested[0].playerReceiverId.name}
-                    moneyCashSender={data.suggested[0].moneyCashSender}
-                    moneyCashReceiver={data.suggested[0].moneyCashReceiver}
-                    eggSender={data.suggested[0].eggSender}
-                    eggReceiver={data.suggested[0].eggReceiver}
-                    featherSender={data.suggested[0].featherSender}
-                    featherReceiver={data.suggested[0].featherReceiver}
-                    bugSender={data.suggested[0].bugSender}
-                    bugReceiver={data.suggested[0].bugReceiver}
-                  />
+                  <SentTrade />
                 </Col>
                 <Col>
-                  <Trade
-                    senderName={data.incoming[0].playerSenderId.name}
-                    receiverName={data.incoming[0].playerReceiverId.name}
-                    moneyCashSender={data.incoming[0].moneyCashSender}
-                    moneyCashReceiver={data.incoming[0].moneyCashReceiver}
-                    eggSender={data.incoming[0].eggSender}
-                    eggReceiver={data.incoming[0].eggReceiver}
-                    featherSender={data.incoming[0].featherSender}
-                    featherReceiver={data.incoming[0].featherReceiver}
-                    bugSender={data.incoming[0].bugSender}
-                    bugReceiver={data.incoming[0].bugReceiver}
-                  />
+                  <IncomingTrade />
                 </Col>
               </Row>
               <br></br>

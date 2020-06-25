@@ -59,8 +59,11 @@ export const GET_ALL_PLAYERS_GAME_STATE = gql`
 `;
 
 export const GET_TRADES_BY_ID = gql`
-  query getTradesById {
-    suggested: getTradesById(playerSenderId: 1, playerReceiverId: 2) {
+  query getTradesById($playerSenderId: Int, $playerReceiverId: Int) {
+    getTradesById(
+      playerSenderId: $playerSenderId
+      playerReceiverId: $playerReceiverId
+    ) {
       id
       moneyCashSender
       moneyCashReceiver
@@ -70,6 +73,7 @@ export const GET_TRADES_BY_ID = gql`
       featherReceiver
       bugSender
       bugReceiver
+      closed
       playerSenderId {
         id
         name
@@ -79,25 +83,30 @@ export const GET_TRADES_BY_ID = gql`
         name
       }
     }
-    incoming: getTradesById(playerSenderId: 2, playerReceiverId: 1) {
-      id
-      moneyCashSender
-      moneyCashReceiver
-      eggSender
-      eggReceiver
-      featherSender
-      featherReceiver
-      bugSender
-      bugReceiver
-      playerSenderId {
-        id
-        name
-      }
-      playerReceiverId {
-        id
-        name
-      }
-    }
+    # incoming: getTradesById(
+    #   playerSenderId: 2
+    #   playerReceiverId: 1
+    #   closed: false
+    # ) {
+    #   id
+    #   moneyCashSender
+    #   moneyCashReceiver
+    #   eggSender
+    #   eggReceiver
+    #   featherSender
+    #   featherReceiver
+    #   bugSender
+    #   bugReceiver
+    #   closed
+    #   playerSenderId {
+    #     id
+    #     name
+    #   }
+    #   playerReceiverId {
+    #     id
+    #     name
+    #   }
+    # }
   }
 `;
 
@@ -125,6 +134,114 @@ export const GET_PRIVATE_MESSAGES_BY_ID = gql`
 `;
 
 // ----------- MUTATIONS ----------------
+
+export const CREATE_PUBLIC_MESSAGE = gql`
+  mutation createPublicMessage($playerId: Int, $content: String) {
+    createPublicMessage(playerId: $playerId, content: $content) {
+      playerId {
+        id
+      }
+      content
+    }
+  }
+`;
+
+export const CLOSE_TRADE = gql`
+  mutation closeTrade($id: Int, $closed: Boolean) {
+    closeTrade(id: $id, closed: $closed) {
+      closed
+    }
+  }
+`;
+
+export const ACCEPT_TRADE = gql`
+  mutation acceptTrade(
+    $id: Int
+    $playerSenderId: Int
+    $playerReceiverId: Int
+    $moneyCashSender: Int
+    $moneyCashReceiver: Int
+    $eggSender: Int
+    $eggReceiver: Int
+    $featherSender: Int
+    $featherReceiver: Int
+    $bugSender: Int
+    $bugReceiver: Int
+  ) {
+    acceptTrade(
+      id: $id
+      playerSenderId: $playerSenderId
+      playerReceiverId: $playerReceiverId
+      moneyCashSender: $moneyCashSender
+      moneyCashReceiver: $moneyCashReceiver
+      eggSender: $eggSender
+      eggReceiver: $eggReceiver
+      featherSender: $featherSender
+      featherReceiver: $featherReceiver
+      bugSender: $bugSender
+      bugReceiver: $bugReceiver
+    ) {
+      id
+      playerSenderId {
+        id
+      }
+      playerReceiverId {
+        id
+      }
+      moneyCashSender
+      moneyCashReceiver
+      eggSender
+      eggReceiver
+      featherSender
+      featherReceiver
+      bugSender
+      bugReceiver
+    }
+  }
+`;
+
+export const SUGGEST_TRADE = gql`
+  mutation suggestTrade(
+    $playerSenderId: Int
+    $playerReceiverId: Int
+    $moneyCashSender: Int
+    $moneyCashReceiver: Int
+    $eggSender: Int
+    $eggReceiver: Int
+    $featherSender: Int
+    $featherReceiver: Int
+    $bugSender: Int
+    $bugReceiver: Int
+  ) {
+    suggestTrade(
+      playerSenderId: $playerSenderId
+      playerReceiverId: $playerReceiverId
+      moneyCashSender: $moneyCashSender
+      moneyCashReceiver: $moneyCashReceiver
+      eggSender: $eggSender
+      eggReceiver: $eggReceiver
+      featherSender: $featherSender
+      featherReceiver: $featherReceiver
+      bugSender: $bugSender
+      bugReceiver: $bugReceiver
+    ) {
+      playerSenderId {
+        id
+      }
+      playerReceiverId {
+        id
+      }
+      moneyCashSender
+      moneyCashReceiver
+      eggSender
+      eggReceiver
+      featherSender
+      featherReceiver
+      bugSender
+      bugReceiver
+    }
+  }
+`;
 
 // ----------- SUBSCRIPTIONS ------------
 
