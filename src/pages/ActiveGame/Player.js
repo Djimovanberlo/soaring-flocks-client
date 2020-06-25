@@ -51,11 +51,11 @@ export default function Player(props) {
 
   const attackHandler = (event) => {
     event.preventDefault();
-    console.log(id, event.target.value);
+    console.log(id, attack);
     createAttack({
       variables: {
         playerId: id,
-        ability: event.target.value,
+        ability: attack,
       },
     });
     console.log("WHO");
@@ -292,19 +292,19 @@ export default function Player(props) {
                     <Image src={bugIcon} style={inlineIconStyle} />1
                   </div>
                   <br></br>
-                  {
-                    <Form>
-                      <Form.Group controlId="marketselect">
-                        <Form.Label>Select a market</Form.Label>
-                        <Form.Control as="select">
-                          <option>Don't build anything</option>
-                          <option>Money Market</option>
-                          <option>Rare Market</option>
-                          <option>Victory Market</option>
-                        </Form.Control>
-                      </Form.Group>
-                    </Form>
-                  }
+                  {/* {moneyCash < ((mMarket + rMarket + vMarket) * 2 - 6) || egg < 1 || feather < 1 || bug <1 ? (<></>) :  */}
+                  <Form>
+                    <Form.Group controlId="marketselect">
+                      <Form.Label>Select a market</Form.Label>
+                      <Form.Control as="select">
+                        <option>Don't build anything</option>
+                        <option>Money Market</option>
+                        <option>Rare Market</option>
+                        <option>Victory Market</option>
+                      </Form.Control>
+                    </Form.Group>
+                  </Form>
+                  {/* } */}
                 </Col>
               </Row>
               <Row>
