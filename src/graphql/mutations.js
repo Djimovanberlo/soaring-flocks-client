@@ -16,6 +16,14 @@ export const CREATE_ATTACK = gql`
   }
 `;
 
+export const CREATE_MARKET = gql`
+  mutation createMarket($playerId: Int, $market: String) {
+    createMarket(playerId: $playerId, market: $market) {
+      id
+    }
+  }
+`;
+
 export const CREATE_PUBLIC_MESSAGE = gql`
   mutation createPublicMessage($playerId: Int, $content: String) {
     createPublicMessage(playerId: $playerId, content: $content) {
