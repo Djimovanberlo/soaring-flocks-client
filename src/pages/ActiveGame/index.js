@@ -33,7 +33,7 @@ export default function ActiveGame() {
   if (loading) return "Loading...";
   if (error) return <Alert variant="danger">Error! {error.message}</Alert>;
   // console.log("data:", data, "error:", error, "loading:", loading);
-  // console.log("PLAYERDATA", data.getGameById.players);
+  console.log("PLAYERDATA", data);
 
   const tradeControls = tradePanelState ? (
     <TradePanel playerList={data.getGameById.players} />
@@ -58,7 +58,10 @@ export default function ActiveGame() {
           <h2>{data.getGameById.gameTitle}</h2>
         </Row>
         <Row>
-          <h6>Turn X. Game ends in Y turns</h6>
+          <h6>
+            Turn {data.getGameById.gameTimePassed}. Game ends in{" "}
+            {data.getGameById.gameTime - data.getGameById.gameTimePassed} turns
+          </h6>
           <Button variant="primary" onClick={handleClick}>
             Open trade
           </Button>

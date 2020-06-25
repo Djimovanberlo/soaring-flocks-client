@@ -27,13 +27,10 @@ export default function gameInfo() {
           </Col>
         </Row>
       </Container>
-      <Container>
+      {/* <Container as={Col} md={{ span: 5, offset: 4 }} className="mt-5">
         <Row>
           <Col>
-            <h5 style={{ textAlign: "center" }}>IMG</h5>
-          </Col>
-          <Col>
-            <h5 style={{ textAlign: "center" }}>
+            <h5>
               <a href="https://codaisseur.com/">Codaisseur</a> portfolio project
             </h5>
             <p>
@@ -42,9 +39,10 @@ export default function gameInfo() {
             </p>
           </Col>
         </Row>
-      </Container>
+      </Container> */}
       <Container>
         <Row>
+          <Col md={{ span: 1 }}>IMG</Col>
           <Col>
             <h5 style={{ textAlign: "center" }}>Rules</h5>
             <p>
@@ -56,9 +54,8 @@ export default function gameInfo() {
               Soaring Flocks.
             </p>
             <p>
-              Each turn players build up to one market and one ability. Every
-              night at midnight, new markets are built and abilities are
-              executed and players earn - or lose - resources accordingly.
+              Each turn players build up to one market. Every night at midnight,
+              new markets are built and players earn resources accordingly.
             </p>
             <p>
               Players own a number of markets. At the end of each turn, these
@@ -67,51 +64,31 @@ export default function gameInfo() {
             </p>
           </Col>
           <Col>
-            <h5 style={{ textAlign: "center" }}>
-              Resources, Markets, Abilities
-            </h5>
-
+            <h5 style={{ textAlign: "center" }}>Resources, Markets, Attacks</h5>
             <p>Resources are used to build markets.</p>
-            <ul>
-              <li>
-                <Image src={moneyCashIcon} style={inlineIconStyle} />
-                MoneyCash is used to build markets. The more markets you have,
-                the more MoneyCash is required to build your next market.
-              </li>
-              <li>
-                <Image src={eggIcon} style={inlineIconStyle} />
-                egg, <Image src={featherIcon} style={inlineIconStyle} />
-                feather, <Image src={bugIcon} style={inlineIconStyle} />
-                bug: rare resources. You need to spend one of each of these to
-                build a market.
-              </li>
-              <li>
-                <Image src={vPointIcon} style={inlineIconStyle} />
-                Victory Points are not used for anything, except winning!
-              </li>
-            </ul>
-            <p>
-              Markets generate resources. Markets cost one of each rare
-              resource, in addition to 2 MoneyCash for each market that you have
-              built.
-            </p>
-            <ul>
-              <li>
-                <Image src={marketIcon} style={inlineIconStyle} />
-                <Image src={moneyCashIcon} style={inlineIconStyle} />
-                Money Market generates 2 MoneyCash each turn
-              </li>
-              <li>
-                <Image src={marketIcon} style={inlineIconStyle} />
-                <Image src={rareIcon} style={inlineIconStyle} />
-                Rare Market generates 1 random Rare Resource each turn
-              </li>
-              <li>
-                <Image src={marketIcon} style={inlineIconStyle} />
-                <Image src={vPointIcon} style={inlineIconStyle} />
-                Victory Market generates 1 victory point each turn
-              </li>
-            </ul>
+            <Image src={moneyCashIcon} style={inlineIconStyle} />
+            MoneyCash is used to build markets. The more markets you have, the
+            more MoneyCash is required to build your next market.
+            <Image src={eggIcon} style={inlineIconStyle} />
+            egg, <Image src={featherIcon} style={inlineIconStyle} />
+            feather, <Image src={bugIcon} style={inlineIconStyle} />
+            bug: rare resources. You need to spend one of each of these to build
+            a market.
+            <Image src={vPointIcon} style={inlineIconStyle} />
+            Victory Points are not used for anything, except winning!
+            <br></br>
+            <br></br>
+            Markets generate resources. Markets cost one of each rare resource,
+            in addition to 2 MoneyCash for each market that you have built.
+            <Image src={marketIcon} style={inlineIconStyle} />
+            <Image src={moneyCashIcon} style={inlineIconStyle} />
+            Money Market generates 2 MoneyCash each turn.
+            <Image src={marketIcon} style={inlineIconStyle} />
+            <Image src={rareIcon} style={inlineIconStyle} />
+            Rare Market generates 1 random Rare Resource each turn
+            <Image src={marketIcon} style={inlineIconStyle} />
+            <Image src={vPointIcon} style={inlineIconStyle} />
+            Victory Market generates 1 victory point each turn
             <p>
               {" "}
               Players start with 1{" "}
@@ -120,14 +97,11 @@ export default function gameInfo() {
               <Image src={marketIcon} style={inlineIconStyle} />
               <Image src={rareIcon} style={inlineIconStyle} />.
             </p>
-            <p>Abilities are executed at midnight each day</p>
-
-            <ul>
-              <li>Attack to destroy another player's random resource</li>
-              <li>Buy a resource for 3 MoneyCash</li>
-              <li>Invest 10 MoneyCash to gain 4 random Rare Resources</li>
-            </ul>
+            Players can attack other players for 1{" "}
+            <Image src={moneyCashIcon} style={inlineIconStyle} />. Attacking
+            another player destroys a random resource.
           </Col>
+          <Col md={{ span: 1 }}>IMG</Col>
         </Row>
       </Container>
     </>

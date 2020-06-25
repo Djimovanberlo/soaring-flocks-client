@@ -34,6 +34,8 @@ export const GET_GAME_BY_ID = gql`
   query getGameById {
     getGameById(id: 1) {
       gameTitle
+      gameTime
+      gameTimePassed
       players {
         id
         name

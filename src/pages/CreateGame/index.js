@@ -15,7 +15,7 @@ export default function CreateGame() {
   const [gameTitle, set_gameTitle] = useState("");
   const [gameTime, set_gameTime] = useState("10 days");
   const [playersInGame, set_playersInGame] = useState([]);
-  const [playersOutGame, set_playersOutGame] = useState([]);
+  // const [playersOutGame, set_playersOutGame] = useState([]);
   const dispatch = useDispatch();
   const token = useSelector(selectToken);
   const history = useHistory();
@@ -32,20 +32,21 @@ export default function CreateGame() {
   if (loading) return "Loading...";
   if (error) return <Alert variant="danger">Error! {error.message}</Alert>;
   // console.log("data:", data, "error:", error, "loading:", loading);
-  // console.log("GAMEDATA", data.inGame);
+  console.log("GAMEDATA", data);
 
   // TO DO: max 12 players
   const addToGameListener = (event) => {
+    console.log(playersInGame, event.target.value, "WQWRQR");
     set_playersInGame([...playersInGame, event.target.value].sort());
-    set_playersOutGame(
-      [
-        ...playersOutGame.filter((player) => player != event.target.value),
-      ].sort()
-    );
+    // set_playersOutGame(
+    //   [
+    //     ...playersOutGame.filter((player) => player != event.target.value),
+    //   ].sort()
+    // );
   };
 
   const removeFromGameListener = (event) => {
-    set_playersOutGame([...playersOutGame, event.target.value].sort());
+    // set_playersOutGame([...data.outGame, event.target.value].sort());
     set_playersInGame(
       [...playersInGame.filter((player) => player != event.target.value)].sort()
     );
@@ -104,9 +105,9 @@ export default function CreateGame() {
             <Col md={{ span: 3 }}>
               <Form.Group controlId="playersInGame">
                 <Form.Label>Click on a name to remove from game</Form.Label>
-                <Form.Control as="select" onChange={removeFromGameListener}>
-                  {data.inGame.map((player) => {
-                    return <option key={player.id}>{player.name}</option>;
+                <Form.Control as="select" onClick={removeFromGameListener}>
+                  {playersInGame.map((player, index) => {
+                    return <option key={index}>{player}</option>;
                   })}
                 </Form.Control>
               </Form.Group>
@@ -114,7 +115,7 @@ export default function CreateGame() {
             <Col md={{ span: 3 }}>
               <Form.Group controlId="playersOutGame">
                 <Form.Label>Click on a name to add to game</Form.Label>
-                <Form.Control as="select" onChange={addToGameListener}>
+                <Form.Control as="select" onClick={addToGameListener}>
                   {data.outGame.map((player, index) => {
                     return <option key={player.id}>{player.name}</option>;
                   })}
@@ -122,7 +123,7 @@ export default function CreateGame() {
               </Form.Group>
             </Col>
           </Row>
-          {playersInGame.length} Player(s) in game:{" "}
+          {data.inGame.length} Player(s) in game:{" "}
           {data.inGame.map((player) => {
             return `${player.name} `;
           })}
