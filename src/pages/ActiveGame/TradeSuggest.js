@@ -28,42 +28,6 @@ export default function TradeSuggest(props) {
     bugReceiver: null,
   });
 
-  // -- copied from server schema
-  // playerSenderId: Int
-  // playerReceiverId: Int
-  // moneyCashSender: Int
-  // moneyCashReceiver: Int
-  // eggSender: Int
-  // eggReceiver: Int
-  // featherSender: Int
-  // featherReceiver: Int
-  // bugSender: Int
-  // bugReceiver: Int
-  // closed: Boolean
-  // -- copied from server resolver
-  // playerSenderId,
-  // playerReceiverId,
-  // moneyCashSender,
-  // moneyCashReceiver,
-  // eggSender,
-  // eggReceiver,
-  // featherSender,
-  // featherReceiver,
-  // bugSender,
-  // bugReceiver,
-  // closed: false,
-  // -- copied from client mutation
-  // playerSenderId
-  // playerReceiverId
-  // moneyCashSender
-  // moneyCashReceiver
-  // eggSender
-  // eggReceiver
-  // featherSender
-  // featherReceiver
-  // bugSender
-  // bugReceiver
-
   const [suggestTrade, { data }] = useMutation(SUGGEST_TRADE);
 
   const submitTrade = (event) => {

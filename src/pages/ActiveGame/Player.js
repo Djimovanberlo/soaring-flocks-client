@@ -17,10 +17,11 @@ import moneyCashIcon from "../../images/icons/moneyCashIcon.png";
 import rareIcon from "../../images/icons/rareIcon.png";
 import vPointIcon from "../../images/icons/vPointIcon.png";
 import { inlineIconStyle, iconStyle } from "../../styles/imgStyles";
-import { CREATE_ATTACK } from "../../graphql/mutations";
+import { CREATE_ATTACK, CREATE_MARKET } from "../../graphql/mutations";
 
 export default function Player(props) {
-  const [attack, set_attack] = useState("");
+  const [attack, set_attack] = useState("Don't attack anyone");
+  const [market, set_market] = useState("Don't build anything");
   const [marketAvailable, set_marketAvailable] = useState(null);
   const [ability, set_ability] = useState("");
   const [abilityParam, set_abilityParam] = useState("");
@@ -31,6 +32,7 @@ export default function Player(props) {
       <br></br>
     </>
   );
+  const [createMarket] = useMutation(CREATE_MARKET);
   const [createAttack] = useMutation(CREATE_ATTACK);
   const { data, error, loading } = useQuery(GET_PLAYER_BY_ID);
   if (loading) return "Loading...";
@@ -49,16 +51,30 @@ export default function Player(props) {
     vMarket,
   } = data.getPlayerById;
 
+  const cashMoneyCost = (mMarket + rMarket + vMarket) * 2 - 6;
+
   const attackHandler = (event) => {
     event.preventDefault();
-    console.log(id, event.target.value);
+    console.log(id, attack);
     createAttack({
       variables: {
         playerId: id,
-        ability: event.target.value,
+        ability: attack,
       },
     });
     console.log("WHO");
+  };
+
+  const marketHandler = (event) => {
+    event.preventDefault();
+    console.log(id, market);
+    createMarket({
+      variables: {
+        playerId: id,
+        market: market,
+        cashMoney: cashMoneyCost,
+      },
+    });
   };
 
   const gameLeaver = (event) => {
@@ -252,7 +268,9 @@ export default function Player(props) {
                               onChange={(event) => {
                                 set_attack(event.target.value);
                               }}
+                              defaultValue="Don't attack anyone"
                             >
+                              <option>Don't attack anyone</option>
                               {props.playerList.map((player) => {
                                 return (
                                   <option key={player.id}>{player.name}</option>
@@ -266,13 +284,20 @@ export default function Player(props) {
                             </Form.Control>
                           </Form.Group>
                           <Form.Group controlId="submitForm">
-                            <Button
-                              variant="outline-danger"
-                              type="submit"
-                              onClick={attackHandler}
-                            >
-                              Attack
-                            </Button>
+                            {attack !== "Don't attack anyone" ? (
+                              <Button
+                                variant="outline-danger"
+                                type="submit"
+                                onClick={attackHandler}
+                              >
+                                Attack
+                              </Button>
+                            ) : (
+                              <>
+                                <br></br>
+                                <br></br>
+                              </>
+                            )}
                           </Form.Group>
                         </Form>
                       )}
@@ -286,25 +311,47 @@ export default function Player(props) {
                   <div>
                     Cost of building a market: <br></br>
                     <Image src={moneyCashIcon} style={inlineIconStyle} />
-                    {(mMarket + rMarket + vMarket) * 2 - 6}
+                    {cashMoneyCost}
                     <Image src={eggIcon} style={inlineIconStyle} />1
                     <Image src={featherIcon} style={inlineIconStyle} />1
                     <Image src={bugIcon} style={inlineIconStyle} />1
                   </div>
                   <br></br>
-                  {
-                    <Form>
-                      <Form.Group controlId="marketselect">
-                        <Form.Label>Select a market</Form.Label>
-                        <Form.Control as="select">
-                          <option>Don't build anything</option>
-                          <option>Money Market</option>
-                          <option>Rare Market</option>
-                          <option>Victory Market</option>
-                        </Form.Control>
-                      </Form.Group>
-                    </Form>
-                  }
+                  {/* {moneyCash < ((mMarket + rMarket + vMarket) * 2 - 6) || egg < 1 || feather < 1 || bug <1 ? (<></>) :  */}
+                  <Form>
+                    <Form.Group controlId="marketselect">
+                      <Form.Label>Select a market</Form.Label>
+                      <Form.Control
+                        as="select"
+                        onChange={(event) => {
+                          set_market(event.target.value);
+                        }}
+                        defaultValue="Don't build anything"
+                      >
+                        <option>Don't build anything</option>
+                        <option>Money Market</option>
+                        <option>Rare Market</option>
+                        <option>Victory Market</option>
+                      </Form.Control>
+                    </Form.Group>
+                    <Form.Group controlId="submitForm">
+                      {market !== "Don't build anything" ? (
+                        <Button
+                          variant="outline-info"
+                          type="submit"
+                          onClick={marketHandler}
+                        >
+                          Build
+                        </Button>
+                      ) : (
+                        <>
+                          <br></br>
+                          <br></br>
+                        </>
+                      )}
+                    </Form.Group>
+                  </Form>
+                  {/* } */}
                 </Col>
               </Row>
               <Row>

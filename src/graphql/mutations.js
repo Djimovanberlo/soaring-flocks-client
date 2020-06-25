@@ -11,9 +11,15 @@ export const CREATE_PLAYER = gql`
 export const CREATE_ATTACK = gql`
   mutation createAttack($playerId: Int, $ability: String) {
     createAttack(playerId: $playerId, ability: $ability) {
-      playerId {
-        id
-      }
+      id
+    }
+  }
+`;
+
+export const CREATE_MARKET = gql`
+  mutation createMarket($playerId: Int, $market: String) {
+    createMarket(playerId: $playerId, market: $market) {
+      id
     }
   }
 `;
