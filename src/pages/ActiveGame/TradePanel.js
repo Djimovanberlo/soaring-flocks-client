@@ -20,6 +20,7 @@ import PrivateChat from "./PrivateChat";
 import SentTrade from "./SentTrade";
 import IncomingTrade from "./IncomingTrade";
 import TradeSuggest from "./TradeSuggest";
+import PublicChat from "./PublicChat";
 
 export default function TradePanel(props) {
   // const { data, error, loading } = useQuery(GET_TRADES_BY_ID);
@@ -51,7 +52,7 @@ export default function TradePanel(props) {
         </Container>
       </Col>
       <Col md={4}>
-        <PrivateChat />
+        <PublicChat />
       </Col>
     </Row>
     // YOU CAN ONLY OFFER 1 TRADE PER PLAYER AT A TIME (to limit spam options)

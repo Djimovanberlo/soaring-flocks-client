@@ -7,7 +7,7 @@ import Container from "react-bootstrap/Container";
 import { Col, Row, Image, Dropdown, DropdownButton } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import { GET_PLAYER_BY_ID } from "../../graphql/queries";
-import { useQuery, useSubscription } from "@apollo/react-hooks";
+import { useQuery, useSubscription, useMutation } from "@apollo/react-hooks";
 
 import bugIcon from "../../images/icons/bugIcon.png";
 import eggIcon from "../../images/icons/eggIcon.png";
@@ -17,8 +17,11 @@ import moneyCashIcon from "../../images/icons/moneyCashIcon.png";
 import rareIcon from "../../images/icons/rareIcon.png";
 import vPointIcon from "../../images/icons/vPointIcon.png";
 import { inlineIconStyle, iconStyle } from "../../styles/imgStyles";
+import { CREATE_ATTACK } from "../../graphql/mutations";
 
 export default function Player(props) {
+  const [attack, set_attack] = useState("");
+  const [marketAvailable, set_marketAvailable] = useState(null);
   const [ability, set_ability] = useState("");
   const [abilityParam, set_abilityParam] = useState("");
   const [abilityParamForm, set_abilityParamForm] = useState(null);
@@ -28,6 +31,7 @@ export default function Player(props) {
       <br></br>
     </>
   );
+  const [createAttack] = useMutation(CREATE_ATTACK);
   const { data, error, loading } = useQuery(GET_PLAYER_BY_ID);
   if (loading) return "Loading...";
   if (error) return <Alert variant="danger">Error! {error.message}</Alert>;
@@ -45,77 +49,126 @@ export default function Player(props) {
     vMarket,
   } = data.getPlayerById;
 
-  const abilityHandler = (event) => {
-    console.log(event.target.value);
-    set_ability(event.target.value);
-    if (event.target.value === "Attack") {
-      set_abilityParamForm(
-        <Form>
-          <Form.Group controlId="attackTargetSelect">
-            <Form.Label>Select a target</Form.Label>
-            <Form.Control
-              as="select"
-              onChange={set_abilityParam(event.target.value)}
-            >
-              {props.playerList.map((player) => {
-                return <option key={player.id}>{player.name}</option>;
-              })}
-            </Form.Control>
-          </Form.Group>
-        </Form>
-      );
-      set_abilityDescription(
-        <>
-          Destroy another player's random resource.
-          <br></br>
-          <br></br>
-        </>
-      );
-    } else if (event.target.value === "Buy") {
-      set_abilityParamForm(
-        <Form>
-          <Form.Group controlId="buyResourceSelect">
-            <Form.Label>Select a resource</Form.Label>
-            <Form.Control
-              as="select"
-              onChange={set_abilityParam(event.target.value)}
-            >
-              <option>Egg</option>
-              <option>Feather</option>
-              <option>Bug</option>
-              <option>Victory Point</option>
-            </Form.Control>
-          </Form.Group>
-        </Form>
-      );
-      set_abilityDescription(
-        <>
-          Pay 4<Image src={moneyCashIcon} style={inlineIconStyle} /> for a
-          resource of choice<br></br>
-          <br></br>
-        </>
-      );
-    } else if (event.target.value === "Invest") {
-      set_abilityParamForm(null);
-      set_abilityDescription(
-        <>
-          Pay 10
-          <Image src={moneyCashIcon} style={inlineIconStyle} /> to gain 4 random
-          Rare Resources
-          <br></br>
-          <br></br>
-        </>
-      );
-    } else if (event.target.value === "No ability") {
-      set_abilityParamForm(null);
-      set_abilityDescription(
-        <>
-          Choose an ability and its parameter<br></br>
-          <br></br>
-        </>
-      );
-    }
+  const attackHandler = (event) => {
+    event.preventDefault();
+    console.log(id, event.target.value);
+    createAttack({
+      variables: {
+        playerId: id,
+        ability: event.target.value,
+      },
+    });
+    console.log("WHO");
   };
+
+  const gameLeaver = (event) => {
+    event.preventDefault();
+    console.log("LEAVE");
+  };
+
+  // const abilityHandler = (event) => {
+  //   console.log(event.target.value);
+  //   set_ability(event.target.value);
+  //   if (event.target.value === "Attack") {
+  //     set_abilityParamForm(
+  //       <Form>
+  //         <Form.Group controlId="attackTargetSelect">
+  //           <Form.Label>Select a target</Form.Label>
+  //           <Form.Control
+  //             as="select"
+  //             onChange={set_abilityParam(event.target.value)}
+  //           >
+  //             {props.playerList.map((player) => {
+  //               return <option key={player.id}>{player.name}</option>;
+  //             })}
+  //           </Form.Control>
+  //         </Form.Group>
+  //       </Form>
+  //     );
+  //     set_abilityDescription(
+  //       <>
+  //         Destroy another player's random resource.
+  //         <br></br>
+  //         <br></br>
+  //       </>
+  //     );
+  //   } else if (event.target.value === "Buy") {
+  //     set_abilityParamForm(
+  //       <Form>
+  //         <Form.Group controlId="buyResourceSelect">
+  //           <Form.Label>Select a resource</Form.Label>
+  //           <Form.Control
+  //             as="select"
+  //             onChange={set_abilityParam(event.target.value)}
+  //           >
+  //             <option>Egg</option>
+  //             <option>Feather</option>
+  //             <option>Bug</option>
+  //             <option>Victory Point</option>
+  //           </Form.Control>
+  //         </Form.Group>
+  //       </Form>
+  //     );
+  //     set_abilityDescription(
+  //       <>
+  //         Pay 4<Image src={moneyCashIcon} style={inlineIconStyle} /> for a
+  //         resource of choice<br></br>
+  //         <br></br>
+  //       </>
+  //     );
+  //   } else if (event.target.value === "Invest") {
+  //     set_abilityParamForm(null);
+  //     set_abilityDescription(
+  //       <>
+  //         Pay 10
+  //         <Image src={moneyCashIcon} style={inlineIconStyle} /> to gain 4 random
+  //         Rare Resources
+  //         <br></br>
+  //         <br></br>
+  //       </>
+  //     );
+  //   } else if (event.target.value === "No ability") {
+  //     set_abilityParamForm(null);
+  //     set_abilityDescription(
+  //       <>
+  //         Choose an ability and its parameter<br></br>
+  //         <br></br>
+  //       </>
+  //     );
+  //   }
+  // };
+
+  // if (
+  //   moneyCash < (mMarket + rMarket + vMarket) * 2 - 6 ||
+  //   egg < 1 ||
+  //   feather < 1 ||
+  //   bug < 1
+  // ) {
+  //   set_marketAvailable(<>Not enough resrouces</>);
+  // } else {
+  //   set_marketAvailable(
+  //     <Form>
+  //       <Form.Group controlId="marketselect">
+  //         <Form.Label>Select a market</Form.Label>
+  //         <Form.Control as="select">
+  //           <option>Don't build anything</option>
+  //           <option>Money Market</option>
+  //           <option>Rare Market</option>
+  //           <option>Victory Market</option>
+  //         </Form.Control>
+  //       </Form.Group>
+  //     </Form>
+  //   );
+  // }
+
+  // Cost of building a market: <br></br>
+  // <Image src={moneyCashIcon} style={inlineIconStyle} />
+  // {(mMarket + rMarket + vMarket) * 2 - 6}
+  // <Image src={eggIcon} style={inlineIconStyle} />1
+  // <Image src={featherIcon} style={inlineIconStyle} />1
+  {
+    /* <Image src={bugIcon} style={inlineIconStyle} />1 */
+  }
 
   return (
     <Container>
@@ -178,23 +231,51 @@ export default function Player(props) {
               <hr></hr>
               <Row>
                 <Col>
-                  <div>Ability</div>
-                  <br></br>
-                  <div>{abilityDescription}</div>
+                  <div>Attack</div>
+                  <div>
+                    <br></br>
+                    Cost of attacking: <br></br>
+                    <Image src={moneyCashIcon} style={inlineIconStyle} />1
+                  </div>
                   <br></br>
                   <Row>
                     <Col>
-                      <Form>
-                        <Form.Group controlId="abilitySelect">
-                          <Form.Label>Select an ability</Form.Label>
-                          <Form.Control as="select" onChange={abilityHandler}>
-                            <option>No ability</option>
+                      {" "}
+                      {moneyCash <= 0 ? (
+                        <></>
+                      ) : (
+                        <Form>
+                          <Form.Group controlId="abilitySelect">
+                            <Form.Label>Select a target</Form.Label>
+                            <Form.Control
+                              as="select"
+                              onChange={(event) => {
+                                set_attack(event.target.value);
+                              }}
+                            >
+                              {props.playerList.map((player) => {
+                                return (
+                                  <option key={player.id}>{player.name}</option>
+                                );
+                              })}
+
+                              {/* <option>No ability</option>
                             <option>Attack</option>
                             <option>Buy</option>
-                            <option>Invest</option>
-                          </Form.Control>
-                        </Form.Group>
-                      </Form>
+                            <option>Invest</option> */}
+                            </Form.Control>
+                          </Form.Group>
+                          <Form.Group controlId="submitForm">
+                            <Button
+                              variant="outline-danger"
+                              type="submit"
+                              onClick={attackHandler}
+                            >
+                              Attack
+                            </Button>
+                          </Form.Group>
+                        </Form>
+                      )}
                     </Col>
                     <Col>{abilityParamForm}</Col>
                   </Row>
@@ -211,17 +292,27 @@ export default function Player(props) {
                     <Image src={bugIcon} style={inlineIconStyle} />1
                   </div>
                   <br></br>
-                  <Form>
-                    <Form.Group controlId="marketselect">
-                      <Form.Label>Select a market</Form.Label>
-                      <Form.Control as="select">
-                        <option>Don't build anything</option>
-                        <option>Money Market</option>
-                        <option>Rare Market</option>
-                        <option>Victory Market</option>
-                      </Form.Control>
-                    </Form.Group>
-                  </Form>
+                  {
+                    <Form>
+                      <Form.Group controlId="marketselect">
+                        <Form.Label>Select a market</Form.Label>
+                        <Form.Control as="select">
+                          <option>Don't build anything</option>
+                          <option>Money Market</option>
+                          <option>Rare Market</option>
+                          <option>Victory Market</option>
+                        </Form.Control>
+                      </Form.Group>
+                    </Form>
+                  }
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  {" "}
+                  <Button variant="danger" type="submit" onClick={gameLeaver}>
+                    Leave Game
+                  </Button>
                 </Col>
               </Row>
             </Container>

@@ -80,7 +80,6 @@ export default function SignUp() {
               placeholder="Password"
               required
             />
-            <>captcha to do</>
           </Form.Group>
           <Form.Group className="mt-5">
             <Button variant="primary" type="submit" onClick={submitForm}>

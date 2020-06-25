@@ -8,6 +8,16 @@ export const CREATE_PLAYER = gql`
   }
 `;
 
+export const CREATE_ATTACK = gql`
+  mutation createAttack($playerId: Int, $ability: String) {
+    createAttack(playerId: $playerId, ability: $ability) {
+      playerId {
+        id
+      }
+    }
+  }
+`;
+
 export const CREATE_PUBLIC_MESSAGE = gql`
   mutation createPublicMessage($playerId: Int, $content: String) {
     createPublicMessage(playerId: $playerId, content: $content) {
