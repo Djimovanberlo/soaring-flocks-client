@@ -7,7 +7,7 @@ import Container from "react-bootstrap/Container";
 import { Col, Row, Image, Dropdown, DropdownButton } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import { GET_PLAYER_BY_ID } from "../../graphql/queries";
-import { useQuery, useSubscription } from "@apollo/react-hooks";
+import { useQuery, useSubscription, useMutation } from "@apollo/react-hooks";
 
 import bugIcon from "../../images/icons/bugIcon.png";
 import eggIcon from "../../images/icons/eggIcon.png";
@@ -17,6 +17,7 @@ import moneyCashIcon from "../../images/icons/moneyCashIcon.png";
 import rareIcon from "../../images/icons/rareIcon.png";
 import vPointIcon from "../../images/icons/vPointIcon.png";
 import { inlineIconStyle, iconStyle } from "../../styles/imgStyles";
+import { CREATE_ATTACK } from "../../graphql/mutations";
 
 export default function Player(props) {
   const [attack, set_attack] = useState("");
@@ -30,6 +31,7 @@ export default function Player(props) {
       <br></br>
     </>
   );
+  const [createAttack] = useMutation(CREATE_ATTACK);
   const { data, error, loading } = useQuery(GET_PLAYER_BY_ID);
   if (loading) return "Loading...";
   if (error) return <Alert variant="danger">Error! {error.message}</Alert>;
@@ -49,6 +51,13 @@ export default function Player(props) {
 
   const attackHandler = (event) => {
     event.preventDefault();
+    console.log(id, event.target.value);
+    createAttack({
+      variables: {
+        playerId: id,
+        ability: event.target.value,
+      },
+    });
     console.log("WHO");
   };
 
