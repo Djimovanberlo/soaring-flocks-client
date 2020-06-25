@@ -11,7 +11,7 @@ import moneyCashIcon from "../../images/icons/moneyCashIcon.png";
 import rareIcon from "../../images/icons/rareIcon.png";
 import vPointIcon from "../../images/icons/vPointIcon.png";
 import { inlineIconStyle, iconStyle } from "../../styles/imgStyles";
-import { SUGGEST_TRADE } from "../../graphql/queries";
+import { SUGGEST_TRADE } from "../../graphql/mutations";
 import { useQuery, useSubscription, useMutation } from "@apollo/react-hooks";
 
 export default function TradeSuggest(props) {

@@ -5,11 +5,8 @@ import { Link } from "react-router-dom";
 import { Col, Row, Image, Alert } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import { useQuery, useSubscription, useMutation } from "@apollo/react-hooks";
-import {
-  CLOSE_TRADE,
-  ACCEPT_TRADE,
-  GET_TRADES_BY_ID,
-} from "../../graphql/queries";
+import { CLOSE_TRADE, ACCEPT_TRADE } from "../../graphql/mutations";
+import { GET_TRADES_BY_ID } from "../../graphql/queries";
 
 import bugIcon from "../../images/icons/bugIcon.png";
 import eggIcon from "../../images/icons/eggIcon.png";

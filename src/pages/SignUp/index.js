@@ -6,7 +6,10 @@ import { signUp } from "../../store/player/actions";
 import { selectToken } from "../../store/player/selectors";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
+import { useMutation } from "@apollo/react-hooks";
 import { Col } from "react-bootstrap";
+
+import { CREATE_PLAYER } from "../../graphql/mutations";
 
 export default function SignUp() {
   const [name, setName] = useState("");
@@ -16,6 +19,8 @@ export default function SignUp() {
   const token = useSelector(selectToken);
   const history = useHistory();
 
+  const [createPlayer] = useMutation(CREATE_PLAYER);
+
   useEffect(() => {
     if (token !== null) {
       history.push("/");
@@ -24,8 +29,11 @@ export default function SignUp() {
 
   function submitForm(event) {
     event.preventDefault();
-
-    dispatch(signUp(name, email, password));
+    console.log(name, email, password);
+    createPlayer({
+      variables: { name, email, password },
+    });
+    // dispatch(signUp(name, email, password));
 
     setEmail("");
     setPassword("");

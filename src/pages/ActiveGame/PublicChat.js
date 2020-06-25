@@ -4,10 +4,8 @@ import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { Col, Row, Form, Image, Alert } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
-import {
-  GET_ALL_PUBLIC_MESSAGES,
-  CREATE_PUBLIC_MESSAGE,
-} from "../../graphql/queries";
+import { CREATE_PUBLIC_MESSAGE } from "../../graphql/mutations";
+import { GET_ALL_PUBLIC_MESSAGES } from "../../graphql/queries";
 import { useQuery, useSubscription, useMutation } from "@apollo/react-hooks";
 
 import bugIcon from "../../images/icons/bugIcon.png";
@@ -19,7 +17,7 @@ import rareIcon from "../../images/icons/rareIcon.png";
 import vPointIcon from "../../images/icons/vPointIcon.png";
 import { inlineIconStyle, iconStyle } from "../../styles/imgStyles";
 
-import Trade from "./Trade";
+import Trade from "./SentTrade";
 
 export default function PublicChat(props) {
   const [inputField, set_inputField] = useState("hoi");
