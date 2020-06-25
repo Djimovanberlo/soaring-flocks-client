@@ -26,9 +26,33 @@ export default function TradeSuggest(props) {
     featherReceiver: null,
     bugSender: null,
     bugReceiver: null,
-    closed: null,
   });
 
+  // -- copied from server schema
+  // playerSenderId: Int
+  // playerReceiverId: Int
+  // moneyCashSender: Int
+  // moneyCashReceiver: Int
+  // eggSender: Int
+  // eggReceiver: Int
+  // featherSender: Int
+  // featherReceiver: Int
+  // bugSender: Int
+  // bugReceiver: Int
+  // closed: Boolean
+  // -- copied from server resolver
+  // playerSenderId,
+  // playerReceiverId,
+  // moneyCashSender,
+  // moneyCashReceiver,
+  // eggSender,
+  // eggReceiver,
+  // featherSender,
+  // featherReceiver,
+  // bugSender,
+  // bugReceiver,
+  // closed: false,
+  // -- copied from client mutation
   // playerSenderId
   // playerReceiverId
   // moneyCashSender
@@ -39,7 +63,6 @@ export default function TradeSuggest(props) {
   // featherReceiver
   // bugSender
   // bugReceiver
-  // closed
 
   const [suggestTrade, { data }] = useMutation(SUGGEST_TRADE);
 
@@ -58,7 +81,6 @@ export default function TradeSuggest(props) {
         featherReceiver: suggestedTrade.featherReceiver,
         bugSender: suggestedTrade.bugSender,
         bugReceiver: suggestedTrade.bugReceiver,
-        closed: suggestedTrade.closed,
       },
     });
   };
@@ -80,10 +102,10 @@ export default function TradeSuggest(props) {
                       type="number"
                       min="0"
                       id="inputSenderMoneyCash"
-                      onClick={(event) => {
+                      onChange={(event) => {
                         set_suggestedTrade({
                           ...suggestedTrade,
-                          moneyCashSender: event.target.value,
+                          moneyCashSender: parseInt(event.target.value),
                         });
                       }}
                     />
@@ -97,10 +119,10 @@ export default function TradeSuggest(props) {
                       type="number"
                       min="0"
                       id="inputSenderEgg"
-                      onClick={(event) => {
+                      onChange={(event) => {
                         set_suggestedTrade({
                           ...suggestedTrade,
-                          eggSender: event.target.value,
+                          eggSender: parseInt(event.target.value),
                         });
                       }}
                     />
@@ -114,10 +136,10 @@ export default function TradeSuggest(props) {
                       type="number"
                       min="0"
                       id="inputSenderFeather"
-                      onClick={(event) => {
+                      onChange={(event) => {
                         set_suggestedTrade({
                           ...suggestedTrade,
-                          featherSender: event.target.value,
+                          featherSender: parseInt(event.target.value),
                         });
                       }}
                     />
@@ -131,10 +153,10 @@ export default function TradeSuggest(props) {
                       type="number"
                       min="0"
                       id="inputSenderBug"
-                      onClick={(event) => {
+                      onChange={(event) => {
                         set_suggestedTrade({
                           ...suggestedTrade,
-                          bugSender: event.target.value,
+                          bugSender: parseInt(event.target.value),
                         });
                       }}
                     />
@@ -151,10 +173,10 @@ export default function TradeSuggest(props) {
                       type="number"
                       min="0"
                       id="inputReceiverMoneyCash"
-                      onClick={(event) => {
+                      onChange={(event) => {
                         set_suggestedTrade({
                           ...suggestedTrade,
-                          moneyCashReceiver: event.target.value,
+                          moneyCashReceiver: parseInt(event.target.value),
                         });
                       }}
                     />
@@ -168,10 +190,10 @@ export default function TradeSuggest(props) {
                       type="number"
                       min="0"
                       id="inputReceiverEgg"
-                      onClick={(event) => {
+                      onChange={(event) => {
                         set_suggestedTrade({
                           ...suggestedTrade,
-                          eggReceiver: event.target.value,
+                          eggReceiver: parseInt(event.target.value),
                         });
                       }}
                     />
@@ -185,10 +207,10 @@ export default function TradeSuggest(props) {
                       type="number"
                       min="0"
                       id="inputReceiverFeather"
-                      onClick={(event) => {
+                      onChange={(event) => {
                         set_suggestedTrade({
                           ...suggestedTrade,
-                          featherReceiver: event.target.value,
+                          featherReceiver: parseInt(event.target.value),
                         });
                       }}
                     />
@@ -202,10 +224,10 @@ export default function TradeSuggest(props) {
                       type="number"
                       min="0"
                       id="inputReceiverBug"
-                      onClick={(event) => {
+                      onChange={(event) => {
                         set_suggestedTrade({
                           ...suggestedTrade,
-                          bugReceiver: event.target.value,
+                          bugReceiver: parseInt(event.target.value),
                         });
                       }}
                     />

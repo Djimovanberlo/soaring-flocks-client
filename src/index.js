@@ -15,6 +15,17 @@ import { split } from "apollo-link";
 import { getMainDefinition } from "apollo-utilities";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { apiUrl } from "./config/constants";
+import { onError } from "apollo-link-error";
+import { ApolloLink } from "apollo-link";
+
+// const errorLink = onError(({ graphQLErrors, networkError }) => {
+//   if (graphQLErrors) {
+//     console.log("GRAPHQL ERROR:", graphQLErrors);
+//   }
+//   if (networkError) {
+//     console.log("NETWORKERROR", networkError);
+//   }
+// });
 
 const httpLink = new HttpLink({
   uri: `http://${apiUrl}`,
@@ -29,6 +40,8 @@ const wsLink = new WebSocketLink({
   },
 });
 
+// const link2 = ApolloLink.from([errorLink, httpLink]);
+
 const link = split(
   ({ query }) => {
     const { kind, operation } = getMainDefinition(query);
@@ -41,6 +54,7 @@ const link = split(
 
 // Instantiate client
 const client = new ApolloClient({
+  // link2,
   link,
   cache: new InMemoryCache(),
 });

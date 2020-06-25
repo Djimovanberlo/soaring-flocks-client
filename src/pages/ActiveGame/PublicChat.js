@@ -6,7 +6,7 @@ import { Col, Row, Form, Image, Alert } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import {
   GET_ALL_PUBLIC_MESSAGES,
-  ADD_PUBLIC_MESSAGE,
+  CREATE_PUBLIC_MESSAGE,
 } from "../../graphql/queries";
 import { useQuery, useSubscription, useMutation } from "@apollo/react-hooks";
 
@@ -28,6 +28,23 @@ export default function PublicChat(props) {
     content: "",
   });
 
+  const [createPublicMessage] = useMutation(CREATE_PUBLIC_MESSAGE);
+
+  const handleOnKeyPress = (target, event) => {
+    if (target.charCode === 13) {
+      // event.preventDefault();
+
+      console.log("ENTER CLICKwwwwED", newMessage.content);
+      createPublicMessage({
+        variables: { playerId: 1, content: newMessage.content },
+      });
+      // addPublicMessage({ variables: { content: target.value } });
+      // set_messages([...messages, newMessage]);
+      set_newMessage({ player: "Djimo", content: "" });
+      set_inputField("");
+    }
+  };
+
   const { data, error, loading } = useQuery(GET_ALL_PUBLIC_MESSAGES);
   if (loading) return "Loading...";
   if (error) return <Alert variant="danger">Error! {error.message}</Alert>;
@@ -37,19 +54,6 @@ export default function PublicChat(props) {
   const handleChange = (event) => {
     console.log(event.target.value);
     set_newMessage({ ...newMessage, content: event.target.value });
-  };
-
-  const handleOnKeyPress = (target, event) => {
-    if (target.charCode === 13) {
-      event.prevetDefault();
-
-      // const [addPublicMessage, { datas }] = useMutation(ADD_PUBLIC_MESSAGE);
-      // addPublicMessage({ variables: { content: target.value } });
-      console.log("ENTER CLICKED", newMessage);
-      // set_messages([...messages, newMessage]);
-      set_newMessage({ player: "Djimo", content: "" });
-      set_inputField("");
-    }
   };
 
   return (

@@ -136,10 +136,12 @@ export const GET_PRIVATE_MESSAGES_BY_ID = gql`
 
 // ----------- MUTATIONS ----------------
 
-export const ADD_PUBLIC_MESSAGE = gql`
-  mutation addPublicMessage($content: String) {
-    addPublicMessage(content: $content) {
-      id
+export const CREATE_PUBLIC_MESSAGE = gql`
+  mutation createPublicMessage($playerId: Int, $content: String) {
+    createPublicMessage(playerId: $playerId, content: $content) {
+      playerId {
+        id
+      }
       content
     }
   }
@@ -149,6 +151,52 @@ export const CLOSE_TRADE = gql`
   mutation closeTrade($id: Int, $closed: Boolean) {
     closeTrade(id: $id, closed: $closed) {
       closed
+    }
+  }
+`;
+
+export const ACCEPT_TRADE = gql`
+  mutation acceptTrade(
+    $id: Int
+    $playerSenderId: Int
+    $playerReceiverId: Int
+    $moneyCashSender: Int
+    $moneyCashReceiver: Int
+    $eggSender: Int
+    $eggReceiver: Int
+    $featherSender: Int
+    $featherReceiver: Int
+    $bugSender: Int
+    $bugReceiver: Int
+  ) {
+    acceptTrade(
+      id: $id
+      playerSenderId: $playerSenderId
+      playerReceiverId: $playerReceiverId
+      moneyCashSender: $moneyCashSender
+      moneyCashReceiver: $moneyCashReceiver
+      eggSender: $eggSender
+      eggReceiver: $eggReceiver
+      featherSender: $featherSender
+      featherReceiver: $featherReceiver
+      bugSender: $bugSender
+      bugReceiver: $bugReceiver
+    ) {
+      id
+      playerSenderId {
+        id
+      }
+      playerReceiverId {
+        id
+      }
+      moneyCashSender
+      moneyCashReceiver
+      eggSender
+      eggReceiver
+      featherSender
+      featherReceiver
+      bugSender
+      bugReceiver
     }
   }
 `;
@@ -165,7 +213,6 @@ export const SUGGEST_TRADE = gql`
     $featherReceiver: Int
     $bugSender: Int
     $bugReceiver: Int
-    $closed: Boolean
   ) {
     suggestTrade(
       playerSenderId: $playerSenderId
@@ -178,10 +225,13 @@ export const SUGGEST_TRADE = gql`
       featherReceiver: $featherReceiver
       bugSender: $bugSender
       bugReceiver: $bugReceiver
-      closed: $closed
     ) {
-      playerSenderId
-      playerReceiverId
+      playerSenderId {
+        id
+      }
+      playerReceiverId {
+        id
+      }
       moneyCashSender
       moneyCashReceiver
       eggSender
@@ -190,7 +240,6 @@ export const SUGGEST_TRADE = gql`
       featherReceiver
       bugSender
       bugReceiver
-      closed
     }
   }
 `;

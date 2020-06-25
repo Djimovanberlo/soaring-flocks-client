@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { Col, Row, Image } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import { useQuery, useSubscription, useMutation } from "@apollo/react-hooks";
-import { CLOSE_TRADE } from "../../graphql/queries";
+import { CLOSE_TRADE, ACCEPT_TRADE } from "../../graphql/queries";
 
 import bugIcon from "../../images/icons/bugIcon.png";
 import eggIcon from "../../images/icons/eggIcon.png";
@@ -18,6 +18,25 @@ import { inlineIconStyle, iconStyle } from "../../styles/imgStyles";
 
 export default function Trade(props) {
   const [closeTrade, { data }] = useMutation(CLOSE_TRADE);
+  const [acceptTrade] = useMutation(ACCEPT_TRADE);
+
+  const tradeAccepter = (event) => {
+    event.preventDefault();
+    console.log("ACCEPT TRADE");
+    acceptTrade({
+      id: props.tradeId,
+      playerSenderId: props.playerSenderId,
+      playerReceiverId: props.playerReceiverId,
+      moneyCashSender: props.moneyCashSender,
+      moneyCashReceiver: props.moneyCashReceiver,
+      eggSender: props.eggSender,
+      eggReceiver: props.eggReceiver,
+      featherSender: props.featherSender,
+      featherReceiver: props.featherReceiver,
+      bugSender: props.bugSender,
+      bugReceiver: props.bugReceiver,
+    });
+  };
 
   const noValueChecker = (resource, resourceIcon) => {
     if (resource != 0) {
@@ -44,7 +63,7 @@ export default function Trade(props) {
               onClick={(event) => {
                 console.log("Cancel trade");
                 event.preventDefault();
-                closeTrade({ variables: { id: props.tradeId, closed: false } });
+                closeTrade({ variables: { id: props.tradeId, closed: true } });
               }}
             >
               Cancel
@@ -56,13 +75,7 @@ export default function Trade(props) {
       return (
         <Row>
           <Col>
-            <Button
-              variant="outline-success"
-              size="sm"
-              onClick={(event) => {
-                console.log("Accept trade");
-              }}
-            >
+            <Button variant="outline-success" size="sm" onClick={tradeAccepter}>
               Accept
             </Button>
           </Col>
@@ -73,7 +86,7 @@ export default function Trade(props) {
               onClick={(event) => {
                 console.log("Cancel trade");
                 event.preventDefault();
-                closeTrade({ variables: { id: props.tradeId, closed: false } });
+                closeTrade({ variables: { id: props.tradeId, closed: true } });
               }}
             >
               Decline
@@ -88,7 +101,7 @@ export default function Trade(props) {
 
   return (
     <Card>
-      {props.closed ? (
+      {!props.closed ? (
         <>
           <Card.Header>
             {props.playerSenderId === 1 ? (
