@@ -59,11 +59,10 @@ export const GET_ALL_PLAYERS_GAME_STATE = gql`
 `;
 
 export const GET_TRADES_BY_ID = gql`
-  query getTradesById {
-    suggested: getTradesById(
-      playerSenderId: 1
-      playerReceiverId: 2
-      closed: false
+  query getTradesById($playerSenderId: Int, $playerReceiverId: Int) {
+    getTradesById(
+      playerSenderId: $playerSenderId
+      playerReceiverId: $playerReceiverId
     ) {
       id
       moneyCashSender
@@ -84,30 +83,30 @@ export const GET_TRADES_BY_ID = gql`
         name
       }
     }
-    incoming: getTradesById(
-      playerSenderId: 2
-      playerReceiverId: 1
-      closed: false
-    ) {
-      id
-      moneyCashSender
-      moneyCashReceiver
-      eggSender
-      eggReceiver
-      featherSender
-      featherReceiver
-      bugSender
-      bugReceiver
-      closed
-      playerSenderId {
-        id
-        name
-      }
-      playerReceiverId {
-        id
-        name
-      }
-    }
+    # incoming: getTradesById(
+    #   playerSenderId: 2
+    #   playerReceiverId: 1
+    #   closed: false
+    # ) {
+    #   id
+    #   moneyCashSender
+    #   moneyCashReceiver
+    #   eggSender
+    #   eggReceiver
+    #   featherSender
+    #   featherReceiver
+    #   bugSender
+    #   bugReceiver
+    #   closed
+    #   playerSenderId {
+    #     id
+    #     name
+    #   }
+    #   playerReceiverId {
+    #     id
+    #     name
+    #   }
+    # }
   }
 `;
 

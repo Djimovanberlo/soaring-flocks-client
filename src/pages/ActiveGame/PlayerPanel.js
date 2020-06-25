@@ -16,7 +16,7 @@ import { inlineIconStyle, iconStyle } from "../../styles/imgStyles";
 import PublicChat from "./PublicChat";
 import Player from "./Player";
 
-import Trade from "./Trade";
+import Trade from "./SentTrade";
 
 export default function PlayerPanel(props) {
   return (

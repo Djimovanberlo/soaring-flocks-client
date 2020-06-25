@@ -16,7 +16,7 @@ import { inlineIconStyle, iconStyle } from "../../styles/imgStyles";
 import { GET_PRIVATE_MESSAGES_BY_ID } from "../../graphql/queries";
 import { useQuery, useSubscription } from "@apollo/react-hooks";
 
-import Trade from "./Trade";
+import Trade from "./SentTrade";
 
 export default function PrivateChat(props) {
   const [inputField, set_inputField] = useState("hoi");
