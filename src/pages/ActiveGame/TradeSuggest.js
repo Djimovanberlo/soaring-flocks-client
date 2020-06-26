@@ -15,9 +15,10 @@ import { SUGGEST_TRADE } from "../../graphql/mutations";
 import { useQuery, useSubscription, useMutation } from "@apollo/react-hooks";
 
 export default function TradeSuggest(props) {
+  console.log("RECEIVERID", props.traderReceiverId);
   const [suggestedTrade, set_suggestedTrade] = useState({
-    playerSenderId: 1,
-    playerReceiverId: 2,
+    playerSenderId: null,
+    playerReceiverId: props.traderReceiverId,
     moneyCashSender: null,
     moneyCashReceiver: null,
     eggSender: null,

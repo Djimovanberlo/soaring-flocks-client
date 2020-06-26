@@ -13,8 +13,8 @@ import TradePanel from "./TradePanel";
 import PublicChat from "./PublicChat";
 import PrivateChat from "./PrivateChat";
 import { useQuery, useSubscription } from "@apollo/react-hooks";
-import { GET_GAME_BY_ID } from "../../graphql/queries";
 
+import { GET_GAME_BY_ID } from "../../graphql/queries";
 import bugIcon from "../../images/icons/bugIcon.png";
 import eggIcon from "../../images/icons/eggIcon.png";
 import featherIcon from "../../images/icons/featherIcon.png";
@@ -25,18 +25,26 @@ import vPointIcon from "../../images/icons/vPointIcon.png";
 import { inlineIconStyle, iconStyle } from "../../styles/imgStyles";
 import PlayerPanel from "./PlayerPanel";
 import ScoreBoard from "./ScoreBoard";
+import { selectTradePlayer } from "../../store/tradePlayer/selectors";
 
 export default function ActiveGame() {
+  const tradePlayer = useSelector(selectTradePlayer);
+
+  console.log("SELECTED PLAYER", tradePlayer);
   const [tradePanelState, set_tradePanelState] = useState(true);
 
   const { data, error, loading } = useQuery(GET_GAME_BY_ID);
   if (loading) return "Loading...";
   if (error) return <Alert variant="danger">Error! {error.message}</Alert>;
   // console.log("data:", data, "error:", error, "loading:", loading);
-  console.log("PLAYERDATA", data);
+  console.log("PLAYERDATA", data.getGameById.players);
 
-  const tradeControls = tradePanelState ? (
-    <TradePanel playerList={data.getGameById.players} />
+  const tradeControls = tradePlayer.tradeState ? (
+    <TradePanel
+      playerList={data.getGameById.players}
+      traderId={tradePlayer.traderId}
+      traderName={tradePlayer.traderName}
+    />
   ) : (
     <PlayerPanel playerList={data.getGameById.players} />
   );
@@ -62,9 +70,6 @@ export default function ActiveGame() {
             Turn {data.getGameById.gameTimePassed}. Game ends in{" "}
             {data.getGameById.gameTime - data.getGameById.gameTimePassed} turns
           </h6>
-          <Button variant="primary" onClick={handleClick}>
-            Open trade
-          </Button>
         </Row>
       </Container>
       <br></br>

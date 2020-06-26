@@ -27,25 +27,28 @@ export default function TradePanel(props) {
   // if (loading) return "Loading...";
   // if (error) return <Alert variant="danger">Error! {error.message}</Alert>;
   // console.log("GOEIEDAG", data);
-
+  // console.log("WOJWOJWOJWOJWOJ", props);
+  const { traderName, traderId } = props;
+  console.log("SOMEDATA", traderName, traderId);
+  // select loggedInPlayerID
   return (
     <Row>
       <Col>
         <Container>
           <Card>
-            <Card.Header>Djimo's trades with Jan</Card.Header>
+            <Card.Header>Djimo's trades with {traderName}</Card.Header>
             <Card.Body>
               <Row>
                 <Col>
-                  <SentTrade />
+                  <SentTrade traderReceiverId={traderId} />
                 </Col>
                 <Col>
-                  <IncomingTrade />
+                  <IncomingTrade traderSenderId={traderId} />
                 </Col>
               </Row>
               <br></br>
               <Row>
-                <TradeSuggest />
+                <TradeSuggest traderReceiverId={traderId} />
               </Row>
             </Card.Body>
           </Card>
