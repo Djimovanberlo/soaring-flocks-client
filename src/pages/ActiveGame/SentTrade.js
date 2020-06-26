@@ -20,6 +20,7 @@ import { inlineIconStyle, iconStyle } from "../../styles/imgStyles";
 export default function SentTrade(props) {
   const [closeTrade] = useMutation(CLOSE_TRADE);
   const [acceptTrade] = useMutation(ACCEPT_TRADE);
+  console.log("PROP", props.traderReceiverId);
   const { data, error, loading } = useQuery(GET_TRADES_BY_ID, {
     variables: {
       playerSenderId: 1,
@@ -98,10 +99,11 @@ export default function SentTrade(props) {
                     size="sm"
                     onClick={(event) => {
                       console.log("Cancel trade");
-                      event.preventDefault();
+                      // event.preventDefault();
                       closeTrade({
                         variables: { id, closed: true },
                       });
+                      window.location.reload(false);
                     }}
                   >
                     Cancel
