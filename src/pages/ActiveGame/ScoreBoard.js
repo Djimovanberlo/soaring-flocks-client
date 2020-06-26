@@ -26,6 +26,7 @@ export default function ScoreBoard(props) {
         return (
           <PlayerScore
             key={listPlayer.id}
+            id={listPlayer.id}
             name={listPlayer.name}
             vPoint={listPlayer.vPoint}
             img={listPlayer.img}

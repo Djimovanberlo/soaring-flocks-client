@@ -23,7 +23,7 @@ export default function SentTrade(props) {
   const { data, error, loading } = useQuery(GET_TRADES_BY_ID, {
     variables: {
       playerSenderId: 1,
-      playerReceiverId: 2,
+      playerReceiverId: props.traderReceiverId,
     },
   });
   if (loading) return "Loading...";

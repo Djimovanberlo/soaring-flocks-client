@@ -18,11 +18,12 @@ import vPointIcon from "../../images/icons/vPointIcon.png";
 import { inlineIconStyle, iconStyle } from "../../styles/imgStyles";
 
 export default function IncomingTrade(props) {
+  // console.log("WIOUWGEWYGEUY", props.traderSenderId);
   const [closeTrade] = useMutation(CLOSE_TRADE);
   const [acceptTrade] = useMutation(ACCEPT_TRADE);
   const { data, error, loading } = useQuery(GET_TRADES_BY_ID, {
     variables: {
-      playerSenderId: 2,
+      playerSenderId: props.traderSenderId,
       playerReceiverId: 1,
     },
   });
