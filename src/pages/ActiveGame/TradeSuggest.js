@@ -48,6 +48,7 @@ export default function TradeSuggest(props) {
         bugReceiver: suggestedTrade.bugReceiver,
       },
     });
+    window.location.reload(false);
   };
 
   return (

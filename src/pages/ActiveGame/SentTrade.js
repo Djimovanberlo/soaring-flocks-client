@@ -102,6 +102,7 @@ export default function SentTrade(props) {
                       closeTrade({
                         variables: { id, closed: true },
                       });
+                      window.location.reload(false);
                     }}
                   >
                     Cancel

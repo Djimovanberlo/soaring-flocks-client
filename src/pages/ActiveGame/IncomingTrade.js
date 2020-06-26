@@ -53,31 +53,6 @@ export default function IncomingTrade(props) {
 
     const tradeAccepter = (event) => {
       // event.preventDefault();
-      console.log(
-        "ACCEPT TRADE",
-        "a",
-        id,
-        "b",
-        data.getTradesById.playerSenderId.id,
-        "c",
-        data.getTradesById.playerReceiverId.id,
-        "d",
-        moneyCashSender,
-        "e",
-        moneyCashReceiver,
-        "f",
-        eggSender,
-        "g",
-        eggReceiver,
-        "h",
-        featherSender,
-        "i",
-        featherReceiver,
-        "j",
-        bugSender,
-        "k",
-        bugReceiver
-      );
       acceptTrade({
         variables: {
           id,
@@ -93,6 +68,7 @@ export default function IncomingTrade(props) {
           bugReceiver,
         },
       });
+      window.location.reload(false);
     };
 
     // id
@@ -172,6 +148,7 @@ export default function IncomingTrade(props) {
                       closeTrade({
                         variables: { id, closed: true },
                       });
+                      window.location.reload(false);
                     }}
                   >
                     Decline
