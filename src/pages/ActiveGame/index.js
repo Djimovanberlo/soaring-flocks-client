@@ -36,9 +36,9 @@ export default function ActiveGame() {
   console.log("PLAYERDATA", data);
 
   const tradeControls = tradePanelState ? (
-    <TradePanel playerList={data.getGameById.players} />
-  ) : (
     <PlayerPanel playerList={data.getGameById.players} />
+  ) : (
+    <TradePanel playerList={data.getGameById.players} />
   );
 
   const handleClick = (event) => {

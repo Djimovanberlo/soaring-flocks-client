@@ -40,6 +40,7 @@ export default function PublicChat(props) {
       // set_messages([...messages, newMessage]);
       set_newMessage({ player: "Djimo", content: "" });
       set_inputField("");
+      window.location.reload(false);
     }
   };
 
