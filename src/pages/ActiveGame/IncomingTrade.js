@@ -92,6 +92,7 @@ export default function IncomingTrade(props) {
           bugReceiver,
         },
       });
+      window.location.reload(false);
     };
 
     // id
@@ -171,6 +172,7 @@ export default function IncomingTrade(props) {
                       closeTrade({
                         variables: { id, closed: true },
                       });
+                      window.location.reload(false);
                     }}
                   >
                     Decline

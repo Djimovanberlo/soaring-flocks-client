@@ -62,7 +62,8 @@ export default function Player(props) {
         ability: attack,
       },
     });
-    console.log("WHO");
+    window.location.reload(false);
+    // console.log("WHO");
   };
 
   const marketHandler = (event) => {
@@ -75,6 +76,7 @@ export default function Player(props) {
         cashMoney: cashMoneyCost,
       },
     });
+    window.location.reload(false);
   };
 
   const gameLeaver = (event) => {

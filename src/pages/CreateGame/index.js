@@ -123,9 +123,9 @@ export default function CreateGame() {
               </Form.Group>
             </Col>
           </Row>
-          {data.inGame.length} Player(s) in game:{" "}
-          {data.inGame.map((player) => {
-            return `${player.name} `;
+          {playersInGame.length} Player(s) in game:{" "}
+          {playersInGame.map((player) => {
+            return `${player} `;
           })}
           <br></br>
           <br></br>
