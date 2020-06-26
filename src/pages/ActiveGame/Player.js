@@ -54,7 +54,7 @@ export default function Player(props) {
   const cashMoneyCost = (mMarket + rMarket + vMarket) * 2 - 6;
 
   const attackHandler = (event) => {
-    event.preventDefault();
+    // event.preventDefault();
     console.log(id, attack);
     createAttack({
       variables: {
@@ -63,10 +63,11 @@ export default function Player(props) {
       },
     });
     console.log("WHO");
+    window.location.reload(false);
   };
 
   const marketHandler = (event) => {
-    event.preventDefault();
+    // event.preventDefault();
     console.log(id, market);
     createMarket({
       variables: {
@@ -75,6 +76,7 @@ export default function Player(props) {
         cashMoney: cashMoneyCost,
       },
     });
+    window.location.reload(false);
   };
 
   const gameLeaver = (event) => {

@@ -144,7 +144,7 @@ export default function IncomingTrade(props) {
                     size="sm"
                     onClick={(event) => {
                       console.log("Decline trade");
-                      event.preventDefault();
+                      // event.preventDefault();
                       closeTrade({
                         variables: { id, closed: true },
                       });
