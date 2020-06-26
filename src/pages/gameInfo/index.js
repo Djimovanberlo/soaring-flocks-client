@@ -8,6 +8,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, NavLink } from "react-router-dom";
 import { Col, Row, Image } from "react-bootstrap";
 
+import antonius from "../../images/avatars/antonius.png";
+import archibald from "../../images/avatars/archibald.png";
+import astrid from "../../images/avatars/astrid.png";
+import betsy from "../../images/avatars/betsy.png";
+import comrade from "../../images/avatars/comrade.png";
+import cornelius from "../../images/avatars/cornelius.png";
+import ebert from "../../images/avatars/ebert.png";
+import frankie from "../../images/avatars/frankie.png";
+import jeremiah from "../../images/avatars/jeremiah.png";
+import patrice from "../../images/avatars/patrice.png";
+import rick from "../../images/avatars/rick.png";
+import yeanaro from "../../images/avatars/yeanaro.png";
+
 import bugIcon from "../../images/icons/bugIcon.png";
 import eggIcon from "../../images/icons/eggIcon.png";
 import featherIcon from "../../images/icons/featherIcon.png";
@@ -42,7 +55,20 @@ export default function gameInfo() {
       </Container> */}
       <Container>
         <Row>
-          <Col md={{ span: 1 }}>IMG</Col>
+          <Col md={{ span: 1 }}>
+            <Image src={antonius} />
+            <br></br>
+            <Image src={betsy} />
+            <br></br>
+            <Image src={cornelius} />
+            <br></br>
+            <Image src={rick} />
+            <br></br>
+            <Image src={comrade} />
+            <br></br>
+            <Image src={yeanaro} />
+            <br></br>
+          </Col>
           <Col>
             <h5 style={{ textAlign: "center" }}>Rules</h5>
             <p>
@@ -101,7 +127,20 @@ export default function gameInfo() {
             <Image src={moneyCashIcon} style={inlineIconStyle} />. Attacking
             another player destroys a random resource.
           </Col>
-          <Col md={{ span: 1 }}>IMG</Col>
+          <Col md={{ span: 1 }}>
+            <Image src={archibald} />
+            <br></br>
+            <Image src={astrid} />
+            <br></br>
+            <Image src={ebert} />
+            <br></br>
+            <Image src={frankie} />
+            <br></br>
+            <Image src={jeremiah} />
+            <br></br>
+            <Image src={patrice} />
+            <br></br>
+          </Col>
         </Row>
       </Container>
     </>
