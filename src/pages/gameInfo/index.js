@@ -19,7 +19,7 @@ import frankie from "../../images/avatars/frankie.png";
 import jeremiah from "../../images/avatars/jeremiah.png";
 import patrice from "../../images/avatars/patrice.png";
 import rick from "../../images/avatars/rick.png";
-import yeanaro from "../../images/avatars/yeanaro.png";
+import yeanero from "../../images/avatars/yeanero.png";
 
 import bugIcon from "../../images/icons/bugIcon.png";
 import eggIcon from "../../images/icons/eggIcon.png";
@@ -28,7 +28,7 @@ import marketIcon from "../../images/icons/marketIcon.png";
 import moneyCashIcon from "../../images/icons/moneyCashIcon.png";
 import rareIcon from "../../images/icons/rareIcon.png";
 import vPointIcon from "../../images/icons/vPointIcon.png";
-import { inlineIconStyle, iconStyle } from "../../styles/imgStyles";
+import { inlineIconStyle, avatarStyle } from "../../styles/imgStyles";
 
 export default function gameInfo() {
   return (
@@ -55,18 +55,18 @@ export default function gameInfo() {
       </Container> */}
       <Container>
         <Row>
-          <Col md={{ span: 1 }}>
-            <Image src={antonius} />
+          <Col md={{ span: 2 }}>
+            <Image src={antonius} style={avatarStyle} />
             <br></br>
-            <Image src={betsy} />
+            <Image src={betsy} style={avatarStyle} />
             <br></br>
-            <Image src={cornelius} />
+            <Image src={cornelius} style={avatarStyle} />
             <br></br>
-            <Image src={rick} />
+            <Image src={rick} style={avatarStyle} />
             <br></br>
-            <Image src={comrade} />
+            <Image src={comrade} style={avatarStyle} />
             <br></br>
-            <Image src={yeanaro} />
+            <Image src={yeanero} style={avatarStyle} />
             <br></br>
           </Col>
           <Col>
@@ -128,17 +128,17 @@ export default function gameInfo() {
             another player destroys a random resource.
           </Col>
           <Col md={{ span: 1 }}>
-            <Image src={archibald} />
+            <Image src={archibald} style={avatarStyle} />
             <br></br>
-            <Image src={astrid} />
+            <Image src={astrid} style={avatarStyle} />
             <br></br>
-            <Image src={ebert} />
+            <Image src={ebert} style={avatarStyle} />
             <br></br>
-            <Image src={frankie} />
+            <Image src={frankie} style={avatarStyle} />
             <br></br>
-            <Image src={jeremiah} />
+            <Image src={jeremiah} style={avatarStyle} />
             <br></br>
-            <Image src={patrice} />
+            <Image src={patrice} style={avatarStyle} />
             <br></br>
           </Col>
         </Row>

@@ -23,10 +23,9 @@ export default function PlayerScore(props) {
           {props.name} <Image src={vPointIcon} style={iconStyle} />
           {props.vPoint}
         </Card.Header>
-        <Card.Img src={require(`../../images/avatars/brownBird.png`)} />
+        <Card.Img src={require(`../../images/avatars/${props.img}.png`)} />
         <Card.Body>
           <Card.Text as="div"></Card.Text>
-          <br></br>
           <Button variant="outline-info" size="sm" onClick={handleClick}>
             Open trade
           </Button>

@@ -28,153 +28,164 @@ export default function IncomingTrade(props) {
   });
   if (loading) return "Loading...";
   if (error) return <Alert variant="danger">Error! {error.message}</Alert>;
-  console.log("GOEIEDAG", data);
+  console.log("GOEIEDAG INCOMING", data);
 
-  const {
-    id,
-    moneyCashSender,
-    moneyCashReceiver,
-    eggSender,
-    eggReceiver,
-    featherSender,
-    featherReceiver,
-    bugSender,
-    bugReceiver,
-  } = data.getTradesById;
-
-  const tradeAccepter = (event) => {
-    // event.preventDefault();
-    console.log(
-      "ACCEPT TRADE",
-      "a",
-      id,
-      "b",
-      data.getTradesById.playerSenderId.id,
-      "c",
-      data.getTradesById.playerReceiverId.id,
-      "d",
-      moneyCashSender,
-      "e",
-      moneyCashReceiver,
-      "f",
-      eggSender,
-      "g",
-      eggReceiver,
-      "h",
-      featherSender,
-      "i",
-      featherReceiver,
-      "j",
-      bugSender,
-      "k",
-      bugReceiver
+  if (data.getTradesById === null) {
+    return (
+      <>
+        <Card.Header>No open trade</Card.Header>
+        <Card.Body>{""}</Card.Body>
+      </>
     );
-    acceptTrade({
-      variables: {
+  } else {
+    const {
+      id,
+      moneyCashSender,
+      moneyCashReceiver,
+      eggSender,
+      eggReceiver,
+      featherSender,
+      featherReceiver,
+      bugSender,
+      bugReceiver,
+    } = data.getTradesById;
+
+    const tradeAccepter = (event) => {
+      // event.preventDefault();
+      console.log(
+        "ACCEPT TRADE",
+        "a",
         id,
-        playerSenderId: data.getTradesById.playerSenderId.id,
-        playerReceiverId: data.getTradesById.playerReceiverId.id,
+        "b",
+        data.getTradesById.playerSenderId.id,
+        "c",
+        data.getTradesById.playerReceiverId.id,
+        "d",
         moneyCashSender,
+        "e",
         moneyCashReceiver,
+        "f",
         eggSender,
+        "g",
         eggReceiver,
+        "h",
         featherSender,
+        "i",
         featherReceiver,
+        "j",
         bugSender,
-        bugReceiver,
-      },
-    });
-  };
-
-  // id
-  // playerSenderId {
-  //   id
-  // }
-  // playerReceiverId {
-  //   id
-  // }
-  // moneyCashSender
-  // moneyCashReceiver
-  // eggSender
-  // eggReceiver
-  // featherSender
-  // featherReceiver
-  // bugSender
-  // bugReceiver
-
-  const noValueChecker = (resource, resourceIcon) => {
-    if (resource != 0) {
-      return (
-        <>
-          <Image src={resourceIcon} style={inlineIconStyle} />
-          {resource}
-          <br></br>
-        </>
+        "k",
+        bugReceiver
       );
-    } else {
-      return <Row></Row>;
-    }
-  };
+      acceptTrade({
+        variables: {
+          id,
+          playerSenderId: data.getTradesById.playerSenderId.id,
+          playerReceiverId: data.getTradesById.playerReceiverId.id,
+          moneyCashSender,
+          moneyCashReceiver,
+          eggSender,
+          eggReceiver,
+          featherSender,
+          featherReceiver,
+          bugSender,
+          bugReceiver,
+        },
+      });
+    };
 
-  return (
-    <Card>
-      {!data || !data.getTradesById.closed ? (
-        <>
-          <Card.Header>Incoming trade</Card.Header>
-          <Card.Body>
-            <Card.Text as="div">
+    // id
+    // playerSenderId {
+    //   id
+    // }
+    // playerReceiverId {
+    //   id
+    // }
+    // moneyCashSender
+    // moneyCashReceiver
+    // eggSender
+    // eggReceiver
+    // featherSender
+    // featherReceiver
+    // bugSender
+    // bugReceiver
+
+    const noValueChecker = (resource, resourceIcon) => {
+      if (resource != 0) {
+        return (
+          <>
+            <Image src={resourceIcon} style={inlineIconStyle} />
+            {resource}
+            <br></br>
+          </>
+        );
+      } else {
+        return <Row></Row>;
+      }
+    };
+
+    return (
+      <Card>
+        {!data || !data.getTradesById.closed ? (
+          <>
+            <Card.Header>Incoming trade</Card.Header>
+            <Card.Body>
+              <Card.Text as="div">
+                <Row>
+                  <Col>
+                    {data.getTradesById.playerSenderId.name} offers: <br></br>
+                    {noValueChecker(moneyCashSender, moneyCashIcon)}
+                    {noValueChecker(eggSender, eggIcon)}
+                    {noValueChecker(featherSender, featherIcon)}
+                    {noValueChecker(bugSender, bugIcon)}
+                  </Col>
+                  <Col>
+                    <Row>
+                      {data.getTradesById.playerReceiverId.name} offers:
+                    </Row>
+                    {noValueChecker(moneyCashReceiver, moneyCashIcon)}
+                    {noValueChecker(eggReceiver, eggIcon)}
+                    {noValueChecker(featherReceiver, featherIcon)}
+                    {noValueChecker(bugReceiver, bugIcon)}
+                  </Col>
+                </Row>
+              </Card.Text>
+              <br></br>
               <Row>
                 <Col>
-                  {data.getTradesById.playerSenderId.name} offers: <br></br>
-                  {noValueChecker(moneyCashSender, moneyCashIcon)}
-                  {noValueChecker(eggSender, eggIcon)}
-                  {noValueChecker(featherSender, featherIcon)}
-                  {noValueChecker(bugSender, bugIcon)}
+                  <Button
+                    variant="outline-success"
+                    size="sm"
+                    onClick={tradeAccepter}
+                  >
+                    Accept
+                  </Button>
                 </Col>
                 <Col>
-                  <Row>{data.getTradesById.playerReceiverId.name} offers:</Row>
-                  {noValueChecker(moneyCashReceiver, moneyCashIcon)}
-                  {noValueChecker(eggReceiver, eggIcon)}
-                  {noValueChecker(featherReceiver, featherIcon)}
-                  {noValueChecker(bugReceiver, bugIcon)}
+                  <Button
+                    variant="outline-danger"
+                    size="sm"
+                    onClick={(event) => {
+                      console.log("Decline trade");
+                      event.preventDefault();
+                      closeTrade({
+                        variables: { id, closed: true },
+                      });
+                    }}
+                  >
+                    Decline
+                  </Button>
                 </Col>
               </Row>
-            </Card.Text>
-            <br></br>
-            <Row>
-              <Col>
-                <Button
-                  variant="outline-success"
-                  size="sm"
-                  onClick={tradeAccepter}
-                >
-                  Accept
-                </Button>
-              </Col>
-              <Col>
-                <Button
-                  variant="outline-danger"
-                  size="sm"
-                  onClick={(event) => {
-                    console.log("Decline trade");
-                    event.preventDefault();
-                    closeTrade({
-                      variables: { id, closed: true },
-                    });
-                  }}
-                >
-                  Decline
-                </Button>
-              </Col>
-            </Row>
-          </Card.Body>{" "}
-        </>
-      ) : (
-        <>
-          <Card.Header>No open trade</Card.Header>
-          <Card.Body>{""}</Card.Body>
-        </>
-      )}
-    </Card>
-  );
+            </Card.Body>{" "}
+          </>
+        ) : (
+          <>
+            <Card.Header>No open trade</Card.Header>
+            <Card.Body>{""}</Card.Body>
+          </>
+        )}
+      </Card>
+    );
+  }
 }
