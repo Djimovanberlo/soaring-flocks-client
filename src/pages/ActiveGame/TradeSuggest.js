@@ -16,8 +16,8 @@ import { useQuery, useSubscription, useMutation } from "@apollo/react-hooks";
 
 export default function TradeSuggest(props) {
   const [suggestedTrade, set_suggestedTrade] = useState({
-    playerSenderId: 3,
-    playerReceiverId: 1,
+    playerSenderId: 1,
+    playerReceiverId: 2,
     moneyCashSender: null,
     moneyCashReceiver: null,
     eggSender: null,

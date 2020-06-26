@@ -8,6 +8,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, NavLink } from "react-router-dom";
 import { Col, Row, Image } from "react-bootstrap";
 
+import antonius from "../../images/avatars/antonius.png";
+import archibald from "../../images/avatars/archibald.png";
+import astrid from "../../images/avatars/astrid.png";
+import betsy from "../../images/avatars/betsy.png";
+import comrade from "../../images/avatars/comrade.png";
+import cornelius from "../../images/avatars/cornelius.png";
+import ebert from "../../images/avatars/ebert.png";
+import frankie from "../../images/avatars/frankie.png";
+import jeremiah from "../../images/avatars/jeremiah.png";
+import patrice from "../../images/avatars/patrice.png";
+import rick from "../../images/avatars/rick.png";
+import yeanero from "../../images/avatars/yeanero.png";
+
 import bugIcon from "../../images/icons/bugIcon.png";
 import eggIcon from "../../images/icons/eggIcon.png";
 import featherIcon from "../../images/icons/featherIcon.png";
@@ -15,7 +28,7 @@ import marketIcon from "../../images/icons/marketIcon.png";
 import moneyCashIcon from "../../images/icons/moneyCashIcon.png";
 import rareIcon from "../../images/icons/rareIcon.png";
 import vPointIcon from "../../images/icons/vPointIcon.png";
-import { inlineIconStyle, iconStyle } from "../../styles/imgStyles";
+import { inlineIconStyle, avatarStyle } from "../../styles/imgStyles";
 
 export default function gameInfo() {
   return (
@@ -42,7 +55,20 @@ export default function gameInfo() {
       </Container> */}
       <Container>
         <Row>
-          <Col md={{ span: 1 }}>IMG</Col>
+          <Col md={{ span: 2 }}>
+            <Image src={antonius} style={avatarStyle} />
+            <br></br>
+            <Image src={betsy} style={avatarStyle} />
+            <br></br>
+            <Image src={cornelius} style={avatarStyle} />
+            <br></br>
+            <Image src={rick} style={avatarStyle} />
+            <br></br>
+            <Image src={comrade} style={avatarStyle} />
+            <br></br>
+            <Image src={yeanero} style={avatarStyle} />
+            <br></br>
+          </Col>
           <Col>
             <h5 style={{ textAlign: "center" }}>Rules</h5>
             <p>
@@ -101,7 +127,20 @@ export default function gameInfo() {
             <Image src={moneyCashIcon} style={inlineIconStyle} />. Attacking
             another player destroys a random resource.
           </Col>
-          <Col md={{ span: 1 }}>IMG</Col>
+          <Col md={{ span: 1 }}>
+            <Image src={archibald} style={avatarStyle} />
+            <br></br>
+            <Image src={astrid} style={avatarStyle} />
+            <br></br>
+            <Image src={ebert} style={avatarStyle} />
+            <br></br>
+            <Image src={frankie} style={avatarStyle} />
+            <br></br>
+            <Image src={jeremiah} style={avatarStyle} />
+            <br></br>
+            <Image src={patrice} style={avatarStyle} />
+            <br></br>
+          </Col>
         </Row>
       </Container>
     </>

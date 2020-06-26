@@ -40,6 +40,7 @@ export const GET_GAME_BY_ID = gql`
         id
         name
         vPoint
+        img
       }
     }
   }

@@ -19,14 +19,13 @@ export default function PlayerScore(props) {
   return (
     <>
       <Card>
-        <Card.Header>{props.name}</Card.Header>
-        {/* <Card.Img /> */}
+        <Card.Header>
+          {props.name} <Image src={vPointIcon} style={iconStyle} />
+          {props.vPoint}
+        </Card.Header>
+        <Card.Img src={require(`../../images/avatars/${props.img}.png`)} />
         <Card.Body>
-          <Card.Text as="div">
-            <Image src={vPointIcon} style={iconStyle} />
-            {props.vPoint}
-          </Card.Text>
-          <br></br>
+          <Card.Text as="div"></Card.Text>
           <Button variant="outline-info" size="sm" onClick={handleClick}>
             Open trade
           </Button>

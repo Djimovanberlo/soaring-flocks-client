@@ -28,84 +28,95 @@ export default function SentTrade(props) {
   });
   if (loading) return "Loading...";
   if (error) return <Alert variant="danger">Error! {error.message}</Alert>;
-  console.log("BONJOURR", data);
+  console.log("BONJOURR SENT", data);
 
-  const {
-    id,
-    moneyCashSender,
-    moneyCashReceiver,
-    eggSender,
-    eggReceiver,
-    featherSender,
-    featherReceiver,
-    bugSender,
-    bugReceiver,
-  } = data.getTradesById;
+  if (data.getTradesById === null)
+    return (
+      <>
+        <Card.Header>No open trade</Card.Header>
+        <Card.Body>{""}</Card.Body>
+      </>
+    );
+  else {
+    const {
+      id,
+      moneyCashSender,
+      moneyCashReceiver,
+      eggSender,
+      eggReceiver,
+      featherSender,
+      featherReceiver,
+      bugSender,
+      bugReceiver,
+    } = data.getTradesById;
 
-  const noValueChecker = (resource, resourceIcon) => {
-    if (resource != 0) {
-      return (
-        <>
-          <Image src={resourceIcon} style={inlineIconStyle} />
-          {resource}
-          <br></br>
-        </>
-      );
-    } else {
-      return <Row></Row>;
-    }
-  };
+    const noValueChecker = (resource, resourceIcon) => {
+      if (resource != 0) {
+        return (
+          <>
+            <Image src={resourceIcon} style={inlineIconStyle} />
+            {resource}
+            <br></br>
+          </>
+        );
+      } else {
+        return <Row></Row>;
+      }
+    };
 
-  return (
-    <Card>
-      {!data || !data.getTradesById.closed ? (
-        <>
-          <Card.Header>Suggested Trade</Card.Header>
-          <Card.Body>
-            <Card.Text as="div">
+    return (
+      <Card>
+        {!data || !data.getTradesById.closed ? (
+          <>
+            <Card.Header>Suggested Trade</Card.Header>
+            <Card.Body>
+              <Card.Text as="div">
+                <Row>
+                  <Col>
+                    <Row>{data.getTradesById.playerSenderId.name} offers: </Row>
+                    {noValueChecker(moneyCashSender, moneyCashIcon)}
+                    {noValueChecker(eggSender, eggIcon)}
+                    {noValueChecker(featherSender, featherIcon)}
+                    {noValueChecker(bugSender, bugIcon)}
+                  </Col>
+                  <Col>
+                    <Row>
+                      {data.getTradesById.playerReceiverId.name} offers:
+                    </Row>
+                    {noValueChecker(moneyCashReceiver, moneyCashIcon)}
+                    {noValueChecker(eggReceiver, eggIcon)}
+                    {noValueChecker(featherReceiver, featherIcon)}
+                    {noValueChecker(bugReceiver, bugIcon)}
+                  </Col>
+                </Row>
+              </Card.Text>
+              <br></br>
               <Row>
                 <Col>
-                  <Row>{data.getTradesById.playerSenderId.name} offers: </Row>
-                  {noValueChecker(moneyCashSender, moneyCashIcon)}
-                  {noValueChecker(eggSender, eggIcon)}
-                  {noValueChecker(featherSender, featherIcon)}
-                  {noValueChecker(bugSender, bugIcon)}
-                </Col>
-                <Col>
-                  <Row>{data.getTradesById.playerReceiverId.name} offers:</Row>
-                  {noValueChecker(moneyCashReceiver, moneyCashIcon)}
-                  {noValueChecker(eggReceiver, eggIcon)}
-                  {noValueChecker(featherReceiver, featherIcon)}
-                  {noValueChecker(bugReceiver, bugIcon)}
+                  <Button
+                    variant="outline-danger"
+                    size="sm"
+                    onClick={(event) => {
+                      console.log("Cancel trade");
+                      event.preventDefault();
+                      closeTrade({
+                        variables: { id, closed: true },
+                      });
+                    }}
+                  >
+                    Cancel
+                  </Button>
                 </Col>
               </Row>
-            </Card.Text>
-            <br></br>
-            <Row>
-              <Col>
-                <Button
-                  variant="outline-danger"
-                  size="sm"
-                  onClick={(event) => {
-                    console.log("Cancel trade");
-                    event.preventDefault();
-                    closeTrade({
-                      variables: { id, closed: true },
-                    });
-                  }}
-                >
-                  Cancel
-                </Button>
-              </Col>
-            </Row>
-          </Card.Body>{" "}
-        </>
-      ) : (
-        <>
-          <Card.Header>No open trade</Card.Header>
-          <Card.Body>{""}</Card.Body>
-        </>
-      )}
-    </Card>
-  );
+            </Card.Body>{" "}
+          </>
+        ) : (
+          <>
+            <Card.Header>No open trade</Card.Header>
+            <Card.Body>{""}</Card.Body>
+          </>
+        )}
+      </Card>
+    );
+  }
 }
