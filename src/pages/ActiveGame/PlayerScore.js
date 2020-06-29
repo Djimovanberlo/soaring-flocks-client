@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Jumbotron from "react-bootstrap/Jumbotron";
-import { Button, Card, Image } from "react-bootstrap";
+import { Button, Card, Image, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import TradePanel from "./TradePanel";
@@ -11,11 +11,12 @@ import {
   selectTradeState,
   selectTradeText,
 } from "../../store/tradePlayer/selectors";
+import { avatarStyle } from "../../styles/imgStyles";
 
 export default function PlayerScore(props) {
-  const [trade, set_trade] = useState("w");
   // select userID (sender trade) and playerID (receiver trade)
   //   const loginLogoutControls = token ? <LoggedIn /> : <LoggedOut />;
+  const [buttonStyle, set_buttonStyle] = useState();
   const dispatch = useDispatch();
 
   const tradeState = useSelector(selectTradeState);
@@ -30,8 +31,8 @@ export default function PlayerScore(props) {
 
   function handleClick() {
     if (tradeState === props.id) {
-      set_trade("w");
-      console.log("TRADE", trade, tradeState);
+      // set_trade("w");
+      // console.log("TRADE", tradeState);
       dispatch(
         storeTradePlayer({
           traderId: null,
@@ -40,8 +41,8 @@ export default function PlayerScore(props) {
         })
       );
     } else if (tradeState !== props.id) {
-      set_trade("w");
-      console.log("TRADE", trade, tradeState);
+      // set_trade("w");
+      // console.log("TRADE", tradeState);
       dispatch(
         storeTradePlayer({
           traderId: props.id,
@@ -55,18 +56,26 @@ export default function PlayerScore(props) {
 
   return (
     <>
-      <Card>
+      <Card style={{ height: "200px", width: "250px" }}>
         <Card.Header>
           {props.name} <Image src={vPointIcon} style={iconStyle} />
-          {props.vPoint}
-        </Card.Header>
-        <Card.Img src={require(`../../images/avatars/${props.img}.png`)} />
-        <Card.Body>
-          <Card.Text as="div"></Card.Text>
-          <Button variant="outline-info" size="sm" onClick={handleClick}>
+          {props.vPoint}&nbsp;&nbsp;&nbsp;
+          {/* <Button variant="outline-info" size="sm" onClick={handleClick}> */}
+          <Button
+            variant={tradeState === props.id ? "info" : "outline-info"}
+            size="sm"
+            onClick={handleClick}
+          >
             {/* {trade} */}
             {tradeState === props.id ? <>Close trade</> : <>Open trade</>}
           </Button>
+        </Card.Header>
+        <Card.Img
+          src={require(`../../images/avatars/${props.img}.png`)}
+          style={avatarStyle}
+        />
+        <Card.Body>
+          <Card.Text as="div"></Card.Text>
         </Card.Body>
       </Card>
     </>

@@ -21,7 +21,7 @@ export default function ScoreBoard(props) {
   // console.log("PLAYERLIST", props.playerList);
 
   return (
-    <Col>
+    <Col style={{ overflowY: "scroll", height: "1000px" }}>
       {props.playerList.map((listPlayer) => {
         return (
           <PlayerScore
