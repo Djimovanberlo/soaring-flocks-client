@@ -11,7 +11,7 @@ import {
 // export const ALL_PLAYERS = "ALL_PLAYERS";
 
 export const storeTradePlayer = (tradePlayer) => {
-  console.log("ACTION", tradePlayer);
+  // console.log("ACTION", tradePlayer);
   return {
     type: "TRADE_PLAYER",
     payload: tradePlayer,

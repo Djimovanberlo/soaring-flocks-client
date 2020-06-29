@@ -29,7 +29,7 @@ export default function TradePanel(props) {
   // console.log("GOEIEDAG", data);
   // console.log("WOJWOJWOJWOJWOJ", props);
   const { traderName, traderId } = props;
-  console.log("SOMEDATA", traderName, traderId);
+  // console.log("SOMEDATA", traderName, traderId);
   // select loggedInPlayerID
   return (
     <Row>

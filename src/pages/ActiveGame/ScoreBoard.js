@@ -18,7 +18,7 @@ export default function ScoreBoard(props) {
   // const sortedListing = newList.sort((a, b) => {
   //   return a.priceEuro - b.priceEuro;
   // });
-  console.log("PLAYERLIST", props.playerList);
+  // console.log("PLAYERLIST", props.playerList);
 
   return (
     <Col>

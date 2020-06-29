@@ -7,26 +7,50 @@ import TradePanel from "./TradePanel";
 import vPointIcon from "../../images/icons/vPointIcon.png";
 import { iconStyle } from "../../styles/imgStyles";
 import { storeTradePlayer } from "../../store/tradePlayer/actions";
-import { selectTradeState } from "../../store/tradePlayer/selectors";
+import {
+  selectTradeState,
+  selectTradeText,
+} from "../../store/tradePlayer/selectors";
 
 export default function PlayerScore(props) {
-  const [trade, set_trade] = useState(false);
+  const [trade, set_trade] = useState("w");
   // select userID (sender trade) and playerID (receiver trade)
   //   const loginLogoutControls = token ? <LoggedIn /> : <LoggedOut />;
   const dispatch = useDispatch();
 
   const tradeState = useSelector(selectTradeState);
 
+  const tradeText = useSelector(selectTradeText);
+
+  // useEffect(() => {
+  //   if (tradeState !== props.id) {
+  //     set_trade("Open trade");
+  //   }
+  // }, []);
+
   function handleClick() {
-    // set_trade(!trade);
-    dispatch(
-      storeTradePlayer({
-        traderId: props.id,
-        traderName: props.name,
-        tradeState: !tradeState,
-      })
-    );
-    // console.log(trade);
+    if (tradeState === props.id) {
+      set_trade("w");
+      console.log("TRADE", trade, tradeState);
+      dispatch(
+        storeTradePlayer({
+          traderId: null,
+          traderName: null,
+          tradeState: null,
+        })
+      );
+    } else if (tradeState !== props.id) {
+      set_trade("w");
+      console.log("TRADE", trade, tradeState);
+      dispatch(
+        storeTradePlayer({
+          traderId: props.id,
+          traderName: props.name,
+          tradeState: props.id,
+        })
+      );
+      // console.log(trade);
+    }
   }
 
   return (
@@ -40,7 +64,8 @@ export default function PlayerScore(props) {
         <Card.Body>
           <Card.Text as="div"></Card.Text>
           <Button variant="outline-info" size="sm" onClick={handleClick}>
-            {!tradeState ? <>Open trade</> : <>Close trade</>}
+            {/* {trade} */}
+            {tradeState === props.id ? <>Close trade</> : <>Open trade</>}
           </Button>
         </Card.Body>
       </Card>
