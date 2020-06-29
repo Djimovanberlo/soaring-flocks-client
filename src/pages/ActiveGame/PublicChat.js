@@ -63,7 +63,7 @@ export default function PublicChat(props) {
       {/* <Card>
         <Card.Header>Game Title Chat</Card.Header>
         <Card.Body style={{ overflowY: "scroll", height: "600px" }}>
-          {data.getAllPublicMessages.map((msg, index) => {
+          {data.messageAdded.map((msg, index) => {
             return (
               <div key={index}>
                 {msg.playerId.name}: {msg.content}
