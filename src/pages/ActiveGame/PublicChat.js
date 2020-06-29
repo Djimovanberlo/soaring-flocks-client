@@ -40,6 +40,7 @@ export default function PublicChat(props) {
       // set_messages([...messages, newMessage]);
       set_newMessage({ player: "Djimo", content: "" });
       set_inputField("");
+      window.location.reload(false);
     }
   };
 
@@ -55,27 +56,31 @@ export default function PublicChat(props) {
   };
 
   return (
-    <Card>
-      <Card.Header>Game Title Chat</Card.Header>
-      <Card.Body>
-        {data.getAllPublicMessages.map((msg, index) => {
-          return (
-            <div key={index}>
-              {msg.playerId.name}: {msg.content}
-            </div>
-          );
-        })}
-      </Card.Body>
-      <Form>
-        <Form.Control
-          type="text"
-          as="textarea"
-          rows="2"
-          value={newMessage.content}
-          onChange={handleChange}
-          onKeyPress={handleOnKeyPress}
-        />
-      </Form>
-    </Card>
+    <div style={{ width: "450px" }}>
+      <Card>
+        <Card.Header>Game Title Chat</Card.Header>
+        <Card.Body style={{ overflowY: "scroll", height: "600px" }}>
+          {data.getAllPublicMessages.map((msg, index) => {
+            return (
+              <div key={index}>
+                {msg.playerId.name}: {msg.content}
+              </div>
+            );
+          })}
+        </Card.Body>
+        <Form>
+          <Form.Control
+            type="text"
+            as="textarea"
+            rows="2"
+            value={newMessage.content}
+            onChange={handleChange}
+            onKeyPress={handleOnKeyPress}
+          />
+        </Form>
+      </Card>
+    </div>
   );
 }
+
+// tyle="overflow:scroll; height:400px

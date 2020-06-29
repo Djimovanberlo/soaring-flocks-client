@@ -18,10 +18,10 @@ export default function ScoreBoard(props) {
   // const sortedListing = newList.sort((a, b) => {
   //   return a.priceEuro - b.priceEuro;
   // });
-  console.log("PLAYERLIST", props.playerList);
+  // console.log("PLAYERLIST", props.playerList);
 
   return (
-    <Col>
+    <Col style={{ overflowY: "scroll", height: "1000px" }}>
       {props.playerList.map((listPlayer) => {
         return (
           <PlayerScore

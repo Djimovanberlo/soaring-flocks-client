@@ -30,14 +30,14 @@ import { selectTradePlayer } from "../../store/tradePlayer/selectors";
 export default function ActiveGame() {
   const tradePlayer = useSelector(selectTradePlayer);
 
-  console.log("SELECTED PLAYER", tradePlayer);
+  // console.log("SELECTED PLAYER", tradePlayer);
   const [tradePanelState, set_tradePanelState] = useState(true);
 
   const { data, error, loading } = useQuery(GET_GAME_BY_ID);
   if (loading) return "Loading...";
   if (error) return <Alert variant="danger">Error! {error.message}</Alert>;
   // console.log("data:", data, "error:", error, "loading:", loading);
-  console.log("PLAYERDATA", data.getGameById.players);
+  // console.log("PLAYERDATA", data.getGameById.players);
 
   const tradeControls = tradePlayer.tradeState ? (
     <TradePanel

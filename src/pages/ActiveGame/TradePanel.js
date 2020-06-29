@@ -4,6 +4,7 @@ import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { Col, Row, Form, Image, Alert } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
+import { useDispatch, useSelector } from "react-redux";
 
 import bugIcon from "../../images/icons/bugIcon.png";
 import eggIcon from "../../images/icons/eggIcon.png";
@@ -15,6 +16,7 @@ import vPointIcon from "../../images/icons/vPointIcon.png";
 import { inlineIconStyle, iconStyle } from "../../styles/imgStyles";
 import { useQuery, useSubscription } from "@apollo/react-hooks";
 import { GET_TRADES_BY_ID } from "../../graphql/queries";
+import { storeTradePlayer } from "../../store/tradePlayer/actions";
 
 import PrivateChat from "./PrivateChat";
 import SentTrade from "./SentTrade";
@@ -23,20 +25,39 @@ import TradeSuggest from "./TradeSuggest";
 import PublicChat from "./PublicChat";
 
 export default function TradePanel(props) {
+  const dispatch = useDispatch();
   // const { data, error, loading } = useQuery(GET_TRADES_BY_ID);
   // if (loading) return "Loading...";
   // if (error) return <Alert variant="danger">Error! {error.message}</Alert>;
   // console.log("GOEIEDAG", data);
   // console.log("WOJWOJWOJWOJWOJ", props);
   const { traderName, traderId } = props;
-  console.log("SOMEDATA", traderName, traderId);
+  // console.log("SOMEDATA", traderName, traderId);
   // select loggedInPlayerID
   return (
     <Row>
       <Col>
         <Container>
           <Card>
-            <Card.Header>Djimo's trades with {traderName}</Card.Header>
+            <Card.Header>
+              Djimo's trades with {traderName}
+              &nbsp;&nbsp;&nbsp;
+              <Button
+                variant="outline-danger"
+                size="sm"
+                onClick={() =>
+                  dispatch(
+                    storeTradePlayer({
+                      traderId: null,
+                      traderName: null,
+                      tradeState: null,
+                    })
+                  )
+                }
+              >
+                Close trade
+              </Button>
+            </Card.Header>
             <Card.Body>
               <Row>
                 <Col>

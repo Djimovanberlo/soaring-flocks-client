@@ -29,7 +29,7 @@ export default function SentTrade(props) {
   });
   if (loading) return "Loading...";
   if (error) return <Alert variant="danger">Error! {error.message}</Alert>;
-  console.log("BONJOURR SENT", data);
+  // console.log("BONJOURR SENT", data);
 
   if (data.getTradesById === null)
     return (

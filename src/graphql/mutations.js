@@ -17,8 +17,8 @@ export const CREATE_ATTACK = gql`
 `;
 
 export const CREATE_MARKET = gql`
-  mutation createMarket($playerId: Int, $market: String) {
-    createMarket(playerId: $playerId, market: $market) {
+  mutation createMarket($playerId: Int, $market: String, $cashMoney: Int) {
+    createMarket(playerId: $playerId, market: $market, cashMoney: $cashMoney) {
       id
     }
   }
