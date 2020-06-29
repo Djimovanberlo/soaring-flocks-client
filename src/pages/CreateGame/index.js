@@ -15,7 +15,7 @@ export default function CreateGame() {
   const [gameTitle, set_gameTitle] = useState("");
   const [gameTime, set_gameTime] = useState("10 days");
   const [playersInGame, set_playersInGame] = useState([]);
-  // const [playersOutGame, set_playersOutGame] = useState([]);
+  const [playersOutGame, set_playersOutGame] = useState([]);
   const dispatch = useDispatch();
   const token = useSelector(selectToken);
   const history = useHistory();
@@ -34,19 +34,25 @@ export default function CreateGame() {
   // console.log("data:", data, "error:", error, "loading:", loading);
   console.log("GAMEDATA", data);
 
+  // set_playersOutGame(
+  //   data.outGame.map((player) => {
+  //     return player.name;
+  //   })
+  // );
+
   // TO DO: max 12 players
   const addToGameListener = (event) => {
     console.log(playersInGame, event.target.value, "WQWRQR");
     set_playersInGame([...playersInGame, event.target.value].sort());
-    // set_playersOutGame(
-    //   [
-    //     ...playersOutGame.filter((player) => player != event.target.value),
-    //   ].sort()
-    // );
+    set_playersOutGame(
+      [
+        ...playersOutGame.filter((player) => player !== event.target.value),
+      ].sort()
+    );
   };
 
   const removeFromGameListener = (event) => {
-    // set_playersOutGame([...data.outGame, event.target.value].sort());
+    set_playersOutGame([...data.outGame, event.target.value].sort());
     set_playersInGame(
       [...playersInGame.filter((player) => player != event.target.value)].sort()
     );
@@ -123,9 +129,9 @@ export default function CreateGame() {
               </Form.Group>
             </Col>
           </Row>
-          {data.inGame.length} Player(s) in game:{" "}
-          {data.inGame.map((player) => {
-            return `${player.name} `;
+          {playersInGame.length} Player(s) in game:{" "}
+          {playersInGame.map((player) => {
+            return `${player} `;
           })}
           <br></br>
           <br></br>
