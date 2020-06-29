@@ -29,6 +29,7 @@ export const GET_ALL_PUBLIC_MESSAGES = gql`
     }
   }
 `;
+// ADD FILTER FOR MESSAGES: GAME_ID
 
 export const GET_GAME_BY_ID = gql`
   query getGameById {

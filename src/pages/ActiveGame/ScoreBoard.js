@@ -33,6 +33,16 @@ export default function ScoreBoard(props) {
           />
         );
       })}
+      <br></br>
+      <br></br>
+      <br></br>
+      <Button
+        variant="danger"
+        type="submit"
+        onClick={() => console.log("LEAVE GAME")}
+      >
+        Leave Game
+      </Button>
     </Col>
   );
 }

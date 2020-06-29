@@ -18,6 +18,7 @@ import rareIcon from "../../images/icons/rareIcon.png";
 import vPointIcon from "../../images/icons/vPointIcon.png";
 import { inlineIconStyle, iconStyle } from "../../styles/imgStyles";
 import { CREATE_ATTACK, CREATE_MARKET } from "../../graphql/mutations";
+import { CREATE_PUBLIC_MESSAGE } from "../../graphql/mutations";
 
 export default function Player(props) {
   const [attack, set_attack] = useState("Don't attack anyone");
@@ -34,6 +35,7 @@ export default function Player(props) {
   );
   const [createMarket] = useMutation(CREATE_MARKET);
   const [createAttack] = useMutation(CREATE_ATTACK);
+  const [createPublicMessage] = useMutation(CREATE_PUBLIC_MESSAGE);
   const { data, error, loading } = useQuery(GET_PLAYER_BY_ID);
   if (loading) return "Loading...";
   if (error) return <Alert variant="danger">Error! {error.message}</Alert>;
@@ -84,114 +86,19 @@ export default function Player(props) {
     console.log("LEAVE");
   };
 
-  // const abilityHandler = (event) => {
-  //   console.log(event.target.value);
-  //   set_ability(event.target.value);
-  //   if (event.target.value === "Attack") {
-  //     set_abilityParamForm(
-  //       <Form>
-  //         <Form.Group controlId="attackTargetSelect">
-  //           <Form.Label>Select a target</Form.Label>
-  //           <Form.Control
-  //             as="select"
-  //             onChange={set_abilityParam(event.target.value)}
-  //           >
-  //             {props.playerList.map((player) => {
-  //               return <option key={player.id}>{player.name}</option>;
-  //             })}
-  //           </Form.Control>
-  //         </Form.Group>
-  //       </Form>
-  //     );
-  //     set_abilityDescription(
-  //       <>
-  //         Destroy another player's random resource.
-  //         <br></br>
-  //         <br></br>
-  //       </>
-  //     );
-  //   } else if (event.target.value === "Buy") {
-  //     set_abilityParamForm(
-  //       <Form>
-  //         <Form.Group controlId="buyResourceSelect">
-  //           <Form.Label>Select a resource</Form.Label>
-  //           <Form.Control
-  //             as="select"
-  //             onChange={set_abilityParam(event.target.value)}
-  //           >
-  //             <option>Egg</option>
-  //             <option>Feather</option>
-  //             <option>Bug</option>
-  //             <option>Victory Point</option>
-  //           </Form.Control>
-  //         </Form.Group>
-  //       </Form>
-  //     );
-  //     set_abilityDescription(
-  //       <>
-  //         Pay 4<Image src={moneyCashIcon} style={inlineIconStyle} /> for a
-  //         resource of choice<br></br>
-  //         <br></br>
-  //       </>
-  //     );
-  //   } else if (event.target.value === "Invest") {
-  //     set_abilityParamForm(null);
-  //     set_abilityDescription(
-  //       <>
-  //         Pay 10
-  //         <Image src={moneyCashIcon} style={inlineIconStyle} /> to gain 4 random
-  //         Rare Resources
-  //         <br></br>
-  //         <br></br>
-  //       </>
-  //     );
-  //   } else if (event.target.value === "No ability") {
-  //     set_abilityParamForm(null);
-  //     set_abilityDescription(
-  //       <>
-  //         Choose an ability and its parameter<br></br>
-  //         <br></br>
-  //       </>
-  //     );
-  //   }
-  // };
-
-  // if (
-  //   moneyCash < (mMarket + rMarket + vMarket) * 2 - 6 ||
-  //   egg < 1 ||
-  //   feather < 1 ||
-  //   bug < 1
-  // ) {
-  //   set_marketAvailable(<>Not enough resrouces</>);
-  // } else {
-  //   set_marketAvailable(
-  //     <Form>
-  //       <Form.Group controlId="marketselect">
-  //         <Form.Label>Select a market</Form.Label>
-  //         <Form.Control as="select">
-  //           <option>Don't build anything</option>
-  //           <option>Money Market</option>
-  //           <option>Rare Market</option>
-  //           <option>Victory Market</option>
-  //         </Form.Control>
-  //       </Form.Group>
-  //     </Form>
-  //   );
-  // }
-
-  // Cost of building a market: <br></br>
-  // <Image src={moneyCashIcon} style={inlineIconStyle} />
-  // {(mMarket + rMarket + vMarket) * 2 - 6}
-  // <Image src={eggIcon} style={inlineIconStyle} />1
-  // <Image src={featherIcon} style={inlineIconStyle} />1
-  {
-    /* <Image src={bugIcon} style={inlineIconStyle} />1 */
-  }
-
   return (
     <Container>
       <Card>
-        <Card.Header>{name}</Card.Header>
+        <Card.Header>
+          {name}
+          <Button
+            onClick={() =>
+              createPublicMessage({
+                variables: { playerId: 1, content: "TESTMSG" },
+              })
+            }
+          ></Button>
+        </Card.Header>
         <Card.Body>
           <Row>
             <Col>
@@ -252,8 +159,17 @@ export default function Player(props) {
                   <div>Attack</div>
                   <div>
                     <br></br>
-                    Cost of attacking: <br></br>
+                    Cost of attacking:
                     <Image src={moneyCashIcon} style={inlineIconStyle} />1
+                    <br></br>
+                    Attacking destroys one{" "}
+                    <Image src={moneyCashIcon} style={inlineIconStyle} />
+                    1 /
+                    <Image src={eggIcon} style={inlineIconStyle} />1 /
+                    <Image src={featherIcon} style={inlineIconStyle} />1 /
+                    <Image src={bugIcon} style={inlineIconStyle} />1 /
+                    <Image src={vPointIcon} style={inlineIconStyle} />1 at
+                    random
                   </div>
                   <br></br>
                   <Row>
@@ -354,14 +270,6 @@ export default function Player(props) {
                     </Form.Group>
                   </Form>
                   {/* } */}
-                </Col>
-              </Row>
-              <Row>
-                <Col>
-                  {" "}
-                  <Button variant="danger" type="submit" onClick={gameLeaver}>
-                    Leave Game
-                  </Button>
                 </Col>
               </Row>
             </Container>

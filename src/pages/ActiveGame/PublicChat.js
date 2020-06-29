@@ -6,6 +6,7 @@ import { Col, Row, Form, Image, Alert } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import { CREATE_PUBLIC_MESSAGE } from "../../graphql/mutations";
 import { GET_ALL_PUBLIC_MESSAGES } from "../../graphql/queries";
+import { SUB_ALL_PUBLIC_MESSAGES } from "../../graphql/subscriptions";
 import { useQuery, useSubscription, useMutation } from "@apollo/react-hooks";
 
 import bugIcon from "../../images/icons/bugIcon.png";
@@ -18,6 +19,7 @@ import vPointIcon from "../../images/icons/vPointIcon.png";
 import { inlineIconStyle, iconStyle } from "../../styles/imgStyles";
 
 import Trade from "./SentTrade";
+import { SubscriptionClient } from "subscriptions-transport-ws";
 
 export default function PublicChat(props) {
   const [inputField, set_inputField] = useState("hoi");
@@ -44,11 +46,12 @@ export default function PublicChat(props) {
     }
   };
 
-  const { data, error, loading } = useQuery(GET_ALL_PUBLIC_MESSAGES);
+  const { data, error, loading } = useSubscription(SUB_ALL_PUBLIC_MESSAGES);
+  // const { data, error, loading } = useQuery(GET_ALL_PUBLIC_MESSAGES);
   if (loading) return "Loading...";
   if (error) return <Alert variant="danger">Error! {error.message}</Alert>;
   // console.log("data:", data, "error:", error, "loading:", loading);
-  // console.log("DATAMSG", data.getAllPublicMessages);
+  console.log("DATAMSG", data);
 
   const handleChange = (event) => {
     console.log(event.target.value);
@@ -57,7 +60,7 @@ export default function PublicChat(props) {
 
   return (
     <div style={{ width: "450px" }}>
-      <Card>
+      {/* <Card>
         <Card.Header>Game Title Chat</Card.Header>
         <Card.Body style={{ overflowY: "scroll", height: "600px" }}>
           {data.getAllPublicMessages.map((msg, index) => {
@@ -72,13 +75,16 @@ export default function PublicChat(props) {
           <Form.Control
             type="text"
             as="textarea"
-            rows="2"
+            rows="3"
             value={newMessage.content}
             onChange={handleChange}
             onKeyPress={handleOnKeyPress}
           />
         </Form>
       </Card>
+      <Button variant="info" size="sm" onClick={console.log("DATA", data)}>
+        TEST
+      </Button> */}
     </div>
   );
 }
