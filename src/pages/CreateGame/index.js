@@ -62,12 +62,6 @@ export default function CreateGame() {
     console.log(gameTitle, parseInt(gameTime));
     console.log(typeof parseInt(gameTime));
     event.preventDefault();
-
-    // dispatch(login(email, password));
-
-    // setEmail("");
-    // setPassword("");
-    // send user to Active Game page
   };
   return (
     <>
