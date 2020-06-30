@@ -18,9 +18,9 @@ export default function PlayerPanel(props) {
         {" "}
         <Player playerList={props.playerList} />
       </Col>
-      <Col md={4}>
+      {/* <Col md={4}>
         <PublicChat />
-      </Col>
+      </Col> */}
     </Row>
   );
 }

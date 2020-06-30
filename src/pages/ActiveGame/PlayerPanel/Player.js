@@ -213,7 +213,6 @@ export default function Player(props) {
                             ) : (
                               <>
                                 <br></br>
-                                <br></br>
                               </>
                             )}
                           </Form.Group>
@@ -234,6 +233,7 @@ export default function Player(props) {
                     <Image src={featherIcon} style={inlineIconStyle} />1
                     <Image src={bugIcon} style={inlineIconStyle} />1
                   </div>
+                  <br></br>
                   <br></br>
                   {/* {moneyCash < ((mMarket + rMarket + vMarket) * 2 - 6) || egg < 1 || feather < 1 || bug <1 ? (<></>) :  */}
                   <Form>
@@ -263,7 +263,6 @@ export default function Player(props) {
                         </Button>
                       ) : (
                         <>
-                          <br></br>
                           <br></br>
                         </>
                       )}

@@ -34,6 +34,7 @@ export const GET_ALL_PUBLIC_MESSAGES = gql`
 export const GET_GAME_BY_ID = gql`
   query getGameById {
     getGameById(id: 1) {
+      id
       gameTitle
       gameTime
       gameTimePassed

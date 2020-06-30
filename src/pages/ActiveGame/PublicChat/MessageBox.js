@@ -13,7 +13,7 @@ export default function MessageBox(props) {
   const [allQueriedMessages, set_allQueriedMessages] = useState(
     props.allMessages
   );
-  console.log("WWWWWW", allQueriedMessages);
+  //   console.log("WWWWWW", allQueriedMessages);
 
   const { data, error, loading } = useSubscription(SUB_ALL_PUBLIC_MESSAGES);
   //   console.log("ZZZZZZ", data);

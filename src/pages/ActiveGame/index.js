@@ -26,18 +26,46 @@ import { inlineIconStyle, iconStyle } from "../../styles/imgStyles";
 import PlayerPanel from "./PlayerPanel/index";
 import ScoreBoard from "./Scoreboard/index";
 import { selectTradePlayer } from "../../store/tradePlayer/selectors";
+import PublicChat from "./PublicChat/index";
+import { storeGame } from "../../store/game/actions";
 
 export default function ActiveGame() {
   const tradePlayer = useSelector(selectTradePlayer);
 
+  const dispatch = useDispatch();
   // console.log("SELECTED PLAYER", tradePlayer);
   const [tradePanelState, set_tradePanelState] = useState(true);
 
   const { data, error, loading } = useQuery(GET_GAME_BY_ID);
+
+  useEffect(() => {
+    if (loading === false && data) {
+      const { id, gameTitle, gameTime, gameTimePassed } = data.getGameById;
+      dispatch(
+        storeGame({
+          id,
+          gameTitle,
+          gameTime,
+          gameTimePassed,
+        })
+      );
+    }
+  }, [loading, data]);
+
   if (loading) return "Loading...";
   if (error) return <Alert variant="danger">Error! {error.message}</Alert>;
   // console.log("data:", data, "error:", error, "loading:", loading);
-  // console.log("PLAYERDATA", data.getGameById.players);
+  console.log("GAMEDATA", data.getGameById);
+
+  // const { id, gameTitle, gameTime, gameTimePassed } = data.getGameById;
+  // dispatch(
+  //   storeGame({
+  //     id,
+  //     gameTitle,
+  //     gameTime,
+  //     gameTimePassed,
+  //   })
+  // );
 
   const tradeControls = tradePlayer.tradeState ? (
     <TradePanel
@@ -78,6 +106,9 @@ export default function ActiveGame() {
           <ScoreBoard playerList={data.getGameById.players} />
         </Col>
         <Col>{tradeControls}</Col>
+        <Col md={4}>
+          <PublicChat />
+        </Col>
       </Row>
     </>
   );

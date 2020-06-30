@@ -68,9 +68,6 @@ export default function TradePanel(props) {
           </Card>
         </Container>
       </Col>
-      <Col md={4}>
-        <PublicChat />
-      </Col>
     </Row>
     // YOU CAN ONLY OFFER 1 TRADE PER PLAYER AT A TIME (to limit spam options)
     // this means a-b AND b-a can be active at the same time, but no more than that
