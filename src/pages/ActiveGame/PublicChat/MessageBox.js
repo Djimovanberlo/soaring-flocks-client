@@ -15,7 +15,11 @@ export default function MessageBox(props) {
   );
   //   console.log("WWWWWW", allQueriedMessages);
 
-  const { data, error, loading } = useSubscription(SUB_ALL_PUBLIC_MESSAGES);
+  const { data, error, loading } = useSubscription(SUB_ALL_PUBLIC_MESSAGES, {
+    variables: {
+      gameId: 1,
+    },
+  });
   //   console.log("ZZZZZZ", data);
 
   useEffect(() => {

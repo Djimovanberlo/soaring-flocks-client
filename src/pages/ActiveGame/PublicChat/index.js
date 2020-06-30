@@ -16,10 +16,14 @@ import MessageBox from "./MessageBox";
 
 export default function PublicChat(props) {
   // const [inputField, set_inputField] = useState("hoi");
-  const { data, error, loading } = useQuery(GET_ALL_PUBLIC_MESSAGES);
+  const { data, error, loading } = useQuery(GET_ALL_PUBLIC_MESSAGES, {
+    variables: {
+      gameId: 1,
+    },
+  });
   if (loading) return "Loading...";
   if (error) return <Alert variant="danger">Error! {error.message}</Alert>;
-  console.log("DATAQUERY", data);
+  // console.log("DATAQUERY", data);
 
   return (
     <div style={{ width: "450px" }}>
