@@ -23,17 +23,12 @@ export default function PublicChat(props) {
 
   const handleOnKeyPress = (target, event) => {
     if (target.charCode === 13) {
-      // event.preventDefault();
-
       console.log("ENTER CLICKwwwwED", newMessage.content);
       createPublicMessage({
         variables: { playerId: 1, content: newMessage.content },
       });
-      // addPublicMessage({ variables: { content: target.value } });
-      // set_messages([...messages, newMessage]);
       set_newMessage({ player: "Djimo", content: "" });
       set_inputField("");
-      // window.location.reload(false);
     }
   };
 
@@ -54,13 +49,14 @@ export default function PublicChat(props) {
       <Card>
         <Card.Header>Game Title Chat</Card.Header>
         <Card.Body style={{ overflowY: "scroll", height: "600px" }}>
-          {data.messageAdded.map((msg, index) => {
+          {/* {data.messageAdded.map((msg, index) => {
             return (
               <div key={index}>
                 {msg.playerId.name}: {msg.content}
               </div>
             );
-          })}
+          })} */}
+          {data.messageAdded.playerId.name}: {data.messageAdded.content}
         </Card.Body>
         <Form>
           <Form.Control
