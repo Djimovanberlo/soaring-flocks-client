@@ -16,7 +16,7 @@ export default function MessageBox(props) {
   console.log("WWWWWW", allQueriedMessages);
 
   const { data, error, loading } = useSubscription(SUB_ALL_PUBLIC_MESSAGES);
-  console.log("ZZZZZZ", data);
+  //   console.log("ZZZZZZ", data);
 
   useEffect(() => {
     if (loading === false && data) {
@@ -25,12 +25,24 @@ export default function MessageBox(props) {
     }
   }, [loading, data]);
 
-  console.log("AAAAAAA", allQueriedMessages);
+  //   console.log("AAAAAAA", allQueriedMessages);
   // const { data, error, loading } = useQuery(GET_ALL_PUBLIC_MESSAGES);
-  if (loading) return "Loading...";
+  if (loading)
+    return (
+      <Card.Body style={{ overflowY: "scroll", height: "600px" }}>
+        {allQueriedMessages.map((msg, index) => {
+          return (
+            <div key={index}>
+              {msg.playerId.name}: {msg.content}
+            </div>
+          );
+        })}
+        {/* {data.messageAdded.playerId.name}: {data.messageAdded.content} */}
+      </Card.Body>
+    );
   if (error) return <Alert variant="danger">Error! {error.message}</Alert>;
   // console.log("data:", data, "error:", error, "loading:", loading);
-  console.log("DATASUBSCRIPTION", data);
+  //   console.log("DATASUBSCRIPTION", data);
 
   return (
     <Card.Body style={{ overflowY: "scroll", height: "600px" }}>
