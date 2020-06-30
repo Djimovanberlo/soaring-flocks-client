@@ -7,11 +7,11 @@ import { selectToken } from "../../store/user/selectors";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
 import { Col, Row, Alert } from "react-bootstrap";
-import PlayerScore from "./PlayerScore";
-import Player from "./Player";
-import TradePanel from "./TradePanel";
-import PublicChat from "./PublicChat";
-import PrivateChat from "./PrivateChat";
+// import PlayerScore from "./Scoreboard/PlayerScore";
+// import Player from "./PlayerPanel/Player";
+import TradePanel from "./TradePanel/index";
+// import PublicChat from "./PublicChat/index";
+// import PrivateChat from "./PrivateChat/index";
 import { useQuery, useSubscription } from "@apollo/react-hooks";
 
 import { GET_GAME_BY_ID } from "../../graphql/queries";
@@ -23,21 +23,49 @@ import moneyCashIcon from "../../images/icons/moneyCashIcon.png";
 import rareIcon from "../../images/icons/rareIcon.png";
 import vPointIcon from "../../images/icons/vPointIcon.png";
 import { inlineIconStyle, iconStyle } from "../../styles/imgStyles";
-import PlayerPanel from "./PlayerPanel";
-import ScoreBoard from "./ScoreBoard";
+import PlayerPanel from "./PlayerPanel/index";
+import ScoreBoard from "./Scoreboard/index";
 import { selectTradePlayer } from "../../store/tradePlayer/selectors";
+import PublicChat from "./PublicChat/index";
+import { storeGame } from "../../store/game/actions";
 
 export default function ActiveGame() {
   const tradePlayer = useSelector(selectTradePlayer);
 
+  const dispatch = useDispatch();
   // console.log("SELECTED PLAYER", tradePlayer);
   const [tradePanelState, set_tradePanelState] = useState(true);
 
   const { data, error, loading } = useQuery(GET_GAME_BY_ID);
+
+  useEffect(() => {
+    if (loading === false && data) {
+      const { id, gameTitle, gameTime, gameTimePassed } = data.getGameById;
+      dispatch(
+        storeGame({
+          id,
+          gameTitle,
+          gameTime,
+          gameTimePassed,
+        })
+      );
+    }
+  }, [loading, data]);
+
   if (loading) return "Loading...";
   if (error) return <Alert variant="danger">Error! {error.message}</Alert>;
   // console.log("data:", data, "error:", error, "loading:", loading);
-  // console.log("PLAYERDATA", data.getGameById.players);
+  console.log("GAMEDATA", data.getGameById);
+
+  // const { id, gameTitle, gameTime, gameTimePassed } = data.getGameById;
+  // dispatch(
+  //   storeGame({
+  //     id,
+  //     gameTitle,
+  //     gameTime,
+  //     gameTimePassed,
+  //   })
+  // );
 
   const tradeControls = tradePlayer.tradeState ? (
     <TradePanel
@@ -78,6 +106,9 @@ export default function ActiveGame() {
           <ScoreBoard playerList={data.getGameById.players} />
         </Col>
         <Col>{tradeControls}</Col>
+        <Col md={4}>
+          <PublicChat />
+        </Col>
       </Row>
     </>
   );
