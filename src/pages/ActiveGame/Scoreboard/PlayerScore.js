@@ -3,15 +3,15 @@ import Jumbotron from "react-bootstrap/Jumbotron";
 import { Button, Card, Image, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import TradePanel from "./TradePanel";
-import vPointIcon from "../../images/icons/vPointIcon.png";
-import { iconStyle } from "../../styles/imgStyles";
-import { storeTradePlayer } from "../../store/tradePlayer/actions";
+import TradePanel from "../TradePanel";
+import vPointIcon from "../../../images/icons/vPointIcon.png";
+import { iconStyle } from "../../../styles/imgStyles";
+import { storeTradePlayer } from "../../../store/tradePlayer/actions";
 import {
   selectTradeState,
   selectTradeText,
-} from "../../store/tradePlayer/selectors";
-import { avatarStyle } from "../../styles/imgStyles";
+} from "../../../store/tradePlayer/selectors";
+import { avatarStyle } from "../../../styles/imgStyles";
 
 export default function PlayerScore(props) {
   // select userID (sender trade) and playerID (receiver trade)
@@ -21,7 +21,7 @@ export default function PlayerScore(props) {
 
   const tradeState = useSelector(selectTradeState);
 
-  const tradeText = useSelector(selectTradeText);
+  // const tradeText = useSelector(selectTradeText);
 
   // useEffect(() => {
   //   if (tradeState !== props.id) {
@@ -71,7 +71,7 @@ export default function PlayerScore(props) {
           </Button>
         </Card.Header>
         <Card.Img
-          src={require(`../../images/avatars/${props.img}.png`)}
+          src={require(`../../../images/avatars/${props.img}.png`)}
           style={avatarStyle}
         />
         <Card.Body>

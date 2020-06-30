@@ -3,15 +3,15 @@ import Jumbotron from "react-bootstrap/Jumbotron";
 import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { Col, Row, Form, Image, Container } from "react-bootstrap";
-import bugIcon from "../../images/icons/bugIcon.png";
-import eggIcon from "../../images/icons/eggIcon.png";
-import featherIcon from "../../images/icons/featherIcon.png";
-import marketIcon from "../../images/icons/marketIcon.png";
-import moneyCashIcon from "../../images/icons/moneyCashIcon.png";
-import rareIcon from "../../images/icons/rareIcon.png";
-import vPointIcon from "../../images/icons/vPointIcon.png";
-import { inlineIconStyle, iconStyle } from "../../styles/imgStyles";
-import { SUGGEST_TRADE } from "../../graphql/mutations";
+import bugIcon from "../../../images/icons/bugIcon.png";
+import eggIcon from "../../../images/icons/eggIcon.png";
+import featherIcon from "../../../images/icons/featherIcon.png";
+import marketIcon from "../../../images/icons/marketIcon.png";
+import moneyCashIcon from "../../../images/icons/moneyCashIcon.png";
+import rareIcon from "../../../images/icons/rareIcon.png";
+import vPointIcon from "../../../images/icons/vPointIcon.png";
+import { inlineIconStyle, iconStyle } from "../../../styles/imgStyles";
+import { SUGGEST_TRADE } from "../../../graphql/mutations";
 import { useQuery, useSubscription, useMutation } from "@apollo/react-hooks";
 
 export default function TradeSuggest(props) {

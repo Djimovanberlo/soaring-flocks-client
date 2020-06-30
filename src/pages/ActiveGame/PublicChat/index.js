@@ -4,21 +4,12 @@ import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { Col, Row, Form, Image, Alert } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
-import { CREATE_PUBLIC_MESSAGE } from "../../graphql/mutations";
-import { GET_ALL_PUBLIC_MESSAGES } from "../../graphql/queries";
-import { SUB_ALL_PUBLIC_MESSAGES } from "../../graphql/subscriptions";
+import { CREATE_PUBLIC_MESSAGE } from "../../../graphql/mutations";
+import { GET_ALL_PUBLIC_MESSAGES } from "../../../graphql/queries";
+import { SUB_ALL_PUBLIC_MESSAGES } from "../../../graphql/subscriptions";
 import { useQuery, useSubscription, useMutation } from "@apollo/react-hooks";
 
-import bugIcon from "../../images/icons/bugIcon.png";
-import eggIcon from "../../images/icons/eggIcon.png";
-import featherIcon from "../../images/icons/featherIcon.png";
-import marketIcon from "../../images/icons/marketIcon.png";
-import moneyCashIcon from "../../images/icons/moneyCashIcon.png";
-import rareIcon from "../../images/icons/rareIcon.png";
-import vPointIcon from "../../images/icons/vPointIcon.png";
-import { inlineIconStyle, iconStyle } from "../../styles/imgStyles";
-
-import Trade from "./SentTrade";
+import Trade from "../TradePanel/SentTrade";
 import { SubscriptionClient } from "subscriptions-transport-ws";
 
 export default function PublicChat(props) {
@@ -42,7 +33,7 @@ export default function PublicChat(props) {
       // set_messages([...messages, newMessage]);
       set_newMessage({ player: "Djimo", content: "" });
       set_inputField("");
-      window.location.reload(false);
+      // window.location.reload(false);
     }
   };
 
@@ -60,7 +51,7 @@ export default function PublicChat(props) {
 
   return (
     <div style={{ width: "450px" }}>
-      {/* <Card>
+      <Card>
         <Card.Header>Game Title Chat</Card.Header>
         <Card.Body style={{ overflowY: "scroll", height: "600px" }}>
           {data.messageAdded.map((msg, index) => {
@@ -82,7 +73,7 @@ export default function PublicChat(props) {
           />
         </Form>
       </Card>
-      <Button variant="info" size="sm" onClick={console.log("DATA", data)}>
+      {/* <Button variant="info" size="sm" onClick={console.log("DATA", data)}>
         TEST
       </Button> */}
     </div>

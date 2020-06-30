@@ -5,6 +5,11 @@ export const SUB_ALL_PUBLIC_MESSAGES = gql`
     messageAdded {
       id
       content
+      createdAt
+      playerId {
+        id
+        name
+      }
     }
   }
 `;

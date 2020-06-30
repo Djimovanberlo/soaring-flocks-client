@@ -2,23 +2,23 @@ import React, { useState, useEffect } from "react";
 import Jumbotron from "react-bootstrap/Jumbotron";
 import { Button, Card, ListGroup, Alert } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import Trade from "./TradePanel";
+import Trade from "../TradePanel";
 import Container from "react-bootstrap/Container";
 import { Col, Row, Image, Dropdown, DropdownButton } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
-import { GET_PLAYER_BY_ID } from "../../graphql/queries";
+import { GET_PLAYER_BY_ID } from "../../../graphql/queries";
 import { useQuery, useSubscription, useMutation } from "@apollo/react-hooks";
 
-import bugIcon from "../../images/icons/bugIcon.png";
-import eggIcon from "../../images/icons/eggIcon.png";
-import featherIcon from "../../images/icons/featherIcon.png";
-import marketIcon from "../../images/icons/marketIcon.png";
-import moneyCashIcon from "../../images/icons/moneyCashIcon.png";
-import rareIcon from "../../images/icons/rareIcon.png";
-import vPointIcon from "../../images/icons/vPointIcon.png";
-import { inlineIconStyle, iconStyle } from "../../styles/imgStyles";
-import { CREATE_ATTACK, CREATE_MARKET } from "../../graphql/mutations";
-import { CREATE_PUBLIC_MESSAGE } from "../../graphql/mutations";
+import bugIcon from "../../../images/icons/bugIcon.png";
+import eggIcon from "../../../images/icons/eggIcon.png";
+import featherIcon from "../../../images/icons/featherIcon.png";
+import marketIcon from "../../../images/icons/marketIcon.png";
+import moneyCashIcon from "../../../images/icons/moneyCashIcon.png";
+import rareIcon from "../../../images/icons/rareIcon.png";
+import vPointIcon from "../../../images/icons/vPointIcon.png";
+import { inlineIconStyle, iconStyle } from "../../../styles/imgStyles";
+import { CREATE_ATTACK, CREATE_MARKET } from "../../../graphql/mutations";
+import { CREATE_PUBLIC_MESSAGE } from "../../../graphql/mutations";
 
 export default function Player(props) {
   const [attack, set_attack] = useState("Don't attack anyone");

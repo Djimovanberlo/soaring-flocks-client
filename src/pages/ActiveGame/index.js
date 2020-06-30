@@ -7,11 +7,11 @@ import { selectToken } from "../../store/user/selectors";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
 import { Col, Row, Alert } from "react-bootstrap";
-import PlayerScore from "./PlayerScore";
-import Player from "./Player";
-import TradePanel from "./TradePanel";
-import PublicChat from "./PublicChat";
-import PrivateChat from "./PrivateChat";
+// import PlayerScore from "./Scoreboard/PlayerScore";
+// import Player from "./PlayerPanel/Player";
+import TradePanel from "./TradePanel/index";
+// import PublicChat from "./PublicChat/index";
+// import PrivateChat from "./PrivateChat/index";
 import { useQuery, useSubscription } from "@apollo/react-hooks";
 
 import { GET_GAME_BY_ID } from "../../graphql/queries";
@@ -23,8 +23,8 @@ import moneyCashIcon from "../../images/icons/moneyCashIcon.png";
 import rareIcon from "../../images/icons/rareIcon.png";
 import vPointIcon from "../../images/icons/vPointIcon.png";
 import { inlineIconStyle, iconStyle } from "../../styles/imgStyles";
-import PlayerPanel from "./PlayerPanel";
-import ScoreBoard from "./ScoreBoard";
+import PlayerPanel from "./PlayerPanel/index";
+import ScoreBoard from "./Scoreboard/index";
 import { selectTradePlayer } from "../../store/tradePlayer/selectors";
 
 export default function ActiveGame() {
