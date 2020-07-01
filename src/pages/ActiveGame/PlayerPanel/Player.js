@@ -8,6 +8,7 @@ import { Col, Row, Image, Dropdown, DropdownButton } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import { GET_PLAYER_BY_ID } from "../../../graphql/queries";
 import { useQuery, useSubscription, useMutation } from "@apollo/react-hooks";
+import { useDispatch, useSelector } from "react-redux";
 
 import bugIcon from "../../../images/icons/bugIcon.png";
 import eggIcon from "../../../images/icons/eggIcon.png";
@@ -19,6 +20,7 @@ import vPointIcon from "../../../images/icons/vPointIcon.png";
 import { inlineIconStyle, iconStyle } from "../../../styles/imgStyles";
 import { CREATE_ATTACK, CREATE_MARKET } from "../../../graphql/mutations";
 import { CREATE_PUBLIC_MESSAGE } from "../../../graphql/mutations";
+import { selectPlayerId, selectPlayer } from "../../../store/player/selectors";
 
 export default function Player(props) {
   const [attack, set_attack] = useState("Don't attack anyone");
@@ -33,13 +35,19 @@ export default function Player(props) {
       <br></br>
     </>
   );
+  const playerId = useSelector(selectPlayerId);
+  console.log("PLAYERSELECT", playerId);
   const [createMarket] = useMutation(CREATE_MARKET);
   const [createAttack] = useMutation(CREATE_ATTACK);
   const [createPublicMessage] = useMutation(CREATE_PUBLIC_MESSAGE);
-  const { data, error, loading } = useQuery(GET_PLAYER_BY_ID);
+  const { data, error, loading } = useQuery(GET_PLAYER_BY_ID, {
+    variables: {
+      id: playerId,
+    },
+  });
   if (loading) return "Loading...";
   if (error) return <Alert variant="danger">Error! {error.message}</Alert>;
-  // console.log("data:", data, "error:", error, "loading:", loading);
+  console.log("data:", data, "error:", error, "loading:", loading);
   const {
     id,
     name,
