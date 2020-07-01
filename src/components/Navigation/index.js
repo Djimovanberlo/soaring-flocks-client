@@ -3,7 +3,7 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { selectToken } from "../../store/user/selectors";
+import { selectToken } from "../../store/player/selectors";
 import NavbarItem from "./NavbarItem";
 import LoggedIn from "./LoggedIn";
 import LoggedOut from "./LoggedOut";
@@ -21,7 +21,7 @@ export default function Navigation() {
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav style={{ width: "100%" }} fill>
           <NavbarItem path="/gameInfo" linkText="Game Info" />
-          <NavbarItem path="/createGame" linkText="Create Game" />
+          {/* <NavbarItem path="/createGame" linkText="Create Game" /> */}
           <NavbarItem path="/activeGame" linkText="Game Title" />
           {loginLogoutControls}
         </Nav>

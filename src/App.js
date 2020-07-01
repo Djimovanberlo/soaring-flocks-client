@@ -34,7 +34,7 @@ function App() {
           <Redirect to="/gameInfo" />
         </Route>
         <Route path="/gameInfo" component={gameInfo} />
-        <Route path="/createGame" component={CreateGame} />
+        {/* <Route path="/createGame" component={CreateGame} /> */}
         <Route path="/activeGame" component={ActiveGame} />
         <Route path="/signup" component={SignUp} />
         <Route path="/login" component={Login} />
