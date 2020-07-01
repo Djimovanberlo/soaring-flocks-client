@@ -1,4 +1,4 @@
-export const selectTradePlayer = (state) => state.tradePlayer;
+export const selectGameTitle = (state) => state.gameState.gameTitle;
 
 export const selectTradeState = (state) => state.tradePlayer.tradeState;
 

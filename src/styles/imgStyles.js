@@ -12,3 +12,7 @@ export const avatarStyle = {
   width: 150,
   height: 150,
 };
+
+// export const avatarScoreStyle = {
+//   width: 
+// }

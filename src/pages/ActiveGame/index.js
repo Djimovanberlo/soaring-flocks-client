@@ -54,7 +54,7 @@ export default function ActiveGame() {
 
   if (loading) return "Loading...";
   if (error) return <Alert variant="danger">Error! {error.message}</Alert>;
-  // console.log("data:", data, "error:", error, "loading:", loading);
+  console.log("data:", data, "error:", error, "loading:", loading);
   console.log("GAMEDATA", data.getGameById);
 
   // const { id, gameTitle, gameTime, gameTimePassed } = data.getGameById;

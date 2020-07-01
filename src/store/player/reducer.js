@@ -2,13 +2,13 @@ import { LOG_OUT, LOGIN_SUCCESS, TOKEN_STILL_VALID } from "./actions";
 
 const initialState = {
   token: localStorage.getItem("token"),
-  name: null,
-  email: null,
+  player: {},
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case LOGIN_SUCCESS:
+      console.log("STORED", action.payload);
       localStorage.setItem("token", action.payload.token);
       return { ...state, ...action.payload };
 
