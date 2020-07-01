@@ -29,9 +29,24 @@ export default function SignUp() {
 
   function submitForm(event) {
     event.preventDefault();
-    console.log(name, email, password);
+    const imgArray = [
+      "antonius",
+      "archibald",
+      "astrid",
+      "betsy",
+      "comrade",
+      "cornelius",
+      "ebert",
+      "frankie",
+      "jeremiah",
+      "patrice",
+      "rick",
+      "yeanero",
+    ];
+    const img = imgArray[Math.floor(Math.random() * imgArray.length)];
+    console.log(name, email, password, img);
     createPlayer({
-      variables: { name, email, password },
+      variables: { name, email, password, img },
     });
     // dispatch(signUp(name, email, password));
 

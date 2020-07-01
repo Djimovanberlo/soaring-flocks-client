@@ -1,9 +1,28 @@
 import gql from "graphql-tag";
 
 export const CREATE_PLAYER = gql`
-  mutation createPlayer($name: String, $email: String, $password: String) {
-    createPlayer(name: $name, email: $email, password: $password) {
+  mutation createPlayer(
+    $name: String
+    $email: String
+    $password: String
+    $img: String
+  ) {
+    createPlayer(name: $name, email: $email, password: $password, img: $img) {
       id
+    }
+  }
+`;
+
+export const LOGIN_PLAYER = gql`
+  mutation loginPlayer($email: String, $password: String) {
+    loginPlayer(email: $email, password: $password) {
+      token
+      player {
+        id
+        name
+        email
+        img
+      }
     }
   }
 `;

@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
-import Button from "react-bootstrap/Button";
-import { login } from "../../store/user/actions";
+import { Button, Alert } from "react-bootstrap/";
+import { loginSuccess } from "../../store/player/actions";
 import { selectToken } from "../../store/user/selectors";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
+import { useMutation } from "@apollo/react-hooks";
 import { Col } from "react-bootstrap";
+
+import { LOGIN_PLAYER } from "../../graphql/mutations";
 
 export default function SignUp() {
   const [email, setEmail] = useState("");
@@ -21,11 +24,27 @@ export default function SignUp() {
     }
   }, [token, history]);
 
-  function submitForm(event) {
-    console.log("hi");
-    event.preventDefault();
+  const [loginPlayer, { data, loading, error }] = useMutation(LOGIN_PLAYER, {
+    onCompleted({ loginPlayer }) {
+      console.log("LOGINPLAYER COMPLETED", loginPlayer);
+      localStorage.setItem("token", loginPlayer);
+      dispatch(loginSuccess(loginPlayer));
+    },
+  });
 
-    dispatch(login(email, password));
+  if (loading) return "Loading...";
+  if (error) return <Alert variant="danger">Error! {error.message}</Alert>;
+  // console.log("LOGINDATA", data);
+
+  function submitForm(event) {
+    console.log("hi", email, password);
+    event.preventDefault();
+    loginPlayer({
+      variables: { email, password },
+    });
+    // dispatch(login(email, password));
+    // console.log("OKAYERDATA", data.loginPlayer);
+    // dispatch(loginSuccess(data.loginPlayer));
 
     setEmail("");
     setPassword("");
