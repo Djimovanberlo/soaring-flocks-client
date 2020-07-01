@@ -12,7 +12,11 @@ export default function Navigation() {
   const token = useSelector(selectToken);
 
   // user in game ? display Game Title : display Create Game
-
+  const gameAccessControls = token ? (
+    <NavbarItem path="/activeGame" linkText="Game Title" />
+  ) : (
+    <></>
+  );
   const loginLogoutControls = token ? <LoggedIn /> : <LoggedOut />;
 
   return (
@@ -22,7 +26,7 @@ export default function Navigation() {
         <Nav style={{ width: "100%" }} fill>
           <NavbarItem path="/gameInfo" linkText="Game Info" />
           {/* <NavbarItem path="/createGame" linkText="Create Game" /> */}
-          <NavbarItem path="/activeGame" linkText="Game Title" />
+          {gameAccessControls}
           {loginLogoutControls}
         </Nav>
       </Navbar.Collapse>
