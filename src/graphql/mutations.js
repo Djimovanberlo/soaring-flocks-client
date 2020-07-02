@@ -8,7 +8,13 @@ export const CREATE_PLAYER = gql`
     $img: String
   ) {
     createPlayer(name: $name, email: $email, password: $password, img: $img) {
-      id
+      token
+      player {
+        id
+        name
+        email
+        img
+      }
     }
   }
 `;

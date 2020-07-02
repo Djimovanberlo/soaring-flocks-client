@@ -10,6 +10,7 @@ import { useMutation } from "@apollo/react-hooks";
 import { Col } from "react-bootstrap";
 
 import { CREATE_PLAYER } from "../../graphql/mutations";
+import { loginSuccess } from "../../store/player/actions";
 
 export default function SignUp() {
   const [name, setName] = useState("");
@@ -19,7 +20,15 @@ export default function SignUp() {
   const token = useSelector(selectToken);
   const history = useHistory();
 
-  const [createPlayer] = useMutation(CREATE_PLAYER);
+  // const [createPlayer] = useMutation(CREATE_PLAYER);
+
+  const [createPlayer, { data, loading, error }] = useMutation(CREATE_PLAYER, {
+    onCompleted({ createPlayer }) {
+      console.log("CREATEPLAYER COMPLETED", createPlayer);
+      // localStorage.setItem("token", loginPlayer.token);
+      dispatch(loginSuccess(createPlayer));
+    },
+  });
 
   useEffect(() => {
     if (token !== null) {

@@ -27,7 +27,7 @@ export default function SignUp() {
   const [loginPlayer, { data, loading, error }] = useMutation(LOGIN_PLAYER, {
     onCompleted({ loginPlayer }) {
       console.log("LOGINPLAYER COMPLETED", loginPlayer);
-      localStorage.setItem("token", loginPlayer);
+      // localStorage.setItem("token", loginPlayer.token);
       dispatch(loginSuccess(loginPlayer));
     },
   });
