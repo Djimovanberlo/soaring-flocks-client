@@ -3,7 +3,7 @@ import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import { login } from "../../store/user/actions";
-import { selectToken } from "../../store/user/selectors";
+// import { selectToken } from "../../store/user/selectors";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
 import { Col, Row, Alert } from "react-bootstrap";
@@ -28,8 +28,11 @@ import ScoreBoard from "./Scoreboard/index";
 import { selectTradePlayer } from "../../store/tradePlayer/selectors";
 import PublicChat from "./PublicChat/index";
 import { storeGame } from "../../store/game/actions";
+import { selectToken } from "../../store/player/selectors";
 
 export default function ActiveGame() {
+  const token = useSelector(selectToken);
+  console.log("DEZE TOKEN", token);
   const tradePlayer = useSelector(selectTradePlayer);
 
   const dispatch = useDispatch();
@@ -37,6 +40,13 @@ export default function ActiveGame() {
   const [tradePanelState, set_tradePanelState] = useState(true);
 
   const { data, error, loading } = useQuery(GET_GAME_BY_ID);
+
+  const history = useHistory();
+  useEffect(() => {
+    if (!token) {
+      history.push("/");
+    }
+  }, [token, history]);
 
   useEffect(() => {
     if (loading === false && data) {
