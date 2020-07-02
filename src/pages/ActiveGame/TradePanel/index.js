@@ -10,6 +10,7 @@ import { inlineIconStyle, iconStyle } from "../../../styles/imgStyles";
 import { useQuery, useSubscription } from "@apollo/react-hooks";
 import { GET_TRADES_BY_ID } from "../../../graphql/queries";
 import { storeTradePlayer } from "../../../store/tradePlayer/actions";
+import { selectPlayerName } from "../../../store/player/selectors";
 
 import PrivateChat from "../PrivateChat";
 import SentTrade from "./SentTrade";
@@ -19,6 +20,7 @@ import PublicChat from "../PublicChat";
 
 export default function TradePanel(props) {
   const dispatch = useDispatch();
+  const playerName = useSelector(selectPlayerName);
   // const { data, error, loading } = useQuery(GET_TRADES_BY_ID);
   // if (loading) return "Loading...";
   // if (error) return <Alert variant="danger">Error! {error.message}</Alert>;
@@ -33,7 +35,7 @@ export default function TradePanel(props) {
         <Container>
           <Card>
             <Card.Header>
-              Djimo's trades with {traderName}
+              {playerName}'s trades with {traderName}
               &nbsp;&nbsp;&nbsp;
               <Button
                 variant="outline-danger"

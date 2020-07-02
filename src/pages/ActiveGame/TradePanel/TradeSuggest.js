@@ -13,11 +13,14 @@ import vPointIcon from "../../../images/icons/vPointIcon.png";
 import { inlineIconStyle, iconStyle } from "../../../styles/imgStyles";
 import { SUGGEST_TRADE } from "../../../graphql/mutations";
 import { useQuery, useSubscription, useMutation } from "@apollo/react-hooks";
+import { useDispatch, useSelector } from "react-redux";
+import { selectPlayerId } from "../../../store/player/selectors";
 
 export default function TradeSuggest(props) {
+  const playerId = useSelector(selectPlayerId);
   console.log("RECEIVERID", props.traderReceiverId);
   const [suggestedTrade, set_suggestedTrade] = useState({
-    playerSenderId: 1,
+    playerSenderId: playerId,
     playerReceiverId: props.traderReceiverId,
     moneyCashSender: null,
     moneyCashReceiver: null,
