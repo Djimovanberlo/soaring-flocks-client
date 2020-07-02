@@ -15,18 +15,13 @@ import { split } from "apollo-link";
 import { getMainDefinition } from "apollo-utilities";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { apiUrl } from "./config/constants";
-import { onError } from "apollo-link-error";
+import { setContext } from "@apollo/link-context";
+import { onError } from "@apollo/link-context";
 import { ApolloLink } from "apollo-link";
 
 const httpLink = new HttpLink({
   uri: `http://${apiUrl}`,
-  // credentials: "same-origin",
 });
-
-// const httpLink = new HttpLink({
-// uri: `http://${apiUrl}`,
-// credentials: "include",
-// });
 
 // Create a WebSocket link:
 const wsLink = new WebSocketLink({
@@ -46,10 +41,23 @@ const link = split(
   httpLink
 );
 
+const authLink = setContext((_, { headers }) => {
+  // get the authentication token from local storage if it exists
+  const token = localStorage.getItem("token");
+  console.log("INDEX TOKEN", token);
+  // return the headers to the context so httpLink can read them
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : "",
+    },
+  };
+});
+
 // Instantiate client
 const client = new ApolloClient({
   cache: new InMemoryCache(),
-  link,
+  link: authLink.concat(link),
 });
 
 ReactDOM.render(
