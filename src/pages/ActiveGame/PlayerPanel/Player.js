@@ -97,16 +97,7 @@ export default function Player(props) {
   return (
     <Container>
       <Card>
-        <Card.Header>
-          {name}
-          <Button
-            onClick={() =>
-              createPublicMessage({
-                variables: { playerId: 1, content: "TESTMSG" },
-              })
-            }
-          ></Button>
-        </Card.Header>
+        <Card.Header>{name}</Card.Header>
         <Card.Body>
           <Row>
             <Col>
