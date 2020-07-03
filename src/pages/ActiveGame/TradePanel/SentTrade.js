@@ -30,6 +30,8 @@ export default function SentTrade(props) {
       playerReceiverId: props.traderReceiverId,
     },
   });
+  console.log("INCOMING TRADE PARAMS", playerId, props.traderReceiverId);
+
   if (loading) return "Loading...";
   if (error) return <Alert variant="danger">Error! {error.message}</Alert>;
   // console.log("BONJOURR SENT", data);

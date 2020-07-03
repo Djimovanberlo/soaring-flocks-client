@@ -42,23 +42,23 @@ const link = split(
   httpLink
 );
 
-const authLink = setContext((_, { headers }) => {
-  // get the authentication token from local storage if it exists
-  const token = localStorage.getItem("token");
-  console.log("INDEX TOKEN", token);
-  // return the headers to the context so httpLink can read them
-  return {
-    headers: {
-      ...headers,
-      authorization: token ? `Bearer ${token}` : "",
-    },
-  };
-});
+// const authLink = setContext((_, { headers }) => {
+//   // get the authentication token from local storage if it exists
+//   const token = localStorage.getItem("token");
+//   // console.log("INDEX TOKEN", token);
+//   // return the headers to the context so httpLink can read them
+//   return {
+//     headers: {
+//       ...headers,
+//       authorization: token ? `Bearer ${token}` : "",
+//     },
+//   };
+// });
 
 // Instantiate client
 const client = new ApolloClient({
   cache: new InMemoryCache(),
-  link: authLink.concat(link),
+  link,
 });
 
 ReactDOM.render(

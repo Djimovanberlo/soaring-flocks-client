@@ -21,7 +21,7 @@ export default function ScoreBoard(props) {
   const playerList = props.playerList.sort((a, b) => {
     return b.vPoint - a.vPoint;
   });
-  console.log("PLAYERLIST ONE", playerList);
+  // console.log("PLAYERLIST ONE", playerList);
 
   return (
     <Col style={{ overflowY: "scroll", height: "1000px" }}>

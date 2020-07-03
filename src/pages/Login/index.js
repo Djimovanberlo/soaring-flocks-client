@@ -40,7 +40,7 @@ export default function SignUp() {
 
   if (loading) return "Loading...";
   if (error) return <Alert variant="danger">Error! {error.message}</Alert>;
-  console.log("LOGINDATA", data);
+  // console.log("LOGINDATA", data);
 
   function submitForm(event) {
     console.log("hi", email, password);

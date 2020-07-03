@@ -22,17 +22,25 @@ import { selectPlayerId } from "../../../store/player/selectors";
 export default function IncomingTrade(props) {
   // console.log("WIOUWGEWYGEUY", props.traderSenderId);
   const playerId = useSelector(selectPlayerId);
+  const [errorState, set_errorState] = useState(null);
   const [closeTrade] = useMutation(CLOSE_TRADE);
-  const [acceptTrade] = useMutation(ACCEPT_TRADE);
+  const [acceptTrade] = useMutation(ACCEPT_TRADE, {
+    onCompleted({ acceptTrade }) {
+      console.log("TRADE ACCEPTED", acceptTrade);
+    },
+  });
+  console.log("INCOMING TRADE PARAMS", props.traderSenderId, playerId);
+
   const { data, error, loading } = useQuery(GET_TRADES_BY_ID, {
     variables: {
       playerSenderId: props.traderSenderId,
       playerReceiverId: playerId,
     },
   });
+  console.log("TRADEDATA", data);
   if (loading) return "Loading...";
   if (error) return <Alert variant="danger">Error! {error.message}</Alert>;
-  // console.log("GOEIEDAG INCOMING", data);
+  console.log("GOEIEDAG INCOMING", data);
 
   if (data.getTradesById === null) {
     return (
@@ -106,6 +114,7 @@ export default function IncomingTrade(props) {
 
     return (
       <Card>
+        {errorState}
         {!data || !data.getTradesById.closed ? (
           <>
             <Card.Header>Incoming trade</Card.Header>

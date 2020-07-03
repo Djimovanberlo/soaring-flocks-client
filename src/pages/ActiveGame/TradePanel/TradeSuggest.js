@@ -21,7 +21,7 @@ export default function TradeSuggest(props) {
   const player = useSelector(selectPlayer);
   console.log("PLAYERTRADE", player);
   const [suggestedTrade, set_suggestedTrade] = useState({
-    playerSenderId: player.id,
+    playerSenderId: playerId,
     playerReceiverId: props.traderReceiverId,
     moneyCashSender: null,
     moneyCashReceiver: null,

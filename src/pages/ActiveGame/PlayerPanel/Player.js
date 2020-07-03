@@ -37,7 +37,7 @@ export default function Player(props) {
   );
   const playerId = useSelector(selectPlayerId);
   const player = useSelector(selectPlayer);
-  console.log("PLAYERSELECT", player);
+  // console.log("PLAYERSELECT", player);
   const [createMarket] = useMutation(CREATE_MARKET);
   const [createAttack] = useMutation(CREATE_ATTACK);
   const [createPublicMessage] = useMutation(CREATE_PUBLIC_MESSAGE);
