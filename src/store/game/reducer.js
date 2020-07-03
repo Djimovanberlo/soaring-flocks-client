@@ -5,8 +5,8 @@ const initialState = {};
 export default (state = initialState, action) => {
   switch (action.type) {
     case "GAME_STATE":
-      console.log(state);
-      console.log("EVEN EEN TEKST", action.payload);
+      // console.log(state);
+      // console.log("EVEN EEN TEKST", action.payload);
       return { ...state, ...action.payload };
     default:
       return state;

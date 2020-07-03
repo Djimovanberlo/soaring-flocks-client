@@ -36,18 +36,19 @@ export default function Player(props) {
     </>
   );
   const playerId = useSelector(selectPlayerId);
-  console.log("PLAYERSELECT", playerId);
+  const player = useSelector(selectPlayer);
+  // console.log("PLAYERSELECT", player);
   const [createMarket] = useMutation(CREATE_MARKET);
   const [createAttack] = useMutation(CREATE_ATTACK);
   const [createPublicMessage] = useMutation(CREATE_PUBLIC_MESSAGE);
-  const { data, error, loading } = useQuery(GET_PLAYER_BY_ID, {
-    variables: {
-      id: playerId,
-    },
-  });
-  if (loading) return "Loading...";
-  if (error) return <Alert variant="danger">Error! {error.message}</Alert>;
-  console.log("data:", data, "error:", error, "loading:", loading);
+  // const { data, error, loading } = useQuery(GET_PLAYER_BY_ID, {
+  //   variables: {
+  //     id: player.id,
+  //   },
+  // });
+  // if (loading) return "Loading...";
+  // if (error) return <Alert variant="danger">Error! {error.message}</Alert>;
+  // console.log("data:", data, "error:", error, "loading:", loading);
   const {
     id,
     name,
@@ -59,9 +60,14 @@ export default function Player(props) {
     mMarket,
     rMarket,
     vMarket,
-  } = data.getPlayerById;
+  } = player;
 
   const cashMoneyCost = (mMarket + rMarket + vMarket) * 2 - 6;
+
+  const filteredPlayerList = props.playerList.filter(
+    (player) => player.id !== id
+  );
+  // Cannot ternary for <option> since React will complain about a missing key while mapping @ attack options
 
   const attackHandler = (event) => {
     // event.preventDefault();
@@ -97,16 +103,7 @@ export default function Player(props) {
   return (
     <Container>
       <Card>
-        <Card.Header>
-          {name}
-          <Button
-            onClick={() =>
-              createPublicMessage({
-                variables: { playerId: 1, content: "TESTMSG" },
-              })
-            }
-          ></Button>
-        </Card.Header>
+        <Card.Header>{name}</Card.Header>
         <Card.Body>
           <Row>
             <Col>
@@ -197,16 +194,11 @@ export default function Player(props) {
                               defaultValue="Don't attack anyone"
                             >
                               <option>Don't attack anyone</option>
-                              {props.playerList.map((player) => {
+                              {filteredPlayerList.map((player) => {
                                 return (
                                   <option key={player.id}>{player.name}</option>
                                 );
                               })}
-
-                              {/* <option>No ability</option>
-                            <option>Attack</option>
-                            <option>Buy</option>
-                            <option>Invest</option> */}
                             </Form.Control>
                           </Form.Group>
                           <Form.Group controlId="submitForm">
@@ -243,40 +235,45 @@ export default function Player(props) {
                   </div>
                   <br></br>
                   <br></br>
-                  {/* {moneyCash < ((mMarket + rMarket + vMarket) * 2 - 6) || egg < 1 || feather < 1 || bug <1 ? (<></>) :  */}
-                  <Form>
-                    <Form.Group controlId="marketselect">
-                      <Form.Label>Select a market</Form.Label>
-                      <Form.Control
-                        as="select"
-                        onChange={(event) => {
-                          set_market(event.target.value);
-                        }}
-                        defaultValue="Don't build anything"
-                      >
-                        <option>Don't build anything</option>
-                        <option>Money Market</option>
-                        <option>Rare Market</option>
-                        <option>Victory Market</option>
-                      </Form.Control>
-                    </Form.Group>
-                    <Form.Group controlId="submitForm">
-                      {market !== "Don't build anything" ? (
-                        <Button
-                          variant="outline-info"
-                          type="submit"
-                          onClick={marketHandler}
+                  {moneyCash < (mMarket + rMarket + vMarket) * 2 - 6 ||
+                  egg < 1 ||
+                  feather < 1 ||
+                  bug < 1 ? (
+                    <></>
+                  ) : (
+                    <Form>
+                      <Form.Group controlId="marketselect">
+                        <Form.Label>Select a market</Form.Label>
+                        <Form.Control
+                          as="select"
+                          onChange={(event) => {
+                            set_market(event.target.value);
+                          }}
+                          defaultValue="Don't build anything"
                         >
-                          Build
-                        </Button>
-                      ) : (
-                        <>
-                          <br></br>
-                        </>
-                      )}
-                    </Form.Group>
-                  </Form>
-                  {/* } */}
+                          <option>Don't build anything</option>
+                          <option>Money Market</option>
+                          <option>Rare Market</option>
+                          <option>Victory Market</option>
+                        </Form.Control>
+                      </Form.Group>
+                      <Form.Group controlId="submitForm">
+                        {market !== "Don't build anything" ? (
+                          <Button
+                            variant="outline-info"
+                            type="submit"
+                            onClick={marketHandler}
+                          >
+                            Build
+                          </Button>
+                        ) : (
+                          <>
+                            <br></br>
+                          </>
+                        )}
+                      </Form.Group>
+                    </Form>
+                  )}
                 </Col>
               </Row>
             </Container>

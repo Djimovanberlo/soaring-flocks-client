@@ -13,11 +13,15 @@ import vPointIcon from "../../../images/icons/vPointIcon.png";
 import { inlineIconStyle, iconStyle } from "../../../styles/imgStyles";
 import { SUGGEST_TRADE } from "../../../graphql/mutations";
 import { useQuery, useSubscription, useMutation } from "@apollo/react-hooks";
+import { useDispatch, useSelector } from "react-redux";
+import { selectPlayerId, selectPlayer } from "../../../store/player/selectors";
 
 export default function TradeSuggest(props) {
-  console.log("RECEIVERID", props.traderReceiverId);
+  const playerId = useSelector(selectPlayerId);
+  const player = useSelector(selectPlayer);
+  console.log("PLAYERTRADE", player);
   const [suggestedTrade, set_suggestedTrade] = useState({
-    playerSenderId: 1,
+    playerSenderId: playerId,
     playerReceiverId: props.traderReceiverId,
     moneyCashSender: null,
     moneyCashReceiver: null,
@@ -67,6 +71,7 @@ export default function TradeSuggest(props) {
                       style={{ width: 60 }}
                       type="number"
                       min="0"
+                      max={player.moneyCash}
                       id="inputSenderMoneyCash"
                       onChange={(event) => {
                         set_suggestedTrade({
@@ -84,6 +89,7 @@ export default function TradeSuggest(props) {
                       style={{ width: 60 }}
                       type="number"
                       min="0"
+                      max={player.egg}
                       id="inputSenderEgg"
                       onChange={(event) => {
                         set_suggestedTrade({
@@ -101,6 +107,7 @@ export default function TradeSuggest(props) {
                       style={{ width: 60 }}
                       type="number"
                       min="0"
+                      max={player.feather}
                       id="inputSenderFeather"
                       onChange={(event) => {
                         set_suggestedTrade({
@@ -118,6 +125,7 @@ export default function TradeSuggest(props) {
                       style={{ width: 60 }}
                       type="number"
                       min="0"
+                      max={player.bug}
                       id="inputSenderBug"
                       onChange={(event) => {
                         set_suggestedTrade({
@@ -138,6 +146,7 @@ export default function TradeSuggest(props) {
                       style={{ width: 60 }}
                       type="number"
                       min="0"
+                      max="10"
                       id="inputReceiverMoneyCash"
                       onChange={(event) => {
                         set_suggestedTrade({
@@ -155,6 +164,7 @@ export default function TradeSuggest(props) {
                       style={{ width: 60 }}
                       type="number"
                       min="0"
+                      max="10"
                       id="inputReceiverEgg"
                       onChange={(event) => {
                         set_suggestedTrade({
@@ -172,6 +182,7 @@ export default function TradeSuggest(props) {
                       style={{ width: 60 }}
                       type="number"
                       min="0"
+                      max="10"
                       id="inputReceiverFeather"
                       onChange={(event) => {
                         set_suggestedTrade({
@@ -189,6 +200,7 @@ export default function TradeSuggest(props) {
                       style={{ width: 60 }}
                       type="number"
                       min="0"
+                      max="10"
                       id="inputReceiverBug"
                       onChange={(event) => {
                         set_suggestedTrade({

@@ -115,7 +115,7 @@ export const getPlayerWithStoredToken = () => {
     try {
       // if we do have a token,
       // check wether it is still valid or if it is expired
-      const response = await axios.get(`${apiUrl}/me`, {
+      const response = await axios.get(`https://${apiUrl}/me`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -128,6 +128,7 @@ export const getPlayerWithStoredToken = () => {
       } else {
         console.log(error);
       }
+      console.log("ERROR", error);
       // if we get a 4xx or 5xx response,
       // get rid of the token by logging out
       dispatch(logOut());

@@ -8,7 +8,23 @@ export const CREATE_PLAYER = gql`
     $img: String
   ) {
     createPlayer(name: $name, email: $email, password: $password, img: $img) {
-      id
+      token
+      player {
+        id
+        name
+        email
+        img
+        inGame
+        moneyCash
+        egg
+        feather
+        bug
+        vPoint
+        mMarket
+        rMarket
+        vMarket
+      }
+      error
     }
   }
 `;
@@ -22,7 +38,26 @@ export const LOGIN_PLAYER = gql`
         name
         email
         img
+        inGame
+        moneyCash
+        egg
+        feather
+        bug
+        vPoint
+        mMarket
+        rMarket
+        vMarket
       }
+      error
+    }
+  }
+`;
+
+export const REFRESH_TOKEN = gql`
+  mutation refreshToken($token: String) {
+    refreshToken(token: $token) {
+      token
+      error
     }
   }
 `;
@@ -104,6 +139,7 @@ export const ACCEPT_TRADE = gql`
       featherReceiver
       bugSender
       bugReceiver
+      error
     }
   }
 `;

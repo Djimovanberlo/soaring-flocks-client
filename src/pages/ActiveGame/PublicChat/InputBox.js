@@ -8,14 +8,22 @@ import { CREATE_PUBLIC_MESSAGE } from "../../../graphql/mutations";
 import { GET_ALL_PUBLIC_MESSAGES } from "../../../graphql/queries";
 import { SUB_ALL_PUBLIC_MESSAGES } from "../../../graphql/subscriptions";
 import { useQuery, useSubscription, useMutation } from "@apollo/react-hooks";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectPlayerName,
+  selectPlayerId,
+} from "../../../store/player/selectors";
 
 export default function InputBox(props) {
   //   console.log("WWWWWWWWWWW", props);
 
   //   console.log("PROPSDATA", allQueriedMessages);
 
+  const playerName = useSelector(selectPlayerName);
+  const playerId = useSelector(selectPlayerId);
+
   const [newMessage, set_newMessage] = useState({
-    player: "Djimo",
+    player: playerName,
     content: "",
   });
 
@@ -25,9 +33,9 @@ export default function InputBox(props) {
     if (target.charCode === 13) {
       //   console.log("ENTER CLICKwwwwED", newMessage.content);
       createPublicMessage({
-        variables: { playerId: 1, content: newMessage.content },
+        variables: { playerId: playerId, content: newMessage.content },
       });
-      set_newMessage({ player: "Djimo", content: "" });
+      set_newMessage({ player: playerName, content: "" });
       // set_inputField("");
     }
   };

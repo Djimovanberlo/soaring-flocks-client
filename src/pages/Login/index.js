@@ -12,6 +12,7 @@ import { Col } from "react-bootstrap";
 import { LOGIN_PLAYER } from "../../graphql/mutations";
 
 export default function SignUp() {
+  const [errorState, set_errorState] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
@@ -27,8 +28,13 @@ export default function SignUp() {
   const [loginPlayer, { data, loading, error }] = useMutation(LOGIN_PLAYER, {
     onCompleted({ loginPlayer }) {
       console.log("LOGINPLAYER COMPLETED", loginPlayer);
-      localStorage.setItem("token", loginPlayer);
-      dispatch(loginSuccess(loginPlayer));
+      if (loginPlayer.error) {
+        set_errorState(<Alert variant="danger">{loginPlayer.error}</Alert>);
+      }
+      // localStorage.setItem("token", loginPlayer.token);
+      if (loginPlayer.player && loginPlayer.token) {
+        dispatch(loginSuccess(loginPlayer));
+      }
     },
   });
 
@@ -52,6 +58,7 @@ export default function SignUp() {
 
   return (
     <>
+      <>{errorState}</>
       <Container as={Col} md={{ span: 6, offset: 5 }} className="mt-5">
         <h2>Log in</h2>
       </Container>

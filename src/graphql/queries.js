@@ -1,18 +1,49 @@
 import gql from "graphql-tag";
 
-export const GET_PLAYER_BY_ID = gql`
-  query getPlayerById($id: Int) {
-    getPlayerById(id: $id) {
-      id
-      name
-      moneyCash
-      egg
-      feather
-      bug
-      vPoint
-      mMarket
-      rMarket
-      vMarket
+export const GET_PLAYER_BY_TOKEN = gql`
+  query getPlayerByToken($token: String) {
+    getPlayerByToken(token: $token) {
+      player {
+        id
+        name
+        email
+        img
+        inGame
+        moneyCash
+        egg
+        feather
+        bug
+        vPoint
+        mMarket
+        rMarket
+        vMarket
+      }
+      error
+      token
+    }
+  }
+`;
+
+export const REFRESH_PLAYER = gql`
+  query refreshPlayer($token: String) {
+    refreshPlayer(token: $token) {
+      player {
+        id
+        name
+        email
+        img
+        inGame
+        moneyCash
+        egg
+        feather
+        bug
+        vPoint
+        mMarket
+        rMarket
+        vMarket
+      }
+      error
+      token
     }
   }
 `;

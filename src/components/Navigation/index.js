@@ -7,13 +7,13 @@ import { selectToken } from "../../store/player/selectors";
 import NavbarItem from "./NavbarItem";
 import LoggedIn from "./LoggedIn";
 import LoggedOut from "./LoggedOut";
+import { selectGameTitle } from "../../store/game/selectors";
 
 export default function Navigation() {
   const token = useSelector(selectToken);
-
   // user in game ? display Game Title : display Create Game
   const gameAccessControls = token ? (
-    <NavbarItem path="/activeGame" linkText="Game Title" />
+    <NavbarItem path="/activeGame" linkText="Soaring Flocks" />
   ) : (
     <></>
   );

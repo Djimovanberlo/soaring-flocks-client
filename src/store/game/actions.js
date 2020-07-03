@@ -11,7 +11,7 @@ import {
 // export const ALL_PLAYERS = "ALL_PLAYERS";
 
 export const storeGame = (gameState) => {
-  console.log("ACTION", gameState);
+  // console.log("ACTION", gameState);
   return {
     type: "GAME_STATE",
     payload: gameState,

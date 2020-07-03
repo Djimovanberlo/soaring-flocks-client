@@ -18,11 +18,14 @@ export default function ScoreBoard(props) {
   // const sortedListing = newList.sort((a, b) => {
   //   return a.priceEuro - b.priceEuro;
   // });
-  // console.log("PLAYERLIST", props.playerList);
+  const playerList = props.playerList.sort((a, b) => {
+    return b.vPoint - a.vPoint;
+  });
+  // console.log("PLAYERLIST ONE", playerList);
 
   return (
     <Col style={{ overflowY: "scroll", height: "1000px" }}>
-      {props.playerList.map((listPlayer) => {
+      {playerList.map((listPlayer) => {
         return (
           <PlayerScore
             key={listPlayer.id}

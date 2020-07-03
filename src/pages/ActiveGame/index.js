@@ -3,7 +3,7 @@ import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import { login } from "../../store/user/actions";
-import { selectToken } from "../../store/user/selectors";
+// import { selectToken } from "../../store/user/selectors";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
 import { Col, Row, Alert } from "react-bootstrap";
@@ -28,15 +28,23 @@ import ScoreBoard from "./Scoreboard/index";
 import { selectTradePlayer } from "../../store/tradePlayer/selectors";
 import PublicChat from "./PublicChat/index";
 import { storeGame } from "../../store/game/actions";
+import { selectToken } from "../../store/player/selectors";
 
 export default function ActiveGame() {
+  const token = useSelector(selectToken);
   const tradePlayer = useSelector(selectTradePlayer);
 
   const dispatch = useDispatch();
-  // console.log("SELECTED PLAYER", tradePlayer);
   const [tradePanelState, set_tradePanelState] = useState(true);
 
   const { data, error, loading } = useQuery(GET_GAME_BY_ID);
+
+  const history = useHistory();
+  useEffect(() => {
+    if (!token) {
+      history.push("/");
+    }
+  }, [token, history]);
 
   useEffect(() => {
     if (loading === false && data) {
@@ -54,18 +62,8 @@ export default function ActiveGame() {
 
   if (loading) return "Loading...";
   if (error) return <Alert variant="danger">Error! {error.message}</Alert>;
-  console.log("data:", data, "error:", error, "loading:", loading);
-  console.log("GAMEDATA", data.getGameById);
-
-  // const { id, gameTitle, gameTime, gameTimePassed } = data.getGameById;
-  // dispatch(
-  //   storeGame({
-  //     id,
-  //     gameTitle,
-  //     gameTime,
-  //     gameTimePassed,
-  //   })
-  // );
+  // console.log("data:", data, "error:", error, "loading:", loading);
+  // console.log("GAMEDATA", data.getGameById);
 
   const tradeControls = tradePlayer.tradeState ? (
     <TradePanel
@@ -76,11 +74,6 @@ export default function ActiveGame() {
   ) : (
     <PlayerPanel playerList={data.getGameById.players} />
   );
-
-  const handleClick = (event) => {
-    event.preventDefault();
-    set_tradePanelState(!tradePanelState);
-  };
 
   return (
     <>
@@ -93,12 +86,12 @@ export default function ActiveGame() {
         <Row>
           <h2>{data.getGameById.gameTitle}</h2>
         </Row>
-        <Row>
+        {/* <Row>
           <h6>
             Turn {data.getGameById.gameTimePassed}. Game ends in{" "}
             {data.getGameById.gameTime - data.getGameById.gameTimePassed} turns
           </h6>
-        </Row>
+        </Row> */}
       </Container>
       <br></br>
       <Row>

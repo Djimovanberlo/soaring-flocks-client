@@ -40,19 +40,6 @@ export default function gameInfo() {
           </Col>
         </Row>
       </Container>
-      {/* <Container as={Col} md={{ span: 5, offset: 4 }} className="mt-5">
-        <Row>
-          <Col>
-            <h5>
-              <a href="https://codaisseur.com/">Codaisseur</a> portfolio project
-            </h5>
-            <p>
-              Soaring Stocks is a fullstack App designed and built by Djimo van
-              Berlo as part of Codaisseur's academy.
-            </p>
-          </Col>
-        </Row>
-      </Container> */}
       <Container>
         <Row>
           <Col md={{ span: 2 }}>
@@ -72,22 +59,35 @@ export default function gameInfo() {
           <Col>
             <h5 style={{ textAlign: "center" }}>Rules</h5>
             <p>
-              Soaring flocks is a multiplayer game where up to 12 players take
+              Soaring flocks is a multiplayer game where up to 20 players take
               on the role of capitalist birds to collect, spend and trade
-              resources in order to earn victory points. Soaring flocks is
-              played in 10, 20 or 30 turns. Each turn lasts a day. Whichever
-              player has the most victory points by the end of the game wins
-              Soaring Flocks.
+              resources in order to earn victory points. In Soaring Flocks, each
+              turn lasts a day. Players' goal is to collect as many Victory
+              Points as they can.
             </p>
             <p>
-              Each turn players build up to one market. Every night at midnight,
-              new markets are built and players earn resources accordingly.
+              Each Player has a number of markets, that produce resources. Every
+              night at midnight, Players earn resources accordingly.
             </p>
             <p>
-              Players own a number of markets. At the end of each turn, these
-              markets create resources for the player. Players are free to trade
-              their resources with each other at any time and by any amount
-            </p>
+              Players are free to trade their resources with each other at any
+              time and by any amount
+            </p>{" "}
+            <hr></hr>
+            <h5 style={{ textAlign: "center" }}>Upcoming features</h5>
+            <p>
+              Games actually start and end. Players can create a game, add other
+              players and start their game. Whichever player has the most
+              Victory Points by the end of the game, wins.
+            </p>{" "}
+            <hr></hr>
+            <p>
+              The page no longer refreshes on handling trades, but is directly
+              subscribed to changes make to trades.
+            </p>{" "}
+            <hr></hr>
+            <p>Players can chat one on one.</p> <hr></hr>
+            <p>Styling improvements.</p>
           </Col>
           <Col>
             <h5 style={{ textAlign: "center" }}>Resources, Markets, Attacks</h5>
@@ -121,7 +121,11 @@ export default function gameInfo() {
               <Image src={marketIcon} style={inlineIconStyle} />
               <Image src={moneyCashIcon} style={inlineIconStyle} /> and 2
               <Image src={marketIcon} style={inlineIconStyle} />
-              <Image src={rareIcon} style={inlineIconStyle} />.
+              <Image src={rareIcon} style={inlineIconStyle} /> markets. They
+              also receive 1 of each{" "}
+              <Image src={eggIcon} style={inlineIconStyle} />
+              egg, <Image src={featherIcon} style={inlineIconStyle} />
+              feather, <Image src={bugIcon} style={inlineIconStyle} /> bug.
             </p>
             Players can attack other players for 1{" "}
             <Image src={moneyCashIcon} style={inlineIconStyle} />. Attacking
