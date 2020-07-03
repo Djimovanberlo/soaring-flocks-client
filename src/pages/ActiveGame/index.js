@@ -75,11 +75,6 @@ export default function ActiveGame() {
     <PlayerPanel playerList={data.getGameById.players} />
   );
 
-  const handleClick = (event) => {
-    event.preventDefault();
-    set_tradePanelState(!tradePanelState);
-  };
-
   return (
     <>
       <Container

@@ -36,18 +36,19 @@ export default function Player(props) {
     </>
   );
   const playerId = useSelector(selectPlayerId);
-  console.log("PLAYERSELECT", playerId);
+  const player = useSelector(selectPlayer);
+  console.log("PLAYERSELECT", player);
   const [createMarket] = useMutation(CREATE_MARKET);
   const [createAttack] = useMutation(CREATE_ATTACK);
   const [createPublicMessage] = useMutation(CREATE_PUBLIC_MESSAGE);
-  const { data, error, loading } = useQuery(GET_PLAYER_BY_ID, {
-    variables: {
-      id: playerId,
-    },
-  });
-  if (loading) return "Loading...";
-  if (error) return <Alert variant="danger">Error! {error.message}</Alert>;
-  console.log("data:", data, "error:", error, "loading:", loading);
+  // const { data, error, loading } = useQuery(GET_PLAYER_BY_ID, {
+  //   variables: {
+  //     id: player.id,
+  //   },
+  // });
+  // if (loading) return "Loading...";
+  // if (error) return <Alert variant="danger">Error! {error.message}</Alert>;
+  // console.log("data:", data, "error:", error, "loading:", loading);
   const {
     id,
     name,
@@ -59,7 +60,7 @@ export default function Player(props) {
     mMarket,
     rMarket,
     vMarket,
-  } = data.getPlayerById;
+  } = player;
 
   const cashMoneyCost = (mMarket + rMarket + vMarket) * 2 - 6;
 

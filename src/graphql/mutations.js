@@ -14,6 +14,15 @@ export const CREATE_PLAYER = gql`
         name
         email
         img
+        inGame
+        moneyCash
+        egg
+        feather
+        bug
+        vPoint
+        mMarket
+        rMarket
+        vMarket
       }
     }
   }
@@ -28,6 +37,15 @@ export const LOGIN_PLAYER = gql`
         name
         email
         img
+        inGame
+        moneyCash
+        egg
+        feather
+        bug
+        vPoint
+        mMarket
+        rMarket
+        vMarket
       }
     }
   }
