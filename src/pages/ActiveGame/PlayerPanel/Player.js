@@ -64,12 +64,10 @@ export default function Player(props) {
 
   const cashMoneyCost = (mMarket + rMarket + vMarket) * 2 - 6;
 
-  console.log("HOI111", props.playerList, id);
-
-  const filteredList = props.playerList.filter((player) => player.id !== id);
+  const filteredPlayerList = props.playerList.filter(
+    (player) => player.id !== id
+  );
   // Cannot ternary for <option> since React will complain about a missing key while mapping @ attack options
-
-  console.log("HOI222", filteredList);
 
   const attackHandler = (event) => {
     // event.preventDefault();
@@ -196,7 +194,7 @@ export default function Player(props) {
                               defaultValue="Don't attack anyone"
                             >
                               <option>Don't attack anyone</option>
-                              {filteredList.map((player) => {
+                              {filteredPlayerList.map((player) => {
                                 return (
                                   <option key={player.id}>{player.name}</option>
                                 );
