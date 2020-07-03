@@ -21,6 +21,7 @@ import { ApolloLink } from "apollo-link";
 
 const httpLink = new HttpLink({
   uri: `http://${apiUrl}`,
+  credentials: "same-origin",
 });
 
 // Create a WebSocket link:

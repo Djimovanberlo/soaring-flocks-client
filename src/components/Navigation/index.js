@@ -13,7 +13,7 @@ export default function Navigation() {
   const token = useSelector(selectToken);
   // user in game ? display Game Title : display Create Game
   const gameAccessControls = token ? (
-    <NavbarItem path="/activeGame" linkText="Soaring flocks" />
+    <NavbarItem path="/activeGame" linkText="Soaring Flocks" />
   ) : (
     <></>
   );

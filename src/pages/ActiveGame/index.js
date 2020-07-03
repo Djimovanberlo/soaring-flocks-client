@@ -32,11 +32,9 @@ import { selectToken } from "../../store/player/selectors";
 
 export default function ActiveGame() {
   const token = useSelector(selectToken);
-  console.log("DEZE TOKEN", token);
   const tradePlayer = useSelector(selectTradePlayer);
 
   const dispatch = useDispatch();
-  // console.log("SELECTED PLAYER", tradePlayer);
   const [tradePanelState, set_tradePanelState] = useState(true);
 
   const { data, error, loading } = useQuery(GET_GAME_BY_ID);
@@ -67,16 +65,6 @@ export default function ActiveGame() {
   console.log("data:", data, "error:", error, "loading:", loading);
   console.log("GAMEDATA", data.getGameById);
 
-  // const { id, gameTitle, gameTime, gameTimePassed } = data.getGameById;
-  // dispatch(
-  //   storeGame({
-  //     id,
-  //     gameTitle,
-  //     gameTime,
-  //     gameTimePassed,
-  //   })
-  // );
-
   const tradeControls = tradePlayer.tradeState ? (
     <TradePanel
       playerList={data.getGameById.players}
@@ -103,12 +91,12 @@ export default function ActiveGame() {
         <Row>
           <h2>{data.getGameById.gameTitle}</h2>
         </Row>
-        <Row>
+        {/* <Row>
           <h6>
             Turn {data.getGameById.gameTimePassed}. Game ends in{" "}
             {data.getGameById.gameTime - data.getGameById.gameTimePassed} turns
           </h6>
-        </Row>
+        </Row> */}
       </Container>
       <br></br>
       <Row>
