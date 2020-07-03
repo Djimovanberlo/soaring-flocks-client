@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
-import Button from "react-bootstrap/Button";
+import { Button, Alert } from "react-bootstrap";
 import { signUp } from "../../store/player/actions";
 import { selectToken } from "../../store/player/selectors";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,6 +13,7 @@ import { CREATE_PLAYER } from "../../graphql/mutations";
 import { loginSuccess } from "../../store/player/actions";
 
 export default function SignUp() {
+  const [errorState, set_errorState] = useState(null);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -26,7 +27,12 @@ export default function SignUp() {
     onCompleted({ createPlayer }) {
       console.log("CREATEPLAYER COMPLETED", createPlayer);
       // localStorage.setItem("token", loginPlayer.token);
-      dispatch(loginSuccess(createPlayer));
+      if (createPlayer.error) {
+        set_errorState(<Alert variant="danger">{createPlayer.error}</Alert>);
+      }
+      if (createPlayer.player && createPlayer.token) {
+        dispatch(loginSuccess(createPlayer));
+      }
     },
   });
 
@@ -66,6 +72,7 @@ export default function SignUp() {
 
   return (
     <>
+      <>{errorState}</>
       <Container as={Col} md={{ span: 6, offset: 5 }} className="mt-5">
         <h2>Sign up</h2>
       </Container>

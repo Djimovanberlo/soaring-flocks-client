@@ -24,6 +24,7 @@ export const CREATE_PLAYER = gql`
         rMarket
         vMarket
       }
+      error
     }
   }
 `;
@@ -47,6 +48,7 @@ export const LOGIN_PLAYER = gql`
         rMarket
         vMarket
       }
+      error
     }
   }
 `;
