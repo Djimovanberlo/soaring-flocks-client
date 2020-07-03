@@ -237,40 +237,45 @@ export default function Player(props) {
                   </div>
                   <br></br>
                   <br></br>
-                  {/* {moneyCash < ((mMarket + rMarket + vMarket) * 2 - 6) || egg < 1 || feather < 1 || bug <1 ? (<></>) :  */}
-                  <Form>
-                    <Form.Group controlId="marketselect">
-                      <Form.Label>Select a market</Form.Label>
-                      <Form.Control
-                        as="select"
-                        onChange={(event) => {
-                          set_market(event.target.value);
-                        }}
-                        defaultValue="Don't build anything"
-                      >
-                        <option>Don't build anything</option>
-                        <option>Money Market</option>
-                        <option>Rare Market</option>
-                        <option>Victory Market</option>
-                      </Form.Control>
-                    </Form.Group>
-                    <Form.Group controlId="submitForm">
-                      {market !== "Don't build anything" ? (
-                        <Button
-                          variant="outline-info"
-                          type="submit"
-                          onClick={marketHandler}
+                  {moneyCash < (mMarket + rMarket + vMarket) * 2 - 6 ||
+                  egg < 1 ||
+                  feather < 1 ||
+                  bug < 1 ? (
+                    <></>
+                  ) : (
+                    <Form>
+                      <Form.Group controlId="marketselect">
+                        <Form.Label>Select a market</Form.Label>
+                        <Form.Control
+                          as="select"
+                          onChange={(event) => {
+                            set_market(event.target.value);
+                          }}
+                          defaultValue="Don't build anything"
                         >
-                          Build
-                        </Button>
-                      ) : (
-                        <>
-                          <br></br>
-                        </>
-                      )}
-                    </Form.Group>
-                  </Form>
-                  {/* } */}
+                          <option>Don't build anything</option>
+                          <option>Money Market</option>
+                          <option>Rare Market</option>
+                          <option>Victory Market</option>
+                        </Form.Control>
+                      </Form.Group>
+                      <Form.Group controlId="submitForm">
+                        {market !== "Don't build anything" ? (
+                          <Button
+                            variant="outline-info"
+                            type="submit"
+                            onClick={marketHandler}
+                          >
+                            Build
+                          </Button>
+                        ) : (
+                          <>
+                            <br></br>
+                          </>
+                        )}
+                      </Form.Group>
+                    </Form>
+                  )}
                 </Col>
               </Row>
             </Container>
