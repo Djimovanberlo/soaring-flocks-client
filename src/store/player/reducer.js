@@ -13,8 +13,9 @@ export default (state = initialState, action) => {
       return { ...state, ...action.payload };
 
     case LOG_OUT:
+      console.log("REDUCING", action.payload);
       localStorage.removeItem("token");
-      return { ...initialState, token: null };
+      return { ...initialState, token: null, player: null };
 
     case TOKEN_STILL_VALID:
       return { ...state, ...action.payload };

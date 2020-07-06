@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Jumbotron from "react-bootstrap/Jumbotron";
 import { Button, Card } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Col, Row, Image, Alert } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import { useQuery, useSubscription, useMutation } from "@apollo/react-hooks";
@@ -20,6 +20,7 @@ import { inlineIconStyle, iconStyle } from "../../../styles/imgStyles";
 import { selectPlayerId } from "../../../store/player/selectors";
 
 export default function IncomingTrade(props) {
+  const history = useHistory();
   // console.log("WIOUWGEWYGEUY", props.traderSenderId);
   const playerId = useSelector(selectPlayerId);
   const [errorState, set_errorState] = useState(null);
@@ -79,6 +80,7 @@ export default function IncomingTrade(props) {
           bugReceiver,
         },
       });
+      // history.push("/GameInfo");
       window.location.reload(false);
     };
 

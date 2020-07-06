@@ -19,7 +19,7 @@ import { selectAppLoading } from "./store/appState/selectors";
 import { logOut } from "../src/store/player/actions";
 import { getPlayerWithStoredToken } from "./store/player/actions";
 import { Jumbotron, Alert } from "react-bootstrap";
-import { selectToken, selectPlayerId } from "./store/player/selectors";
+import { selectToken, selectPlayer } from "./store/player/selectors";
 import { loginSuccess } from "../src/store/player/actions";
 import { REFRESH_PLAYER } from "./graphql/queries";
 
@@ -27,38 +27,17 @@ function App() {
   const dispatch = useDispatch();
   const isLoading = useSelector(selectAppLoading);
   const token = localStorage.getItem("token");
-  const playerId = useSelector(selectPlayerId);
+  // const playerId = useSelector(selectPlayerId);
+  const player = useSelector(selectPlayer);
   const history = useHistory();
 
-  console.log("REFRESH TOKEN", token);
-  const { data, loading, error } = useQuery(GET_PLAYER_BY_TOKEN, {
-    variables: {
-      token,
-    },
-  });
-
-  console.log("DATA", data);
+  console.log("APP", token, player);
 
   useEffect(() => {
-    if (loading === false && data) {
-      // dispatch(loginSuccess(data.getPlayerByToken));
+    if (!token || !player) {
+      history.push("/login");
     }
-  }, [loading, data]);
-
-  useEffect(() => {
-    console.log("TOKEN", token);
-    if (!token) {
-      dispatch(logOut());
-    }
-  }, [token, history]);
-
-  if (loading) return "Loading...";
-  if (error) return <Alert variant="danger">Error! {error.message}</Alert>;
-  console.log("data:", data, "error:", error, "loading:", loading);
-
-  // useEffect(() => {
-  //   dispatch(getPlayerWithStoredToken());
-  // }, [dispatch]);
+  }, [token, player]);
 
   return (
     <div className="App">
