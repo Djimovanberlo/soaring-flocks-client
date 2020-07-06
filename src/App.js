@@ -26,39 +26,8 @@ import { REFRESH_PLAYER } from "./graphql/queries";
 function App() {
   const dispatch = useDispatch();
   const isLoading = useSelector(selectAppLoading);
-  const token = localStorage.getItem("token");
-  const playerId = useSelector(selectPlayerId);
+  // const playerId = useSelector(selectPlayerId);
   const history = useHistory();
-
-  console.log("REFRESH TOKEN", token);
-  // const { data, loading, error } = useQuery(GET_PLAYER_BY_TOKEN, {
-  //   variables: {
-  //     token,
-  //   },
-  // });
-
-  // console.log("DATA", data);
-
-  // useEffect(() => {
-  //   if (loading === false && data) {
-  //     // dispatch(loginSuccess(data.getPlayerByToken));
-  //   }
-  // }, [loading, data]);
-
-  // useEffect(() => {
-  //   console.log("TOKEN", token);
-  //   if (!token) {
-  //     dispatch(logOut());
-  //   }
-  // }, [token, history]);
-
-  // if (loading) return "Loading...";
-  // if (error) return <Alert variant="danger">Error! {error.message}</Alert>;
-  // console.log("data:", data, "error:", error, "loading:", loading);
-
-  // useEffect(() => {
-  //   dispatch(getPlayerWithStoredToken());
-  // }, [dispatch]);
 
   return (
     <div className="App">

@@ -16,6 +16,7 @@ import { GET_PLAYER_BY_TOKEN } from "../../graphql/queries";
 import { useQuery, useSubscription } from "@apollo/react-hooks";
 
 import { GET_GAME_BY_ID } from "../../graphql/queries";
+import { apiUrl } from "../../config/constants";
 import bugIcon from "../../images/icons/bugIcon.png";
 import eggIcon from "../../images/icons/eggIcon.png";
 import featherIcon from "../../images/icons/featherIcon.png";
@@ -42,13 +43,6 @@ export default function ActiveGame() {
   const token = localStorage.getItem("token");
   console.log("REFRESH TOKEN", token);
 
-  const history = useHistory();
-  useEffect(() => {
-    if (!token || !player) {
-      history.push("/");
-    }
-  }, [token, history]);
-
   const {
     data: data_player,
     loading: loading_player,
@@ -58,6 +52,13 @@ export default function ActiveGame() {
       token,
     },
   });
+
+  const history = useHistory();
+  useEffect(() => {
+    if (!token || !player) {
+      history.push("/");
+    }
+  }, [token]);
 
   useEffect(() => {
     if (loading_player === false && data_player) {
@@ -77,27 +78,6 @@ export default function ActiveGame() {
     "loading:",
     loading_player
   );
-
-  // useEffect(() => {
-  //   if (loading === false && data) {
-  //     // dispatch(loginSuccess(data.getPlayerByToken));
-  //   }
-  // }, [loading, data]);
-
-  // useEffect(() => {
-  //   console.log("TOKEN", token);
-  //   if (!token) {
-  //     dispatch(logOut());
-  //   }
-  // }, [token, history]);
-
-  // if (loading) return "Loading...";
-  // if (error) return <Alert variant="danger">Error! {error.message}</Alert>;
-  // console.log("data:", data, "error:", error, "loading:", loading);
-
-  // useEffect(() => {
-  //   dispatch(getPlayerWithStoredToken());
-  // }, [dispatch]);
 
   const {
     data: data_game,
@@ -119,7 +99,7 @@ export default function ActiveGame() {
     }
   }, [loading_game, data_game]);
 
-  if (loading_game) return "Loading...";
+  if (loading_game || loading_player) return "Loading...";
   if (error_game)
     return <Alert variant="danger">Error! {error_game.message}</Alert>;
   console.log(
