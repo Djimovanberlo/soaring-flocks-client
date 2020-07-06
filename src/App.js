@@ -31,30 +31,30 @@ function App() {
   const history = useHistory();
 
   console.log("REFRESH TOKEN", token);
-  const { data, loading, error } = useQuery(GET_PLAYER_BY_TOKEN, {
-    variables: {
-      token,
-    },
-  });
+  // const { data, loading, error } = useQuery(GET_PLAYER_BY_TOKEN, {
+  //   variables: {
+  //     token,
+  //   },
+  // });
 
-  console.log("DATA", data);
+  // console.log("DATA", data);
 
-  useEffect(() => {
-    if (loading === false && data) {
-      // dispatch(loginSuccess(data.getPlayerByToken));
-    }
-  }, [loading, data]);
+  // useEffect(() => {
+  //   if (loading === false && data) {
+  //     // dispatch(loginSuccess(data.getPlayerByToken));
+  //   }
+  // }, [loading, data]);
 
-  useEffect(() => {
-    console.log("TOKEN", token);
-    if (!token) {
-      dispatch(logOut());
-    }
-  }, [token, history]);
+  // useEffect(() => {
+  //   console.log("TOKEN", token);
+  //   if (!token) {
+  //     dispatch(logOut());
+  //   }
+  // }, [token, history]);
 
-  if (loading) return "Loading...";
-  if (error) return <Alert variant="danger">Error! {error.message}</Alert>;
-  console.log("data:", data, "error:", error, "loading:", loading);
+  // if (loading) return "Loading...";
+  // if (error) return <Alert variant="danger">Error! {error.message}</Alert>;
+  // console.log("data:", data, "error:", error, "loading:", loading);
 
   // useEffect(() => {
   //   dispatch(getPlayerWithStoredToken());

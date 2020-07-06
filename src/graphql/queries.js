@@ -1,5 +1,12 @@
 import gql from "graphql-tag";
 
+// export const REFRESH_GAME_PLAYER = gql`
+//   query refreshPlayerGame($id: Int, $token: String) {
+//     refreshPlayerGame(id: $id, token: $token) {
+
+//     }
+//   }`
+
 export const GET_PLAYER_BY_TOKEN = gql`
   query getPlayerByToken($token: String) {
     getPlayerByToken(token: $token) {

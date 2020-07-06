@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { logOut } from "../../store/user/actions";
+import { logOut } from "../../store/player/actions";
 import Button from "react-bootstrap/Button";
 import { selectPlayer } from "../../store/player/selectors";
 import Nav from "react-bootstrap/Nav";

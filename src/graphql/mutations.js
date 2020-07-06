@@ -53,15 +53,6 @@ export const LOGIN_PLAYER = gql`
   }
 `;
 
-export const REFRESH_TOKEN = gql`
-  mutation refreshToken($token: String) {
-    refreshToken(token: $token) {
-      token
-      error
-    }
-  }
-`;
-
 export const CREATE_ATTACK = gql`
   mutation createAttack($playerId: Int, $ability: String) {
     createAttack(playerId: $playerId, ability: $ability) {
