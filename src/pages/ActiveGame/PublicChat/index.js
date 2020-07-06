@@ -26,13 +26,13 @@ export default function PublicChat(props) {
   });
   if (loading) return "Loading...";
   if (error) return <Alert variant="danger">Error! {error.message}</Alert>;
-  // console.log("DATAQUERY", data);
+  console.log("DATAQUERY", data);
 
   return (
     <div style={{ width: "450px" }}>
       <Card>
         <Card.Header>{gameTitle} Chat</Card.Header>
-        <MessageBox allMessages={data.getAllPublicMessages} />
+        <MessageBox allPublicMessages={data.getAllPublicMessages} />
         <InputBox />
       </Card>
       {/* <Button variant="info" size="sm" onClick={console.log("DATA", data)}>

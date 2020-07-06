@@ -21,7 +21,7 @@ export default function SignUp() {
 
   useEffect(() => {
     if (token !== null) {
-      history.push("/");
+      history.push("/ActiveGame");
     }
   }, [token, history]);
 

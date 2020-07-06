@@ -11,7 +11,7 @@ import { useQuery, useSubscription, useMutation } from "@apollo/react-hooks";
 
 export default function MessageBox(props) {
   const [allQueriedMessages, set_allQueriedMessages] = useState(
-    props.allMessages
+    props.allPublicMessages
   );
   //   console.log("WWWWWW", allQueriedMessages);
 

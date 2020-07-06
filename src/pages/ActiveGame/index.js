@@ -41,7 +41,14 @@ export default function ActiveGame() {
   const tradePlayer = useSelector(selectTradePlayer);
   const player = useSelector(selectPlayer);
   const token = localStorage.getItem("token");
+  console.log("PLAYER", player);
   console.log("REFRESH TOKEN", token);
+  const history = useHistory();
+  useEffect(() => {
+    if (!token || !player) {
+      history.push("/login");
+    }
+  }, [token, player]);
 
   const {
     data: data_player,
@@ -52,13 +59,6 @@ export default function ActiveGame() {
       token,
     },
   });
-
-  const history = useHistory();
-  useEffect(() => {
-    if (!token || !player) {
-      history.push("/");
-    }
-  }, [token]);
 
   useEffect(() => {
     if (loading_player === false && data_player) {

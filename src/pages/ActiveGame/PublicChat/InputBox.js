@@ -15,6 +15,7 @@ import {
 } from "../../../store/player/selectors";
 
 export default function InputBox(props) {
+  const [msgLengthError, set_msgLengthError] = useState("");
   //   console.log("WWWWWWWWWWW", props);
 
   //   console.log("PROPSDATA", allQueriedMessages);
@@ -31,12 +32,19 @@ export default function InputBox(props) {
 
   const handleOnKeyPress = (target, event) => {
     if (target.charCode === 13) {
-      //   console.log("ENTER CLICKwwwwED", newMessage.content);
-      createPublicMessage({
-        variables: { playerId: playerId, content: newMessage.content },
-      });
-      set_newMessage({ player: playerName, content: "" });
-      // set_inputField("");
+      if (newMessage.content.length < 250) {
+        console.log("JA", newMessage.content.length);
+        //   console.log("ENTER CLICKwwwwED", newMessage.content);
+        createPublicMessage({
+          variables: { playerId: playerId, content: newMessage.content },
+        });
+        set_newMessage({ player: playerName, content: "" });
+        // set_inputField("");
+      } else {
+        console.log("NEE", newMessage.content.length);
+        set_msgLengthError("Chat messages must be 250 or less characters");
+        set_newMessage({ player: playerName, content: "" });
+      }
     }
   };
 
@@ -46,15 +54,19 @@ export default function InputBox(props) {
   };
 
   return (
-    <Form>
-      <Form.Control
-        type="text"
-        as="textarea"
-        rows="3"
-        value={newMessage.content}
-        onChange={handleChange}
-        onKeyPress={handleOnKeyPress}
-      />
-    </Form>
+    <>
+      <Form>
+        <Form.Control
+          type="text"
+          as="textarea"
+          rows="3"
+          value={newMessage.content}
+          onChange={handleChange}
+          onKeyPress={handleOnKeyPress}
+        />
+      </Form>
+      <br></br>
+      {msgLengthError}
+    </>
   );
 }

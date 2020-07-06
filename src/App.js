@@ -19,15 +19,25 @@ import { selectAppLoading } from "./store/appState/selectors";
 import { logOut } from "../src/store/player/actions";
 import { getPlayerWithStoredToken } from "./store/player/actions";
 import { Jumbotron, Alert } from "react-bootstrap";
-import { selectToken, selectPlayerId } from "./store/player/selectors";
+import { selectToken, selectPlayer } from "./store/player/selectors";
 import { loginSuccess } from "../src/store/player/actions";
 import { REFRESH_PLAYER } from "./graphql/queries";
 
 function App() {
   const dispatch = useDispatch();
   const isLoading = useSelector(selectAppLoading);
+  const token = localStorage.getItem("token");
   // const playerId = useSelector(selectPlayerId);
+  const player = useSelector(selectPlayer);
   const history = useHistory();
+
+  console.log("APP", token, player);
+
+  useEffect(() => {
+    if (!token || !player) {
+      history.push("/login");
+    }
+  }, [token, player]);
 
   return (
     <div className="App">
