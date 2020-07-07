@@ -1,12 +1,10 @@
-import { LOG_OUT, LOGIN_SUCCESS, TOKEN_STILL_VALID } from "./actions";
+import { GAME_STATE } from "./actions";
 
 const initialState = {};
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case "GAME_STATE":
-      // console.log(state);
-      // console.log("EVEN EEN TEKST", action.payload);
+    case GAME_STATE:
       return { ...state, ...action.payload };
     default:
       return state;

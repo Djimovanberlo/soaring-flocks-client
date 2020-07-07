@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from "react";
-import Form from "react-bootstrap/Form";
-import Container from "react-bootstrap/Container";
-import { Button, Alert } from "react-bootstrap/";
-import { loginSuccess } from "../../store/player/actions";
-import { selectToken } from "../../store/user/selectors";
-import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
+import { Alert, Button, Container, Col, Form } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import { useMutation } from "@apollo/react-hooks";
-import { Col } from "react-bootstrap";
 
 import { LOGIN_PLAYER } from "../../graphql/mutations";
+import { loginSuccess } from "../../store/player/actions";
+import { selectToken } from "../../store/player/selectors";
 
 export default function SignUp() {
   const [errorState, set_errorState] = useState(null);
@@ -27,11 +24,9 @@ export default function SignUp() {
 
   const [loginPlayer, { data, loading, error }] = useMutation(LOGIN_PLAYER, {
     onCompleted({ loginPlayer }) {
-      console.log("LOGINPLAYER COMPLETED", loginPlayer);
       if (loginPlayer.error) {
         set_errorState(<Alert variant="danger">{loginPlayer.error}</Alert>);
       }
-      // localStorage.setItem("token", loginPlayer.token);
       if (loginPlayer.player && loginPlayer.token) {
         dispatch(loginSuccess(loginPlayer));
       }
@@ -40,7 +35,6 @@ export default function SignUp() {
 
   if (loading) return "Loading...";
   if (error) return <Alert variant="danger">Error! {error.message}</Alert>;
-  // console.log("LOGINDATA", data);
 
   function submitForm(event) {
     console.log("hi", email, password);
@@ -48,9 +42,6 @@ export default function SignUp() {
     loginPlayer({
       variables: { email, password },
     });
-    // dispatch(login(email, password));
-    // console.log("OKAYERDATA", data.loginPlayer);
-    // dispatch(loginSuccess(data.loginPlayer));
 
     setEmail("");
     setPassword("");

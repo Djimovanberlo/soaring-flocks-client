@@ -7,7 +7,7 @@ import gameState from "./game/reducer";
 
 export default combineReducers({
   appState,
-  user,
+  // user,
   player,
   tradePlayer,
   gameState,
