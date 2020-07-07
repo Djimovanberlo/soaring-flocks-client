@@ -1,34 +1,20 @@
 import "./App.css";
-import React, { useEffect } from "react";
+import React from "react";
 
-import { Switch, Route, Redirect, useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { Switch, Route, Redirect } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import Navigation from "./components/Navigation";
 import Loading from "./components/Loading";
 import MessageBox from "./components/MessageBox";
 import gameInfo from "./pages/gameInfo";
-// import CreateGame from "./pages/CreateGame";
 import ActiveGame from "./pages/ActiveGame";
 import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
-import { logOut } from "../src/store/player/actions";
 import { selectAppLoading } from "./store/appState/selectors";
-import { selectPlayer } from "./store/player/selectors";
 
 function App() {
-  const dispatch = useDispatch();
-  const history = useHistory();
-  const player = useSelector(selectPlayer);
   const isLoading = useSelector(selectAppLoading);
-  const token = localStorage.getItem("token");
-
-  useEffect(() => {
-    if (!token || !player) {
-      dispatch(logOut());
-      history.push("/login");
-    }
-  }, [token, player]);
 
   return (
     <div className="App">
