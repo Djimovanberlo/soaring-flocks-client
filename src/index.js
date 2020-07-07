@@ -15,10 +15,8 @@ import { split } from "apollo-link";
 import { getMainDefinition } from "apollo-utilities";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { apiUrl } from "./config/constants";
-import { setContext } from "@apollo/link-context";
-import { onError } from "@apollo/link-context";
-import { ApolloLink } from "apollo-link";
 
+// create a Http link:
 const httpLink = new HttpLink({
   uri: `http://${apiUrl}`,
   credentials: "same-origin",
@@ -42,19 +40,6 @@ const link = split(
   httpLink
 );
 
-// const authLink = setContext((_, { headers }) => {
-//   // get the authentication token from local storage if it exists
-//   const token = localStorage.getItem("token");
-//   // console.log("INDEX TOKEN", token);
-//   // return the headers to the context so httpLink can read them
-//   return {
-//     headers: {
-//       ...headers,
-//       authorization: token ? `Bearer ${token}` : "",
-//     },
-//   };
-// });
-
 // Instantiate client
 const client = new ApolloClient({
   cache: new InMemoryCache(),
@@ -72,7 +57,4 @@ ReactDOM.render(
   document.getElementById("root")
 );
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
