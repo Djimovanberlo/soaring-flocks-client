@@ -98,7 +98,7 @@ export default function SentTrade(props) {
                       closeTrade({
                         variables: { id, closed: true },
                       });
-                      // window.location.reload(false);
+                      window.location.reload(false);
                       // This force reload is to display updated values after having attacked. Upcoming feature is to use a graphQL subscription for this, instead of this awkward reload.
                     }}
                   >
