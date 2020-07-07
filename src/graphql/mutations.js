@@ -83,7 +83,7 @@ export const CREATE_PUBLIC_MESSAGE = gql`
 export const CLOSE_TRADE = gql`
   mutation closeTrade($id: Int, $closed: Boolean) {
     closeTrade(id: $id, closed: $closed) {
-      closed
+      id
     }
   }
 `;

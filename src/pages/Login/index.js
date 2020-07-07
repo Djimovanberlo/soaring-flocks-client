@@ -22,7 +22,7 @@ export default function SignUp() {
     }
   }, [token, history]);
 
-  const [loginPlayer, { data, loading, error }] = useMutation(LOGIN_PLAYER, {
+  const [loginPlayer, { loading, error }] = useMutation(LOGIN_PLAYER, {
     onCompleted({ loginPlayer }) {
       if (loginPlayer.error) {
         set_errorState(<Alert variant="danger">{loginPlayer.error}</Alert>);

@@ -8,7 +8,7 @@ import Navigation from "./components/Navigation";
 import Loading from "./components/Loading";
 import MessageBox from "./components/MessageBox";
 import gameInfo from "./pages/gameInfo";
-import CreateGame from "./pages/CreateGame";
+// import CreateGame from "./pages/CreateGame";
 import ActiveGame from "./pages/ActiveGame";
 import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
