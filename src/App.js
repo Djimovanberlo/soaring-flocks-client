@@ -35,6 +35,7 @@ function App() {
 
   useEffect(() => {
     if (!token || !player) {
+      dispatch(logOut());
       history.push("/login");
     }
   }, [token, player]);

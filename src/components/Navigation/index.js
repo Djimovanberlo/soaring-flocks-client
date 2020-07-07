@@ -1,13 +1,12 @@
 import React from "react";
-import Navbar from "react-bootstrap/Navbar";
-import Nav from "react-bootstrap/Nav";
-import { NavLink } from "react-router-dom";
+import { Navbar, Nav } from "react-bootstrap";
 import { useSelector } from "react-redux";
+
+// import { selectGameTitle } from "../../store/game/selectors";
 import { selectToken } from "../../store/player/selectors";
-import NavbarItem from "./NavbarItem";
 import LoggedIn from "./LoggedIn";
 import LoggedOut from "./LoggedOut";
-import { selectGameTitle } from "../../store/game/selectors";
+import NavbarItem from "./NavbarItem";
 
 export default function Navigation() {
   const token = useSelector(selectToken);

@@ -42,7 +42,7 @@ export default function InputBox(props) {
         // set_inputField("");
       } else {
         console.log("NEE", newMessage.content.length);
-        set_msgLengthError("Chat messages must be 250 or less characters");
+        set_msgLengthError("Chat messages must be 250 or less characters.");
         set_newMessage({ player: playerName, content: "" });
       }
     }
