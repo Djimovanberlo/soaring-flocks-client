@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useQuery } from "@apollo/react-hooks";
 
 import { GET_ALL_PLAYERS_GAME_STATE } from "../../graphql/queries";
-import { selectToken } from "../../store/user/selectors";
+import { selectToken } from "../../store/player/selectors";
 
 export default function CreateGame() {
   // This entire component is for additional feature: start and end game
