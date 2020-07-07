@@ -1,24 +1,22 @@
 import React, { useState, useEffect } from "react";
-import Form from "react-bootstrap/Form";
-import Container from "react-bootstrap/Container";
-import { Button, Alert } from "react-bootstrap";
-import { login } from "../../store/user/actions";
-import { selectToken } from "../../store/user/selectors";
+import { useHistory } from "react-router-dom";
+import { Alert, Button, Col, Row, Container, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, Link } from "react-router-dom";
-import { Col, Row } from "react-bootstrap";
+import { useQuery } from "@apollo/react-hooks";
 
 import { GET_ALL_PLAYERS_GAME_STATE } from "../../graphql/queries";
-import { useQuery, useSubscription } from "@apollo/react-hooks";
+import { selectToken } from "../../store/player/selectors";
 
 export default function CreateGame() {
+  // This entire component is for additional feature: start and end game
+  const dispatch = useDispatch();
+  const token = useSelector(selectToken);
+  const history = useHistory();
+
   const [gameTitle, set_gameTitle] = useState("");
   const [gameTime, set_gameTime] = useState("10 days");
   const [playersInGame, set_playersInGame] = useState([]);
   const [playersOutGame, set_playersOutGame] = useState([]);
-  const dispatch = useDispatch();
-  const token = useSelector(selectToken);
-  const history = useHistory();
 
   useEffect(() => {
     if (token !== null) {
@@ -27,22 +25,11 @@ export default function CreateGame() {
   }, [token, history]);
 
   const { data, error, loading } = useQuery(GET_ALL_PLAYERS_GAME_STATE);
-  // set_playersInGame(data.inGame);
-  // set_playersOutGame(data.outGame);
+
   if (loading) return "Loading...";
   if (error) return <Alert variant="danger">Error! {error.message}</Alert>;
-  // console.log("data:", data, "error:", error, "loading:", loading);
-  // console.log("GAMEDATA", data);
 
-  // set_playersOutGame(
-  //   data.outGame.map((player) => {
-  //     return player.name;
-  //   })
-  // );
-
-  // TO DO: max 12 players
   const addToGameListener = (event) => {
-    console.log(playersInGame, event.target.value, "WQWRQR");
     set_playersInGame([...playersInGame, event.target.value].sort());
     set_playersOutGame(
       [
@@ -54,7 +41,9 @@ export default function CreateGame() {
   const removeFromGameListener = (event) => {
     set_playersOutGame([...data.outGame, event.target.value].sort());
     set_playersInGame(
-      [...playersInGame.filter((player) => player != event.target.value)].sort()
+      [
+        ...playersInGame.filter((player) => player !== event.target.value),
+      ].sort()
     );
   };
 

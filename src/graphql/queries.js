@@ -1,39 +1,8 @@
 import gql from "graphql-tag";
 
-// export const REFRESH_GAME_PLAYER = gql`
-//   query refreshPlayerGame($id: Int, $token: String) {
-//     refreshPlayerGame(id: $id, token: $token) {
-
-//     }
-//   }`
-
 export const GET_PLAYER_BY_TOKEN = gql`
   query getPlayerByToken($token: String) {
     getPlayerByToken(token: $token) {
-      player {
-        id
-        name
-        email
-        img
-        inGame
-        moneyCash
-        egg
-        feather
-        bug
-        vPoint
-        mMarket
-        rMarket
-        vMarket
-      }
-      error
-      token
-    }
-  }
-`;
-
-export const REFRESH_PLAYER = gql`
-  query refreshPlayer($token: String) {
-    refreshPlayer(token: $token) {
       player {
         id
         name
@@ -67,7 +36,7 @@ export const GET_ALL_PUBLIC_MESSAGES = gql`
     }
   }
 `;
-// ADD FILTER FOR MESSAGES: GAME_ID
+// For additional feature: start and end game: add param for messages: gameId
 
 export const GET_GAME_BY_ID = gql`
   query getGameById {
@@ -85,6 +54,7 @@ export const GET_GAME_BY_ID = gql`
     }
   }
 `;
+// for additional feature: start and end game: dynamic id
 
 export const GET_ALL_PLAYERS_GAME_STATE = gql`
   query getAllPlayersGameState {
@@ -100,6 +70,7 @@ export const GET_ALL_PLAYERS_GAME_STATE = gql`
     }
   }
 `;
+// for additional feature: start and end game
 
 export const GET_TRADES_BY_ID = gql`
   query getTradesById($playerSenderId: Int, $playerReceiverId: Int) {
@@ -126,30 +97,6 @@ export const GET_TRADES_BY_ID = gql`
         name
       }
     }
-    # incoming: getTradesById(
-    #   playerSenderId: 2
-    #   playerReceiverId: 1
-    #   closed: false
-    # ) {
-    #   id
-    #   moneyCashSender
-    #   moneyCashReceiver
-    #   eggSender
-    #   eggReceiver
-    #   featherSender
-    #   featherReceiver
-    #   bugSender
-    #   bugReceiver
-    #   closed
-    #   playerSenderId {
-    #     id
-    #     name
-    #   }
-    #   playerReceiverId {
-    #     id
-    #     name
-    #   }
-    # }
   }
 `;
 
@@ -175,3 +122,4 @@ export const GET_PRIVATE_MESSAGES_BY_ID = gql`
     }
   }
 `;
+// for additional feature: private messages

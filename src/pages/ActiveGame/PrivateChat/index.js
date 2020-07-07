@@ -1,54 +1,29 @@
-import React, { useState, useEffect } from "react";
-import Jumbotron from "react-bootstrap/Jumbotron";
-import { Button, Card } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import { Col, Row, Form, Image, Alert } from "react-bootstrap";
-import Container from "react-bootstrap/Container";
-
-// import bugIcon from "../../images/icons/bugIcon.png";
-// import eggIcon from "../../images/icons/eggIcon.png";
-// import featherIcon from "../../images/icons/featherIcon.png";
-// import marketIcon from "../../images/icons/marketIcon.png";
-// import moneyCashIcon from "../../images/icons/moneyCashIcon.png";
-// import rareIcon from "../../images/icons/rareIcon.png";
-// import vPointIcon from "../../images/icons/vPointIcon.png";
-// import { inlineIconStyle, iconStyle } from "../../styles/imgStyles";
-import { GET_PRIVATE_MESSAGES_BY_ID } from "../../../graphql/queries";
+import React, { useState } from "react";
+import { Alert, Card, Form } from "react-bootstrap";
 import { useQuery, useSubscription } from "@apollo/react-hooks";
 
-// import Trade from "./SentTrade";
+import { GET_PRIVATE_MESSAGES_BY_ID } from "../../../graphql/queries";
 
-export default function PrivateChat(props) {
-  const [inputField, set_inputField] = useState("hoi");
+export default function PrivateChat() {
+  // This entire component is for additional feature: private chat and is not yet used in current version
+  // This component can be restructured similarly to PublicChat, with index, inputbox, messagebox
+
   const [newMessage, set_newMessage] = useState({
-    player: "Djimo",
+    player: "playerName",
     content: "",
   });
-  const [messages, set_messages] = useState([
-    {
-      player: "Djimo",
-      content: "wwwwww?",
-    },
-    { player: "Jan", content: "aaaa" },
-    { player: "Jochem", content: "eeeee" },
-  ]);
 
   const { data, error, loading } = useQuery(GET_PRIVATE_MESSAGES_BY_ID);
   if (loading) return "Loading...";
   if (error) return <Alert variant="danger">Error! {error.message}</Alert>;
-  console.log("QDATA", data);
 
   const handleChange = (event) => {
-    console.log(event.target.value);
     set_newMessage({ ...newMessage, content: event.target.value });
   };
 
-  const handleOnKeyPress = (target, event) => {
+  const handleOnKeyPress = (target) => {
     if (target.charCode === 13) {
-      console.log("ENTER CLICKEDWWWWW", newMessage);
-      set_messages([...messages, newMessage]);
-      set_newMessage({ player: "Djimo", content: "" });
-      set_inputField("");
+      console.log("PRESSED ENTER");
     }
   };
 
@@ -56,7 +31,7 @@ export default function PrivateChat(props) {
     <Card>
       <Card.Header>Chat with otherPlayer</Card.Header>
       <Card.Body>
-        {messages
+        {/* {messages
           .slice(0)
           .reverse()
           .map((message, index) => {
@@ -65,7 +40,7 @@ export default function PrivateChat(props) {
                 {message.player}: {message.content}
               </div>
             );
-          })}
+          })} */}
       </Card.Body>
       <Form>
         <Form.Control

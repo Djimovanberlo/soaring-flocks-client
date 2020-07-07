@@ -1,32 +1,25 @@
 import React, { useState, useEffect } from "react";
-import Form from "react-bootstrap/Form";
-import Container from "react-bootstrap/Container";
-import { Button, Alert } from "react-bootstrap";
-import { signUp } from "../../store/player/actions";
-import { selectToken } from "../../store/player/selectors";
-import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
+import { Alert, Button, Col, Container, Form } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import { useMutation } from "@apollo/react-hooks";
-import { Col } from "react-bootstrap";
 
 import { CREATE_PLAYER } from "../../graphql/mutations";
 import { loginSuccess } from "../../store/player/actions";
+import { selectToken } from "../../store/player/selectors";
 
 export default function SignUp() {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const token = useSelector(selectToken);
+
   const [errorState, set_errorState] = useState(null);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const dispatch = useDispatch();
-  const token = useSelector(selectToken);
-  const history = useHistory();
 
-  // const [createPlayer] = useMutation(CREATE_PLAYER);
-
-  const [createPlayer, { data, loading, error }] = useMutation(CREATE_PLAYER, {
+  const [createPlayer] = useMutation(CREATE_PLAYER, {
     onCompleted({ createPlayer }) {
-      console.log("CREATEPLAYER COMPLETED", createPlayer);
-      // localStorage.setItem("token", loginPlayer.token);
       if (createPlayer.error) {
         set_errorState(<Alert variant="danger">{createPlayer.error}</Alert>);
       }
@@ -63,7 +56,6 @@ export default function SignUp() {
     createPlayer({
       variables: { name, email, password, img },
     });
-    // dispatch(signUp(name, email, password));
 
     setEmail("");
     setPassword("");

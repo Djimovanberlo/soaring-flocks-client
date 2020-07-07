@@ -1,25 +1,28 @@
-import React, { useState, useEffect } from "react";
-import Jumbotron from "react-bootstrap/Jumbotron";
-import { Button, Card } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import { Col, Row, Form, Image, Container } from "react-bootstrap";
+import React, { useState } from "react";
+import {
+  Button,
+  Card,
+  Col,
+  Row,
+  Form,
+  Image,
+  Container,
+} from "react-bootstrap";
+import { useSelector } from "react-redux";
+import { useMutation } from "@apollo/react-hooks";
+
+import { iconStyle } from "../../../styles/imgStyles";
 import bugIcon from "../../../images/icons/bugIcon.png";
 import eggIcon from "../../../images/icons/eggIcon.png";
 import featherIcon from "../../../images/icons/featherIcon.png";
-import marketIcon from "../../../images/icons/marketIcon.png";
 import moneyCashIcon from "../../../images/icons/moneyCashIcon.png";
-import rareIcon from "../../../images/icons/rareIcon.png";
-import vPointIcon from "../../../images/icons/vPointIcon.png";
-import { inlineIconStyle, iconStyle } from "../../../styles/imgStyles";
 import { SUGGEST_TRADE } from "../../../graphql/mutations";
-import { useQuery, useSubscription, useMutation } from "@apollo/react-hooks";
-import { useDispatch, useSelector } from "react-redux";
 import { selectPlayerId, selectPlayer } from "../../../store/player/selectors";
 
 export default function TradeSuggest(props) {
   const playerId = useSelector(selectPlayerId);
   const player = useSelector(selectPlayer);
-  console.log("PLAYERTRADE", player);
+
   const [suggestedTrade, set_suggestedTrade] = useState({
     playerSenderId: playerId,
     playerReceiverId: props.traderReceiverId,
@@ -33,11 +36,9 @@ export default function TradeSuggest(props) {
     bugReceiver: null,
   });
 
-  const [suggestTrade, { data }] = useMutation(SUGGEST_TRADE);
+  const [suggestTrade] = useMutation(SUGGEST_TRADE);
 
-  const submitTrade = (event) => {
-    // event.preventDefault();
-    console.log("Create trade", suggestedTrade, suggestedTrade.playerSenderId);
+  const submitTrade = () => {
     suggestTrade({
       variables: {
         playerSenderId: suggestedTrade.playerSenderId,
@@ -53,6 +54,7 @@ export default function TradeSuggest(props) {
       },
     });
     window.location.reload(false);
+    // This force reload is to display updated values after having attacked. Upcoming feature is to use a graphQL subscription for this, instead of this awkward reload.
   };
 
   return (

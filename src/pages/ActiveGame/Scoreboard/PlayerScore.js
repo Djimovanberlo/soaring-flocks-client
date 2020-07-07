@@ -1,40 +1,21 @@
-import React, { useState, useEffect } from "react";
-import Jumbotron from "react-bootstrap/Jumbotron";
-import { Button, Card, Image, Col } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Button, Card, Image } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import TradePanel from "../TradePanel";
+
 import vPointIcon from "../../../images/icons/vPointIcon.png";
-import { iconStyle } from "../../../styles/imgStyles";
+import { avatarStyle, iconStyle } from "../../../styles/imgStyles";
 import { storeTradePlayer } from "../../../store/tradePlayer/actions";
-import {
-  selectTradeState,
-  selectTradeText,
-} from "../../../store/tradePlayer/selectors";
+import { selectTradeState } from "../../../store/tradePlayer/selectors";
 import { selectPlayerId } from "../../../store/player/selectors";
-import { avatarStyle } from "../../../styles/imgStyles";
 
 export default function PlayerScore(props) {
-  // select userID (sender trade) and playerID (receiver trade)
-  //   const loginLogoutControls = token ? <LoggedIn /> : <LoggedOut />;
-  const [buttonStyle, set_buttonStyle] = useState();
   const dispatch = useDispatch();
 
   const playerId = useSelector(selectPlayerId);
   const tradeState = useSelector(selectTradeState);
 
-  // const tradeText = useSelector(selectTradeText);
-
-  // useEffect(() => {
-  //   if (tradeState !== props.id) {
-  //     set_trade("Open trade");
-  //   }
-  // }, []);
-
-  function handleClick() {
+  const handleClick = () => {
     if (tradeState === props.id) {
-      // set_trade("w");
-      // console.log("TRADE", tradeState);
       dispatch(
         storeTradePlayer({
           traderId: null,
@@ -43,8 +24,6 @@ export default function PlayerScore(props) {
         })
       );
     } else if (tradeState !== props.id) {
-      // set_trade("w");
-      // console.log("TRADE", tradeState);
       dispatch(
         storeTradePlayer({
           traderId: props.id,
@@ -52,9 +31,8 @@ export default function PlayerScore(props) {
           tradeState: props.id,
         })
       );
-      // console.log(trade);
     }
-  }
+  };
 
   return (
     <>

@@ -1,14 +1,10 @@
-import React, { useState, useEffect } from "react";
-import Jumbotron from "react-bootstrap/Jumbotron";
-import { Button, Card, ListGroup, Alert } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import Trade from "../TradePanel";
+import React, { useState } from "react";
+import { Button, Card, ListGroup } from "react-bootstrap";
+import { Col, Row, Image } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
-import { Col, Row, Image, Dropdown, DropdownButton } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
-import { GET_PLAYER_BY_ID } from "../../../graphql/queries";
-import { useQuery, useSubscription, useMutation } from "@apollo/react-hooks";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
+import { useMutation } from "@apollo/react-hooks";
 
 import bugIcon from "../../../images/icons/bugIcon.png";
 import eggIcon from "../../../images/icons/eggIcon.png";
@@ -19,36 +15,17 @@ import rareIcon from "../../../images/icons/rareIcon.png";
 import vPointIcon from "../../../images/icons/vPointIcon.png";
 import { inlineIconStyle, iconStyle } from "../../../styles/imgStyles";
 import { CREATE_ATTACK, CREATE_MARKET } from "../../../graphql/mutations";
-import { CREATE_PUBLIC_MESSAGE } from "../../../graphql/mutations";
-import { selectPlayerId, selectPlayer } from "../../../store/player/selectors";
+import { selectPlayer } from "../../../store/player/selectors";
 
 export default function Player(props) {
+  const player = useSelector(selectPlayer);
+
   const [attack, set_attack] = useState("Don't attack anyone");
   const [market, set_market] = useState("Don't build anything");
-  const [marketAvailable, set_marketAvailable] = useState(null);
-  const [ability, set_ability] = useState("");
-  const [abilityParam, set_abilityParam] = useState("");
-  const [abilityParamForm, set_abilityParamForm] = useState(null);
-  const [abilityDescription, set_abilityDescription] = useState(
-    <>
-      Choose an ability and its parameter<br></br>
-      <br></br>
-    </>
-  );
-  const playerId = useSelector(selectPlayerId);
-  const player = useSelector(selectPlayer);
-  // console.log("PLAYERSELECT", player);
+
   const [createMarket] = useMutation(CREATE_MARKET);
   const [createAttack] = useMutation(CREATE_ATTACK);
-  const [createPublicMessage] = useMutation(CREATE_PUBLIC_MESSAGE);
-  // const { data, error, loading } = useQuery(GET_PLAYER_BY_ID, {
-  //   variables: {
-  //     id: player.id,
-  //   },
-  // });
-  // if (loading) return "Loading...";
-  // if (error) return <Alert variant="danger">Error! {error.message}</Alert>;
-  // console.log("data:", data, "error:", error, "loading:", loading);
+
   const {
     id,
     name,
@@ -67,24 +44,20 @@ export default function Player(props) {
   const filteredPlayerList = props.playerList.filter(
     (player) => player.id !== id
   );
-  // Cannot ternary for <option> since React will complain about a missing key while mapping @ attack options
+  // Cannot filter by id @ selectForm since React will complain about a missing key while mapping @ attack <option>
 
-  const attackHandler = (event) => {
-    // event.preventDefault();
-    console.log(id, attack);
+  const attackHandler = () => {
     createAttack({
       variables: {
         playerId: id,
         ability: attack,
       },
     });
-    console.log("WHO");
     window.location.reload(false);
   };
+  // This force reload is to display updated values after having attacked. Upcoming feature is to use a graphQL subscription for this, instead of this awkward reload.
 
-  const marketHandler = (event) => {
-    // event.preventDefault();
-    console.log(id, market);
+  const marketHandler = () => {
     createMarket({
       variables: {
         playerId: id,
@@ -93,11 +66,7 @@ export default function Player(props) {
       },
     });
     window.location.reload(false);
-  };
-
-  const gameLeaver = (event) => {
-    event.preventDefault();
-    console.log("LEAVE");
+    // This force reload is to display updated values after having attacked. Upcoming feature is to use a graphQL subscription for this, instead of this awkward reload.
   };
 
   return (
@@ -219,7 +188,6 @@ export default function Player(props) {
                         </Form>
                       )}
                     </Col>
-                    <Col>{abilityParamForm}</Col>
                   </Row>
                 </Col>
                 <Col>

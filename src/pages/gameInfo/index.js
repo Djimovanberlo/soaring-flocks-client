@@ -1,13 +1,8 @@
-import React, { useState, useEffect } from "react";
-import Form from "react-bootstrap/Form";
+import React from "react";
 import Container from "react-bootstrap/Container";
-import Button from "react-bootstrap/Button";
-import { login } from "../../store/user/actions";
-import { selectToken } from "../../store/user/selectors";
-import { useDispatch, useSelector } from "react-redux";
-import { useHistory, NavLink } from "react-router-dom";
 import { Col, Row, Image } from "react-bootstrap";
 
+import { inlineIconStyle, avatarStyle } from "../../styles/imgStyles";
 import antonius from "../../images/avatars/antonius.png";
 import archibald from "../../images/avatars/archibald.png";
 import astrid from "../../images/avatars/astrid.png";
@@ -20,7 +15,6 @@ import jeremiah from "../../images/avatars/jeremiah.png";
 import patrice from "../../images/avatars/patrice.png";
 import rick from "../../images/avatars/rick.png";
 import yeanero from "../../images/avatars/yeanero.png";
-
 import bugIcon from "../../images/icons/bugIcon.png";
 import eggIcon from "../../images/icons/eggIcon.png";
 import featherIcon from "../../images/icons/featherIcon.png";
@@ -28,7 +22,6 @@ import marketIcon from "../../images/icons/marketIcon.png";
 import moneyCashIcon from "../../images/icons/moneyCashIcon.png";
 import rareIcon from "../../images/icons/rareIcon.png";
 import vPointIcon from "../../images/icons/vPointIcon.png";
-import { inlineIconStyle, avatarStyle } from "../../styles/imgStyles";
 
 export default function gameInfo() {
   return (
