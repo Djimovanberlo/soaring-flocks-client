@@ -2,7 +2,12 @@ import React from "react";
 import Container from "react-bootstrap/Container";
 import { Col, Row, Image } from "react-bootstrap";
 
-import { inlineIconStyle, avatarStyle } from "../../styles/imgStyles";
+import {
+  inlineIconStyle,
+  avatarStyle,
+  logoStyle,
+} from "../../styles/imgStyles";
+import logo from "../../images/logo/logo.png";
 import antonius from "../../images/avatars/antonius.png";
 import archibald from "../../images/avatars/archibald.png";
 import astrid from "../../images/avatars/astrid.png";
@@ -26,12 +31,8 @@ import vPointIcon from "../../images/icons/vPointIcon.png";
 export default function gameInfo() {
   return (
     <>
-      <Container as={Col} md={{ span: 6, offset: 5 }} className="mt-5">
-        <Row>
-          <Col>
-            <h2>Soaring Flocks</h2>
-          </Col>
-        </Row>
+      <Container as={Col} md={{ span: 6, offset: 4 }} className="mt-5">
+        <Image src={logo} style={logoStyle} />
       </Container>
       <Container>
         <Row>

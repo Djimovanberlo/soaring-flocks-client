@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { Col, Container, Row, Alert } from "react-bootstrap";
+import { Col, Container, Row, Alert, Image } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useQuery } from "@apollo/react-hooks";
 
 import { GET_GAME_BY_ID, GET_PLAYER_BY_TOKEN } from "../../graphql/queries";
+import logo from "../../images/logo/logo.png";
+import { logoStyle } from "../../styles/imgStyles";
 import PlayerPanel from "./PlayerPanel/index";
 import ScoreBoard from "./Scoreboard/index";
 import PublicChat from "./PublicChat/index";
@@ -28,15 +30,14 @@ export default function ActiveGame() {
     }
   }, [token, player]);
 
-  const {
-    data: data_player,
-    loading: loading_player,
-    error: error_player,
-  } = useQuery(GET_PLAYER_BY_TOKEN, {
-    variables: {
-      token,
-    },
-  });
+  const { data: data_player, loading: loading_player } = useQuery(
+    GET_PLAYER_BY_TOKEN,
+    {
+      variables: {
+        token,
+      },
+    }
+  );
 
   useEffect(() => {
     if (loading_player === false && data_player) {
@@ -83,12 +84,10 @@ export default function ActiveGame() {
       <Container
         style={{ textAlign: "center" }}
         as={Col}
-        md={{ span: 2, offset: 5 }}
+        md={{ span: 2, offset: 4 }}
         className="mt-5"
       >
-        <Row>
-          <h2>{data_game.getGameById.gameTitle}</h2>
-        </Row>
+        <Image src={logo} style={logoStyle} />
       </Container>
       <br></br>
       <Row>

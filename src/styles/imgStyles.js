@@ -13,6 +13,7 @@ export const avatarStyle = {
   height: 150,
 };
 
-// export const avatarScoreStyle = {
-//   width: 
-// }
+export const logoStyle = {
+  width: 521,
+  height: 202,
+};

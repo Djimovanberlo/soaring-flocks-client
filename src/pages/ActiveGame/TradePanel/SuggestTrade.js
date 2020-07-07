@@ -23,8 +23,6 @@ export default function SuggestTrade(props) {
   // const playerId = useSelector(selectPlayerId);
   const player = useSelector(selectPlayer);
 
-  console.log("PLAYER", player);
-
   const [suggestedTrade, set_suggestedTrade] = useState({
     playerSenderId: player.id,
     playerReceiverId: props.traderReceiverId,
