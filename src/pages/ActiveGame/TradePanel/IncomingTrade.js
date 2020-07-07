@@ -1,36 +1,21 @@
-import React, { useState, useEffect } from "react";
-import Jumbotron from "react-bootstrap/Jumbotron";
-import { Button, Card } from "react-bootstrap";
-import { Link, useHistory } from "react-router-dom";
-import { Col, Row, Image, Alert } from "react-bootstrap";
-import Container from "react-bootstrap/Container";
-import { useQuery, useSubscription, useMutation } from "@apollo/react-hooks";
-import { CLOSE_TRADE, ACCEPT_TRADE } from "../../../graphql/mutations";
-import { GET_TRADES_BY_ID } from "../../../graphql/queries";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from "react";
+import { Button, Card, Col, Row, Image, Alert } from "react-bootstrap";
+import { useSelector } from "react-redux";
+import { useQuery, useMutation } from "@apollo/react-hooks";
 
+import { inlineIconStyle } from "../../../styles/imgStyles";
 import bugIcon from "../../../images/icons/bugIcon.png";
 import eggIcon from "../../../images/icons/eggIcon.png";
 import featherIcon from "../../../images/icons/featherIcon.png";
-import marketIcon from "../../../images/icons/marketIcon.png";
 import moneyCashIcon from "../../../images/icons/moneyCashIcon.png";
-import rareIcon from "../../../images/icons/rareIcon.png";
-import vPointIcon from "../../../images/icons/vPointIcon.png";
-import { inlineIconStyle, iconStyle } from "../../../styles/imgStyles";
+import { CLOSE_TRADE, ACCEPT_TRADE } from "../../../graphql/mutations";
+import { GET_TRADES_BY_ID } from "../../../graphql/queries";
 import { selectPlayerId } from "../../../store/player/selectors";
 
 export default function IncomingTrade(props) {
-  const history = useHistory();
-  // console.log("WIOUWGEWYGEUY", props.traderSenderId);
   const playerId = useSelector(selectPlayerId);
-  const [errorState, set_errorState] = useState(null);
   const [closeTrade] = useMutation(CLOSE_TRADE);
-  const [acceptTrade] = useMutation(ACCEPT_TRADE, {
-    onCompleted({ acceptTrade }) {
-      console.log("TRADE ACCEPTED", acceptTrade);
-    },
-  });
-  console.log("INCOMING TRADE PARAMS", props.traderSenderId, playerId);
+  const [acceptTrade] = useMutation(ACCEPT_TRADE);
 
   const { data, error, loading } = useQuery(GET_TRADES_BY_ID, {
     variables: {
@@ -38,10 +23,8 @@ export default function IncomingTrade(props) {
       playerReceiverId: playerId,
     },
   });
-  console.log("TRADEDATA", data);
   if (loading) return "Loading...";
   if (error) return <Alert variant="danger">Error! {error.message}</Alert>;
-  console.log("GOEIEDAG INCOMING", data);
 
   if (data.getTradesById === null) {
     return (
@@ -63,8 +46,7 @@ export default function IncomingTrade(props) {
       bugReceiver,
     } = data.getTradesById;
 
-    const tradeAccepter = (event) => {
-      // event.preventDefault();
+    const tradeAccepter = () => {
       acceptTrade({
         variables: {
           id,
@@ -80,25 +62,9 @@ export default function IncomingTrade(props) {
           bugReceiver,
         },
       });
-      // history.push("/GameInfo");
       window.location.reload(false);
     };
-
-    // id
-    // playerSenderId {
-    //   id
-    // }
-    // playerReceiverId {
-    //   id
-    // }
-    // moneyCashSender
-    // moneyCashReceiver
-    // eggSender
-    // eggReceiver
-    // featherSender
-    // featherReceiver
-    // bugSender
-    // bugReceiver
+    // This force reload is to display updated values after having attacked. Upcoming feature is to use a graphQL subscription for this, instead of this awkward reload.
 
     const noValueChecker = (resource, resourceIcon) => {
       if (resource != 0) {
@@ -116,7 +82,6 @@ export default function IncomingTrade(props) {
 
     return (
       <Card>
-        {errorState}
         {!data || !data.getTradesById.closed ? (
           <>
             <Card.Header>Incoming trade</Card.Header>
@@ -156,13 +121,12 @@ export default function IncomingTrade(props) {
                   <Button
                     variant="outline-danger"
                     size="sm"
-                    onClick={(event) => {
-                      console.log("Decline trade");
-                      // event.preventDefault();
+                    onClick={() => {
                       closeTrade({
                         variables: { id, closed: true },
                       });
                       window.location.reload(false);
+                      // This force reload is to display updated values after having attacked. Upcoming feature is to use a graphQL subscription for this, instead of this awkward reload.
                     }}
                   >
                     Decline

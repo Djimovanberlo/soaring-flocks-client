@@ -18,10 +18,10 @@ import { CREATE_ATTACK, CREATE_MARKET } from "../../../graphql/mutations";
 import { selectPlayer } from "../../../store/player/selectors";
 
 export default function Player(props) {
+  const player = useSelector(selectPlayer);
+
   const [attack, set_attack] = useState("Don't attack anyone");
   const [market, set_market] = useState("Don't build anything");
-
-  const player = useSelector(selectPlayer);
 
   const [createMarket] = useMutation(CREATE_MARKET);
   const [createAttack] = useMutation(CREATE_ATTACK);

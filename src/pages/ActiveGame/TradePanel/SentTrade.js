@@ -1,40 +1,31 @@
-import React, { useState, useEffect } from "react";
-import Jumbotron from "react-bootstrap/Jumbotron";
-import { Button, Card } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import { Col, Row, Image, Alert } from "react-bootstrap";
-import Container from "react-bootstrap/Container";
-import { useQuery, useSubscription, useMutation } from "@apollo/react-hooks";
-import { CLOSE_TRADE, ACCEPT_TRADE } from "../../../graphql/mutations";
-import { GET_TRADES_BY_ID } from "../../../graphql/queries";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { Alert, Button, Card, Col, Image, Row } from "react-bootstrap";
+import { useSelector } from "react-redux";
+import { useQuery, useMutation } from "@apollo/react-hooks";
 
+import { CLOSE_TRADE } from "../../../graphql/mutations";
+import { GET_TRADES_BY_ID } from "../../../graphql/queries";
+import { inlineIconStyle } from "../../../styles/imgStyles";
 import bugIcon from "../../../images/icons/bugIcon.png";
 import eggIcon from "../../../images/icons/eggIcon.png";
 import featherIcon from "../../../images/icons/featherIcon.png";
-import marketIcon from "../../../images/icons/marketIcon.png";
 import moneyCashIcon from "../../../images/icons/moneyCashIcon.png";
-import rareIcon from "../../../images/icons/rareIcon.png";
-import vPointIcon from "../../../images/icons/vPointIcon.png";
-import { inlineIconStyle, iconStyle } from "../../../styles/imgStyles";
 import { selectPlayerId } from "../../../store/player/selectors";
 
 export default function SentTrade(props) {
   const playerId = useSelector(selectPlayerId);
+
   const [closeTrade] = useMutation(CLOSE_TRADE);
-  const [acceptTrade] = useMutation(ACCEPT_TRADE);
-  console.log("PROP", props.traderReceiverId);
+
   const { data, error, loading } = useQuery(GET_TRADES_BY_ID, {
     variables: {
       playerSenderId: playerId,
       playerReceiverId: props.traderReceiverId,
     },
   });
-  console.log("INCOMING TRADE PARAMS", playerId, props.traderReceiverId);
 
   if (loading) return "Loading...";
   if (error) return <Alert variant="danger">Error! {error.message}</Alert>;
-  // console.log("BONJOURR SENT", data);
 
   if (data.getTradesById === null)
     return (
@@ -102,13 +93,13 @@ export default function SentTrade(props) {
                   <Button
                     variant="outline-danger"
                     size="sm"
-                    onClick={(event) => {
+                    onClick={() => {
                       console.log("Cancel trade");
-                      // event.preventDefault();
                       closeTrade({
                         variables: { id, closed: true },
                       });
                       window.location.reload(false);
+                      // This force reload is to display updated values after having attacked. Upcoming feature is to use a graphQL subscription for this, instead of this awkward reload.
                     }}
                   >
                     Cancel
