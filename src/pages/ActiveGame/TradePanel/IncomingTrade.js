@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Button, Card, Col, Row, Image, Alert } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { useQuery, useMutation } from "@apollo/react-hooks";
@@ -67,7 +67,7 @@ export default function IncomingTrade(props) {
     // This force reload is to display updated values after having attacked. Upcoming feature is to use a graphQL subscription for this, instead of this awkward reload.
 
     const noValueChecker = (resource, resourceIcon) => {
-      if (resource != 0) {
+      if (resource !== 0) {
         return (
           <>
             <Image src={resourceIcon} style={inlineIconStyle} />

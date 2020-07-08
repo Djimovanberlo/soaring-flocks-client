@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import SentTrade from "./SentTrade";
 import IncomingTrade from "./IncomingTrade";
-import TradeSuggest from "./TradeSuggest";
+import SuggestTrade from "./SuggestTrade";
 import { storeTradePlayer } from "../../../store/tradePlayer/actions";
 import { selectPlayerName } from "../../../store/player/selectors";
 
@@ -49,7 +49,7 @@ export default function TradePanel(props) {
               </Row>
               <br></br>
               <Row>
-                <TradeSuggest traderReceiverId={traderId} />
+                <SuggestTrade traderReceiverId={traderId} />
               </Row>
             </Card.Body>
           </Card>

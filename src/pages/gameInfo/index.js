@@ -2,7 +2,12 @@ import React from "react";
 import Container from "react-bootstrap/Container";
 import { Col, Row, Image } from "react-bootstrap";
 
-import { inlineIconStyle, avatarStyle } from "../../styles/imgStyles";
+import {
+  inlineIconStyle,
+  avatarStyle,
+  logoStyle,
+} from "../../styles/imgStyles";
+import logo from "../../images/logo/logo.png";
 import antonius from "../../images/avatars/antonius.png";
 import archibald from "../../images/avatars/archibald.png";
 import astrid from "../../images/avatars/astrid.png";
@@ -26,12 +31,8 @@ import vPointIcon from "../../images/icons/vPointIcon.png";
 export default function gameInfo() {
   return (
     <>
-      <Container as={Col} md={{ span: 6, offset: 5 }} className="mt-5">
-        <Row>
-          <Col>
-            <h2>Soaring Flocks</h2>
-          </Col>
-        </Row>
+      <Container as={Col} md={{ span: 6, offset: 4 }} className="mt-5">
+        <Image src={logo} style={logoStyle} />
       </Container>
       <Container>
         <Row>
@@ -55,23 +56,28 @@ export default function gameInfo() {
               Soaring flocks is a multiplayer game where up to 20 players take
               on the role of capitalist birds to collect, spend and trade
               resources in order to earn victory points. In Soaring Flocks, each
-              turn lasts a day. Players' goal is to collect as many Victory
-              Points as they can.
+              turn lasts a day and a game lasts 15 days. Whichever player has
+              the most Victory Points by the end of the game wins! After 15
+              days, all data is reset and a new game starts.
             </p>
             <p>
-              Each Player has a number of markets, that produce resources. Every
-              night at midnight, Players earn resources accordingly.
+              Each Player has a number of markets, that produce resources. They
+              can invest these resources into building more markets. Every night
+              at midnight, Players earn resources accordingly to the markets
+              they own.
             </p>
             <p>
               Players are free to trade their resources with each other at any
-              time and by any amount
+              time and by any amount - if they can afford it.
             </p>{" "}
             <hr></hr>
             <h5 style={{ textAlign: "center" }}>Upcoming features</h5>
+            <p>After a game, the final score of players is displayed.</p>{" "}
+            <hr></hr>
             <p>
-              Games actually start and end. Players can create a game, add other
-              players and start their game. Whichever player has the most
-              Victory Points by the end of the game, wins.
+              Players can create a game, add other players and start their game.
+              Whichever player has the most Victory Points by the end of the
+              game, wins.
             </p>{" "}
             <hr></hr>
             <p>
@@ -84,15 +90,14 @@ export default function gameInfo() {
           </Col>
           <Col>
             <h5 style={{ textAlign: "center" }}>Resources, Markets, Attacks</h5>
-            <p>Resources are used to build markets.</p>
             <Image src={moneyCashIcon} style={inlineIconStyle} />
             MoneyCash is used to build markets. The more markets you have, the
-            more MoneyCash is required to build your next market.
+            more MoneyCash is required to build your next market.<br></br>
             <Image src={eggIcon} style={inlineIconStyle} />
             egg, <Image src={featherIcon} style={inlineIconStyle} />
             feather, <Image src={bugIcon} style={inlineIconStyle} />
             bug: rare resources. You need to spend one of each of these to build
-            a market.
+            a market.<br></br>
             <Image src={vPointIcon} style={inlineIconStyle} />
             Victory Points are not used for anything, except winning!
             <br></br>

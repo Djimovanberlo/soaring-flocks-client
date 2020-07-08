@@ -48,7 +48,7 @@ export default function SentTrade(props) {
     } = data.getTradesById;
 
     const noValueChecker = (resource, resourceIcon) => {
-      if (resource != 0) {
+      if (resource !== 0) {
         return (
           <>
             <Image src={resourceIcon} style={inlineIconStyle} />
@@ -94,7 +94,7 @@ export default function SentTrade(props) {
                     variant="outline-danger"
                     size="sm"
                     onClick={() => {
-                      console.log("Cancel trade");
+                      console.log("Cancel trade", id);
                       closeTrade({
                         variables: { id, closed: true },
                       });

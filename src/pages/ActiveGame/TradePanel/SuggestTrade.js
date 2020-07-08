@@ -17,14 +17,14 @@ import eggIcon from "../../../images/icons/eggIcon.png";
 import featherIcon from "../../../images/icons/featherIcon.png";
 import moneyCashIcon from "../../../images/icons/moneyCashIcon.png";
 import { SUGGEST_TRADE } from "../../../graphql/mutations";
-import { selectPlayerId, selectPlayer } from "../../../store/player/selectors";
+import { selectPlayer } from "../../../store/player/selectors";
 
-export default function TradeSuggest(props) {
-  const playerId = useSelector(selectPlayerId);
+export default function SuggestTrade(props) {
+  // const playerId = useSelector(selectPlayerId);
   const player = useSelector(selectPlayer);
 
   const [suggestedTrade, set_suggestedTrade] = useState({
-    playerSenderId: playerId,
+    playerSenderId: player.id,
     playerReceiverId: props.traderReceiverId,
     moneyCashSender: null,
     moneyCashReceiver: null,
@@ -39,20 +39,28 @@ export default function TradeSuggest(props) {
   const [suggestTrade] = useMutation(SUGGEST_TRADE);
 
   const submitTrade = () => {
-    suggestTrade({
-      variables: {
-        playerSenderId: suggestedTrade.playerSenderId,
-        playerReceiverId: suggestedTrade.playerReceiverId,
-        moneyCashSender: suggestedTrade.moneyCashSender,
-        moneyCashReceiver: suggestedTrade.moneyCashReceiver,
-        eggSender: suggestedTrade.eggSender,
-        eggReceiver: suggestedTrade.eggReceiver,
-        featherSender: suggestedTrade.featherSender,
-        featherReceiver: suggestedTrade.featherReceiver,
-        bugSender: suggestedTrade.bugSender,
-        bugReceiver: suggestedTrade.bugReceiver,
-      },
-    });
+    if (
+      player.moneyCash < suggestedTrade.moneyCashSender ||
+      player.egg < suggestedTrade.eggSender ||
+      player.feather < suggestedTrade.featherSender ||
+      player.bug < suggestedTrade.bugSender
+    ) {
+    } else {
+      suggestTrade({
+        variables: {
+          playerSenderId: suggestedTrade.playerSenderId,
+          playerReceiverId: suggestedTrade.playerReceiverId,
+          moneyCashSender: suggestedTrade.moneyCashSender,
+          moneyCashReceiver: suggestedTrade.moneyCashReceiver,
+          eggSender: suggestedTrade.eggSender,
+          eggReceiver: suggestedTrade.eggReceiver,
+          featherSender: suggestedTrade.featherSender,
+          featherReceiver: suggestedTrade.featherReceiver,
+          bugSender: suggestedTrade.bugSender,
+          bugReceiver: suggestedTrade.bugReceiver,
+        },
+      });
+    }
     window.location.reload(false);
     // This force reload is to display updated values after having attacked. Upcoming feature is to use a graphQL subscription for this, instead of this awkward reload.
   };

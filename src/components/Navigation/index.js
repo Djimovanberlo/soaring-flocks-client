@@ -3,20 +3,26 @@ import { Navbar, Nav } from "react-bootstrap";
 import { useSelector } from "react-redux";
 
 // import { selectGameTitle } from "../../store/game/selectors";
-import { selectToken } from "../../store/player/selectors";
+import { selectPlayer } from "../../store/player/selectors";
 import LoggedIn from "./LoggedIn";
 import LoggedOut from "./LoggedOut";
 import NavbarItem from "./NavbarItem";
 
 export default function Navigation() {
-  const token = useSelector(selectToken);
-  // user in game ? display Game Title : display Create Game
-  const gameAccessControls = token ? (
-    <NavbarItem path="/activeGame" linkText="Soaring Flocks" />
-  ) : (
-    <></>
-  );
-  const loginLogoutControls = token ? <LoggedIn /> : <LoggedOut />;
+  const player = useSelector(selectPlayer);
+
+  const gameAccessControls =
+    Object.keys(player).length === 0 && player.constructor === Object ? (
+      <></>
+    ) : (
+      <NavbarItem path="/activeGame" linkText="Soaring Flocks" />
+    );
+  const loginLogoutControls =
+    Object.keys(player).length === 0 && player.constructor === Object ? (
+      <LoggedOut />
+    ) : (
+      <LoggedIn />
+    );
 
   return (
     <Navbar bg="light" expand="lg">

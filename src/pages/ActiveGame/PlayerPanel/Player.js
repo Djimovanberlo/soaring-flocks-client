@@ -149,7 +149,7 @@ export default function Player(props) {
                   <Row>
                     <Col>
                       {" "}
-                      {moneyCash <= 0 ? (
+                      {moneyCash <= 0 || !moneyCash ? (
                         <></>
                       ) : (
                         <Form>
@@ -204,9 +204,13 @@ export default function Player(props) {
                   <br></br>
                   <br></br>
                   {moneyCash < (mMarket + rMarket + vMarket) * 2 - 6 ||
+                  !moneyCash ||
                   egg < 1 ||
+                  !egg ||
                   feather < 1 ||
-                  bug < 1 ? (
+                  !feather ||
+                  bug < 1 ||
+                  !bug ? (
                     <></>
                   ) : (
                     <Form>

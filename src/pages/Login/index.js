@@ -1,34 +1,27 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useHistory, Link } from "react-router-dom";
 import { Alert, Button, Container, Col, Form } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useMutation } from "@apollo/react-hooks";
 
 import { LOGIN_PLAYER } from "../../graphql/mutations";
 import { loginSuccess } from "../../store/player/actions";
-import { selectToken } from "../../store/player/selectors";
 
 export default function SignUp() {
   const [errorState, set_errorState] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
-  const token = useSelector(selectToken);
   const history = useHistory();
 
-  useEffect(() => {
-    if (token !== null) {
-      history.push("/ActiveGame");
-    }
-  }, [token, history]);
-
-  const [loginPlayer, { data, loading, error }] = useMutation(LOGIN_PLAYER, {
+  const [loginPlayer, { loading, error }] = useMutation(LOGIN_PLAYER, {
     onCompleted({ loginPlayer }) {
       if (loginPlayer.error) {
         set_errorState(<Alert variant="danger">{loginPlayer.error}</Alert>);
       }
       if (loginPlayer.player && loginPlayer.token) {
         dispatch(loginSuccess(loginPlayer));
+        history.push("/ActiveGame");
       }
     },
   });
@@ -37,7 +30,6 @@ export default function SignUp() {
   if (error) return <Alert variant="danger">Error! {error.message}</Alert>;
 
   function submitForm(event) {
-    console.log("hi", email, password);
     event.preventDefault();
     loginPlayer({
       variables: { email, password },

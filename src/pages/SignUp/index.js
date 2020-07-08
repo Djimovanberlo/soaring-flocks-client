@@ -1,17 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useHistory, Link } from "react-router-dom";
 import { Alert, Button, Col, Container, Form } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useMutation } from "@apollo/react-hooks";
 
 import { CREATE_PLAYER } from "../../graphql/mutations";
 import { loginSuccess } from "../../store/player/actions";
-import { selectToken } from "../../store/player/selectors";
 
 export default function SignUp() {
   const dispatch = useDispatch();
   const history = useHistory();
-  const token = useSelector(selectToken);
 
   const [errorState, set_errorState] = useState(null);
   const [name, setName] = useState("");
@@ -25,15 +23,10 @@ export default function SignUp() {
       }
       if (createPlayer.player && createPlayer.token) {
         dispatch(loginSuccess(createPlayer));
+        history.push("/ActiveGame");
       }
     },
   });
-
-  useEffect(() => {
-    if (token !== null) {
-      history.push("/ActiveGame");
-    }
-  }, [token, history]);
 
   function submitForm(event) {
     event.preventDefault();
@@ -52,11 +45,9 @@ export default function SignUp() {
       "yeanero",
     ];
     const img = imgArray[Math.floor(Math.random() * imgArray.length)];
-    console.log(name, email, password, img);
     createPlayer({
       variables: { name, email, password, img },
     });
-
     setEmail("");
     setPassword("");
     setName("");
