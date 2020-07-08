@@ -94,7 +94,6 @@ export default function SentTrade(props) {
                     variant="outline-danger"
                     size="sm"
                     onClick={() => {
-                      console.log("Cancel trade", id);
                       closeTrade({
                         variables: { id, closed: true },
                       });
