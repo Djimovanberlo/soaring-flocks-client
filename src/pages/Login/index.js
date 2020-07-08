@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useHistory, Link } from "react-router-dom";
 import { Alert, Button, Container, Col, Form } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useMutation } from "@apollo/react-hooks";
 
 import { LOGIN_PLAYER } from "../../graphql/mutations";
@@ -30,7 +30,6 @@ export default function SignUp() {
   if (error) return <Alert variant="danger">Error! {error.message}</Alert>;
 
   function submitForm(event) {
-    console.log("hi", email, password);
     event.preventDefault();
     loginPlayer({
       variables: { email, password },

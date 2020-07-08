@@ -33,17 +33,6 @@ export default function ActiveGame() {
     },
   });
 
-  console.log(
-    "data:",
-    data_player,
-    "loading:",
-    loading_player,
-    "error:",
-    error_player,
-    "token:",
-    token
-  );
-
   useEffect(() => {
     if (!token || player === {} || error_player) {
       history.push("/login");
@@ -61,8 +50,6 @@ export default function ActiveGame() {
     error: error_game,
     loading: loading_game,
   } = useQuery(GET_GAME_BY_ID);
-
-  console.log("GAMEDATA", data_game);
 
   useEffect(() => {
     if (loading_game === false && data_game) {

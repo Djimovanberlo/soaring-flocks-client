@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useHistory, Link } from "react-router-dom";
 import { Alert, Button, Col, Container, Form } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useMutation } from "@apollo/react-hooks";
 
 import { CREATE_PLAYER } from "../../graphql/mutations";
@@ -45,7 +45,6 @@ export default function SignUp() {
       "yeanero",
     ];
     const img = imgArray[Math.floor(Math.random() * imgArray.length)];
-    console.log(name, email, password, img);
     createPlayer({
       variables: { name, email, password, img },
     });

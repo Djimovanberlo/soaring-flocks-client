@@ -9,10 +9,7 @@ import LoggedOut from "./LoggedOut";
 import NavbarItem from "./NavbarItem";
 
 export default function Navigation() {
-  const token = localStorage.getItem("token");
   const player = useSelector(selectPlayer);
-
-  console.log("________________", player);
 
   const gameAccessControls =
     Object.keys(player).length === 0 && player.constructor === Object ? (
