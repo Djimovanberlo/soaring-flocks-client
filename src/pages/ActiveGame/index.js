@@ -33,6 +33,17 @@ export default function ActiveGame() {
     },
   });
 
+  console.log(
+    "data:",
+    data_player,
+    "loading:",
+    loading_player,
+    "error:",
+    error_player,
+    "token:",
+    token
+  );
+
   useEffect(() => {
     if (!token || player === {} || error_player) {
       history.push("/login");

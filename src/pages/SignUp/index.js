@@ -6,12 +6,10 @@ import { useMutation } from "@apollo/react-hooks";
 
 import { CREATE_PLAYER } from "../../graphql/mutations";
 import { loginSuccess } from "../../store/player/actions";
-import { selectToken } from "../../store/player/selectors";
 
 export default function SignUp() {
   const dispatch = useDispatch();
   const history = useHistory();
-  const token = useSelector(selectToken);
 
   const [errorState, set_errorState] = useState(null);
   const [name, setName] = useState("");
@@ -25,15 +23,10 @@ export default function SignUp() {
       }
       if (createPlayer.player && createPlayer.token) {
         dispatch(loginSuccess(createPlayer));
+        history.push("/ActiveGame");
       }
     },
   });
-
-  useEffect(() => {
-    if (token !== null) {
-      history.push("/ActiveGame");
-    }
-  }, [token, history]);
 
   function submitForm(event) {
     event.preventDefault();
@@ -56,7 +49,6 @@ export default function SignUp() {
     createPlayer({
       variables: { name, email, password, img },
     });
-
     setEmail("");
     setPassword("");
     setName("");

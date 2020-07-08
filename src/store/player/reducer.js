@@ -13,10 +13,7 @@ export default (state = initialState, action) => {
 
     case LOG_OUT:
       localStorage.removeItem("token");
-      return { ...initialState, token: null, player: null };
-
-    // case TOKEN_STILL_VALID:
-    //   return { ...state, ...action.payload };
+      return { ...initialState, token: null, player: {} };
 
     default:
       return state;
