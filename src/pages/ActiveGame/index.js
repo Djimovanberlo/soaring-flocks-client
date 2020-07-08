@@ -88,7 +88,9 @@ export default function ActiveGame() {
         className="mt-5"
       >
         <Image src={logo} style={logoStyle} />
-        <div>{`Turn ${data_game.getGameById.gameTimePassed}. Game ends in ${data_game.getGameById.gameTime} turns.`}</div>
+        <div>{`Turn ${data_game.getGameById.gameTimePassed + 1}. Game ends in ${
+          data_game.getGameById.gameTime - 1
+        } turns.`}</div>
       </Container>
       <br></br>
       <Row>
