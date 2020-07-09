@@ -20,7 +20,6 @@ import { SUGGEST_TRADE } from "../../../graphql/mutations";
 import { selectPlayer } from "../../../store/player/selectors";
 
 export default function SuggestTrade(props) {
-  // const playerId = useSelector(selectPlayerId);
   const player = useSelector(selectPlayer);
 
   const [suggestedTrade, set_suggestedTrade] = useState({
