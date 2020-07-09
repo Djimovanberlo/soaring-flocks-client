@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
 import {
   Button,
   Card,
@@ -21,10 +20,7 @@ import { SUGGEST_TRADE } from "../../../graphql/mutations";
 import { selectPlayer } from "../../../store/player/selectors";
 
 export default function SuggestTrade(props) {
-  // const playerId = useSelector(selectPlayerId);
   const player = useSelector(selectPlayer);
-
-  const history = useHistory();
 
   const [suggestedTrade, set_suggestedTrade] = useState({
     playerSenderId: player.id,
@@ -64,8 +60,7 @@ export default function SuggestTrade(props) {
         },
       });
     }
-    history.push("/");
-    // window.location.reload(false);
+    window.location.reload(false);
     // This force reload is to display updated values after having attacked. Upcoming feature is to use a graphQL subscription for this, instead of this awkward reload.
   };
 
