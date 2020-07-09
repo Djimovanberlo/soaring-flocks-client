@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Alert, Card } from "react-bootstrap";
 import { useSubscription } from "@apollo/react-hooks";
 
@@ -8,16 +8,28 @@ export default function MessageBox(props) {
   const [allQueriedMessages, set_allQueriedMessages] = useState(
     props.allPublicMessages
   );
+
   const { data, error, loading } = useSubscription(SUB_ALL_PUBLIC_MESSAGES, {
     variables: {
       gameId: 1,
     },
   });
+
+  // adding subscribed messages to queried(props) had to be done through useCallback, to avoid infinite rerender.
+  const addMessage = useCallback(() => {
+    if (loading === false && data) {
+      set_allQueriedMessages((allQueriedMessages) => [
+        ...allQueriedMessages,
+        data.messageAdded,
+      ]);
+    }
+  }, [data, loading]);
+
   useEffect(() => {
     if (loading === false && data) {
-      set_allQueriedMessages([...allQueriedMessages, data.messageAdded]);
+      addMessage();
     }
-  }, [loading, data, allQueriedMessages]);
+  }, [loading, data, addMessage]);
 
   if (loading)
     return (
