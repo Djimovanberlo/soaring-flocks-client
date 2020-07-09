@@ -38,28 +38,20 @@ export default function SuggestTrade(props) {
   const [suggestTrade] = useMutation(SUGGEST_TRADE);
 
   const submitTrade = () => {
-    if (
-      player.moneyCash < suggestedTrade.moneyCashSender ||
-      player.egg < suggestedTrade.eggSender ||
-      player.feather < suggestedTrade.featherSender ||
-      player.bug < suggestedTrade.bugSender
-    ) {
-    } else {
-      suggestTrade({
-        variables: {
-          playerSenderId: suggestedTrade.playerSenderId,
-          playerReceiverId: suggestedTrade.playerReceiverId,
-          moneyCashSender: suggestedTrade.moneyCashSender,
-          moneyCashReceiver: suggestedTrade.moneyCashReceiver,
-          eggSender: suggestedTrade.eggSender,
-          eggReceiver: suggestedTrade.eggReceiver,
-          featherSender: suggestedTrade.featherSender,
-          featherReceiver: suggestedTrade.featherReceiver,
-          bugSender: suggestedTrade.bugSender,
-          bugReceiver: suggestedTrade.bugReceiver,
-        },
-      });
-    }
+    suggestTrade({
+      variables: {
+        playerSenderId: suggestedTrade.playerSenderId,
+        playerReceiverId: suggestedTrade.playerReceiverId,
+        moneyCashSender: suggestedTrade.moneyCashSender,
+        moneyCashReceiver: suggestedTrade.moneyCashReceiver,
+        eggSender: suggestedTrade.eggSender,
+        eggReceiver: suggestedTrade.eggReceiver,
+        featherSender: suggestedTrade.featherSender,
+        featherReceiver: suggestedTrade.featherReceiver,
+        bugSender: suggestedTrade.bugSender,
+        bugReceiver: suggestedTrade.bugReceiver,
+      },
+    });
     window.location.reload(false);
     // This force reload is to display updated values after having attacked. Upcoming feature is to use a graphQL subscription for this, instead of this awkward reload.
   };
