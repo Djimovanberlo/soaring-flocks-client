@@ -37,13 +37,13 @@ export default function ActiveGame() {
     if (!token || player === {} || error_player) {
       history.push("/login");
     }
-  }, [token, player, error_player]);
+  }, [token, player, error_player, history]);
 
   useEffect(() => {
     if (loading_player === false && data_player) {
       dispatch(loginSuccess(data_player.getPlayerByToken));
     }
-  }, [loading_player, data_player]);
+  }, [loading_player, data_player, dispatch]);
 
   const {
     data: data_game,
@@ -63,7 +63,7 @@ export default function ActiveGame() {
         })
       );
     }
-  }, [loading_game, data_game]);
+  }, [loading_game, data_game, dispatch]);
 
   if (loading_game || loading_player) return "Loading...";
   if (error_game)

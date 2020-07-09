@@ -17,7 +17,7 @@ export default function MessageBox(props) {
     if (loading === false && data) {
       set_allQueriedMessages([...allQueriedMessages, data.messageAdded]);
     }
-  }, [loading, data]);
+  }, [loading, data, allQueriedMessages]);
 
   if (loading)
     return (

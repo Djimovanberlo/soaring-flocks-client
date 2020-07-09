@@ -74,6 +74,6 @@ The [datamodel](https://github.com/Djimovanberlo/soaring-flocks-client/blob/mast
 
 ## Backend repository
 
-The backend of this project was built using Apollo server and Sequelize with postgres database. [click here to view backend repo](google.com).
+The backend of this project was built using Apollo server and Sequelize with postgres database. [click here to view backend repo](https://github.com/Djimovanberlo/soaring-flocks-server/tree/master).
 
 Thanks to Jan Gunster for drawing avatars.
