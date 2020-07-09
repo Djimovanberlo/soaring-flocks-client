@@ -57,11 +57,11 @@ Software is never finished, and Soaring Flocks is no different.
 
 ## Game Rules
 
-Find rules here: [rules](google.com)
+Find rules here: [rules](https://github.com/Djimovanberlo/soaring-flocks-client/blob/master/RULES.md)
 
 ## Datamodel, wireframe, projectboard
 
-The [datamodel](google.com), [wireframe](google.com) and [projectboard](google.com) I used to to work on this project. Note that not all features have been added yet.
+The [datamodel](https://github.com/Djimovanberlo/soaring-flocks-client/blob/master/Soaring%20Flocks%20dataModel.png), [wireframe](https://github.com/Djimovanberlo/soaring-flocks-client/blob/master/Soaring%20Flocks%20wireframes.png) and [projectboard](https://github.com/Djimovanberlo/soaring-flocks-client/projects/1) I used to to work on this project. Note that not all features have been added yet.
 
 ## Upcoming features
 
