@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { Button, Card, ListGroup } from "react-bootstrap";
 import { Col, Row, Image } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
@@ -19,6 +20,7 @@ import { selectPlayer } from "../../../store/player/selectors";
 
 export default function Player(props) {
   const player = useSelector(selectPlayer);
+  const history = useHistory();
 
   const [attack, set_attack] = useState("Don't attack anyone");
   const [market, set_market] = useState("Don't build anything");
@@ -53,7 +55,8 @@ export default function Player(props) {
         ability: attack,
       },
     });
-    window.location.reload(false);
+    history.push("/");
+    // window.location.reload(false);
   };
   // This force reload is to display updated values after having attacked. Upcoming feature is to use a graphQL subscription for this, instead of this awkward reload.
 
@@ -65,7 +68,8 @@ export default function Player(props) {
         cashMoney: cashMoneyCost,
       },
     });
-    window.location.reload(false);
+    history.push("/");
+    // window.location.reload(false);
     // This force reload is to display updated values after having attacked. Upcoming feature is to use a graphQL subscription for this, instead of this awkward reload.
   };
 
