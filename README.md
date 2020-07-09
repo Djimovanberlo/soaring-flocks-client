@@ -1,6 +1,6 @@
 ![logo](https://user-images.githubusercontent.com/60095327/86928629-194b1580-c135-11ea-93e2-006e52f71a09.png)
 
-## Soaring Flocks | a game for ruthless, capitalist fowl
+## Soaring Flocks | a game for capitalist fowl
 
 ![Screenshot from 2020-07-08 16-13-23](https://user-images.githubusercontent.com/60095327/86929310-fcfba880-c135-11ea-9f83-3b04c6dffa08.png)
 ![Screenshot from 2020-07-08 16-14-26](https://user-images.githubusercontent.com/60095327/86929639-58c63180-c136-11ea-89b0-a21b23b71cd8.png)
