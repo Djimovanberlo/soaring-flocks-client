@@ -13,8 +13,7 @@
 
 ## About
 
-[Check a working version!]
-(not implemented yet)
+[Check out working version](https://soaring-flocks.netlify.app/gameInfo)
 
 Soaring flocks is a game where players take on the role of capitalist birds to generate, spend and trade resources. A game lasts for 15 days, with one-day turns. Each day at midnight, players' resources are updated, after which they can invest or trade those resources at liberty. Players can also chat with eachother. Be sure to collect the most victory points before the game is over!
 
