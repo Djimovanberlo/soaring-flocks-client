@@ -18,7 +18,7 @@ import { apiUrl } from "./config/constants";
 
 // create a Http link:
 const httpLink = new HttpLink({
-  uri: `http://${apiUrl}`,
+  uri: `https://${apiUrl}`,
   credentials: "same-origin",
 });
 
