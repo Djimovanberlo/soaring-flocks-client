@@ -23,6 +23,7 @@ Soaring flocks is a game where players take on the role of capitalist birds to g
 - [App demo](#app-demo)
 - [Used technologies](#used-technologies)
 - [Project goals](#project-goals)
+- [Game rules](#game-rules)
 - [Datamodel, wireframe, projectboard](#datamodel-wireframe-projectboard)
 - [Upcoming features](#upcoming-features)
 - [Backend repository](#backend-repository)
