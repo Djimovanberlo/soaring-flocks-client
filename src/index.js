@@ -40,6 +40,8 @@ const link = split(
   httpLink
 );
 
+console.log("URL", apiUrl);
+
 // Instantiate client
 const client = new ApolloClient({
   cache: new InMemoryCache(),
