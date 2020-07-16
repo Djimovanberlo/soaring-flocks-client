@@ -53,11 +53,11 @@ export default function gameInfo() {
           <Col>
             <h5 style={{ textAlign: "center" }}>Rules</h5>
             <p>
-              Soaring flocks is a multiplayer game where up to 20 players take
+              Soaring flocks is a multiplayer game where up to 15 players take
               on the role of capitalist birds to collect, spend and trade
               resources in order to earn victory points. In Soaring Flocks, each
-              turn lasts a day and a game lasts 20 days. Whichever player has
-              the most Victory Points by the end of the game wins! After 20
+              turn lasts a day and a game lasts 15 days. Whichever player has
+              the most Victory Points by the end of the game wins! After 15
               days, all data is reset and a new game starts.
             </p>
             <p>
