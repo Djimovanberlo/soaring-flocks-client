@@ -30,6 +30,21 @@ const wsLink = new WebSocketLink({
   },
 });
 
+// // These are for development: removing secure connection to work on localhost
+// // create a Http link:
+// const httpLink = new HttpLink({
+//   uri: `http://${apiUrl}`,
+//   credentials: "same-origin",
+// });
+
+// // Create a WebSocket link:
+// const wsLink = new WebSocketLink({
+//   uri: `ws://${apiUrl}`,
+//   options: {
+//     reconnect: true,
+//   },
+// });
+
 const link = split(
   ({ query }) => {
     const { kind, operation } = getMainDefinition(query);
