@@ -18,17 +18,32 @@ import { apiUrl } from "./config/constants";
 
 // create a Http link:
 const httpLink = new HttpLink({
-  uri: `http://${apiUrl}`,
+  uri: `https://${apiUrl}`,
   credentials: "same-origin",
 });
 
 // Create a WebSocket link:
 const wsLink = new WebSocketLink({
-  uri: `ws://${apiUrl}`,
+  uri: `wss://${apiUrl}`,
   options: {
     reconnect: true,
   },
 });
+
+// // These are for development: removing secure connection to work on localhost
+// // create a Http link:
+// const httpLink = new HttpLink({
+//   uri: `http://${apiUrl}`,
+//   credentials: "same-origin",
+// });
+
+// // Create a WebSocket link:
+// const wsLink = new WebSocketLink({
+//   uri: `ws://${apiUrl}`,
+//   options: {
+//     reconnect: true,
+//   },
+// });
 
 const link = split(
   ({ query }) => {
@@ -39,6 +54,8 @@ const link = split(
   wsLink,
   httpLink
 );
+
+console.log("URL", apiUrl);
 
 // Instantiate client
 const client = new ApolloClient({
