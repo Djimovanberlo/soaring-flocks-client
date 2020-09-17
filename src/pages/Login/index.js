@@ -27,7 +27,10 @@ export default function SignUp() {
   });
 
   if (loading) return "Loading...";
-  if (error) return <Alert variant="danger">Error! {error.message}</Alert>;
+  if (error) {
+    console.log(error);
+    return <Alert variant="danger">Error! {error.message}</Alert>;
+  }
 
   function submitForm(event) {
     event.preventDefault();
